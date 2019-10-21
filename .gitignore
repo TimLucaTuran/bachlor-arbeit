@@ -1,0 +1,10 @@
+*.log
+*.fdb*
+*.fls
+*.bak
+*.gz
+*.dvi
+*.aux
+*rawdata*
+*.toc
+*.pdf
