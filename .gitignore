@@ -5,6 +5,5 @@
 *.gz
 *.dvi
 *.aux
-*rawdata*
 *.toc
 *.pdf
