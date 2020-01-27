@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}
+
+\usepackage{graphicx}
+\graphicspath{{./graphics/}}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}		%allows FloatBarrier command
+\usepackage{wrapfig}		%allows wrapping figures around text on left l, right r, center c, inner side i, outer side o
+\usepackage{amsmath, amssymb, amsthm}
+%\usepackage{bm}				%allows bm command for boldfaced vectors in math mode
+\usepackage[utf8]{inputenc}
+\usepackage{import} 
+\usepackage{float}
+\usepackage{epstopdf}		%converts every .eps-file to a .pdf-file, which can then be included
+
+%\usepackage{hyperref}
+\usepackage[numbers,square,sort&compress]{natbib}
+
+\usepackage{fancyhdr}
+\newcommand{\s}[1]{\mathrm{#1}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{\rightmark}
+
+\usepackage[ngerman]{babel}
+
+\title{Titel}
+\author{Tim Turan und Johannes Nicklaus}
+\date{\today}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Aufgabenstellung}
+\import{sections/}{template_aufgaben}
+
+\section{Theoretische Grundlagen}
+\import{sections/}{template_theoretische_grundlagen}
+
+\FloatBarrier
+\section{Versuchsaufbau und -durchführung }
+\import{sections/}{template_versuchsaufbau_durchfuehrung}
+
+\FloatBarrier
+\section{Ergebnisse}
+%\import{sections/}{template_ergebnisse}
+
+\FloatBarrier
+\section{Diskussion}
+\import{sections/}{template_diskussion}
+
+\FloatBarrier
+\section{Zusammenfassung}
+\import{sections/}{template_zusammenfassung}
+
+\FloatBarrier
+\section{Literaturverzeichnis}
+\import{sections/}{template_literaturverzeichnis}
+
+\section{Anhang}
+
+\end{document}
