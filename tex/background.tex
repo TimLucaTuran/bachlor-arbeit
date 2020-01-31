@@ -72,8 +72,22 @@ but there are more sophisticated cost functions for different kind of outputs. N
 Here the very important Algorithm \textit{Backpropagation} is used and allows a efficient calculation of $\grad{C}_{\vb{b}^l}$ and $\grad{C}_{\vu{w}^l}$. These are used to gradually minimize the cost function. A very comprehensive explanation of Backpropagation can be found here: \cite{backprop}.
 
 \paragraph{Convolutional Neural Networks}
-An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$, gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer. But now the number of weights in $\vu{w}^2$ are in the order of
+An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$, gray scale image. This can be expressed as a $n \cp n$ matrix, flattened (as in figure \ref{fig:bg:flatten}) and fed into the input layer. But now the number of weights to the next layer $\vu{w}^2$ are in the order of
 $\order{n^3}$ (<- guess)
 which soon becomes unfeasible.
 
-Computational limits aside there is another problem. Imagine an image with the number one in the top right corner. If this number moves to a different position the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "number one" independent of its position in the picture.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.4\linewidth]{bg_flatten}
+    \caption{Flattening of a $3\cp3$ matrix to fit the input of a multilayer perceptron.}
+    \label{fig:bg:flatten}
+\end{figure}
+
+Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\linewidth]{bg_convnet_T}
+    \caption{}
+    \label{fig:bg:convnet_T}
+\end{figure}
