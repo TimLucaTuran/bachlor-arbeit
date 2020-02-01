@@ -26,7 +26,7 @@ Artificial Neural Networks (ANN's or short NN's) are a kind of data structure in
     \label{fig:bg:basic_nn}
 \end{figure}
 
-\paragraph{Densely Connected Neural Networks}
+\paragraph{Multilayer Perceptron}
 This kind of classic NN consist of single nodes which are organized into layers. Every node is connected to all the nodes of the previous and next layer thus they are called dense. Each node holds a value called activation $a$ where the activation to the first layer is the input to the network, here:
 $(x_1, \, x_2, \, x_3)$.
 To calculate the activation of a node one has to multiply all the activations of the previous layer with their respective weights $w$, add the bias $b$ and finally apply a non-linear activation function $\sigma$. For the index notation superscripts specify the layer and subscripts the node. So $a^2_1$ is the activation of the first node in the second layer. To characterize a weight two subscripts are needed for the end and beginning of the connection. For the example in figure \ref{fig:bg:basic_nn} that means:
@@ -56,7 +56,7 @@ However it is more convenient to stop considering every node individually and to
     \caption{sigmoid}
     \label{}
 \end{subfigure}
-\caption{Two examples of activation functions $\sigma$.}
+\caption{Two examples of activation functions $\sigma$. Especially the relu function has a destinct on and off state similar to biological neurons.}
 \label{}
 \end{figure}
 
@@ -72,22 +72,44 @@ but there are more sophisticated cost functions for different kind of outputs. N
 Here the very important Algorithm \textit{Backpropagation} is used and allows a efficient calculation of $\grad{C}_{\vb{b}^l}$ and $\grad{C}_{\vu{w}^l}$. These are used to gradually minimize the cost function. A very comprehensive explanation of Backpropagation can be found here: \cite{backprop}.
 
 \paragraph{Convolutional Neural Networks}
-An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$, gray scale image. This can be expressed as a $n \cp n$ matrix, flattened (as in figure \ref{fig:bg:flatten}) and fed into the input layer. But now the number of weights to the next layer $\vu{w}^2$ are in the order of
+An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$, gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer (see figure \ref{fig:bg:flatten}). But now the number of weights to the next layer $\vu{w}^2$ are in the order of
 $\order{n^3}$ (<- guess)
 which soon becomes unfeasible.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.4\linewidth]{bg_flatten}
+    \includegraphics[width=.45\linewidth]{bg_flatten}
     \caption{Flattening of a $3\cp3$ matrix to fit the input of a multilayer perceptron.}
     \label{fig:bg:flatten}
 \end{figure}
 
-Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture.
+Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture. Also the information about the distance between pixels is lost.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_convnet_T}
-    \caption{}
+    \caption{Two pictures of a T at different positions where the red color signifies a high value in the grayscale image. After the flatten operation seen in figure \ref{fig:bg:flatten} very different nodes are active.}
     \label{fig:bg:convnet_T}
 \end{figure}
+
+These problems led to the development of a new kind of layer called \textit{Convolution} (see figure \ref{fig:bg:convolution}). A fixed size \textit{kernel} is shifted over the matrix and at every position the the point wise product between kernel and matrix is calculated and summed. The result is called feature map of that kernel. Notice how the greatest value of the feature map is at the position of the letter T. So with only a small number of weights the convolution is able to detect the T independent of its position in the image. One convolutional layer contains not only a single but a number of different kernels $k$ so that the shape of the $n \times n$ matrix transforms to $(n-1) \times (n-1) \times k$. In a Convolutional Network (ConvNet) multiple of these layers are used so that it can find "patterns in patterns". For the letter detection example one could imagine the first layer to detect various edges and the next layer to detect letters in the position of these edges.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\linewidth]{bg_convolution}
+    \caption{Example of a convolution where white pixel are 0 and red pixel are 1.}
+    \label{fig:bg:convolution}
+\end{figure}
+
+\paragraph{Max Pooling Layers}
+For a big image and and a large number of kernels the output shape of the convolutional layers is still $\approx n \times n \times k$, so quite large. Also notice how the "T kernel's" feature map is not only active at the exact position of the T but in the general region. The solution to this is to downsample the output with a \textit{Pooling Layer}. Here a smaller kernel, usually $2 \times 2$ is shifted over the matrix two steps at a time maximum is calculated.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\linewidth]{bg_pooling}
+    \caption{}
+    \label{fig:bg:pooling}
+\end{figure}
+
+
+\paragraph{1D ConvNets}
