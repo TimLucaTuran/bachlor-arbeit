@@ -3,9 +3,10 @@
 
 \usepackage{scrlayer-scrpage}
 \usepackage{graphicx}
-\graphicspath{{../fig/}}
+\graphicspath{{../../fig/}}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{import}
 %\usepackage{placeins}		%allows FloatBarrier command
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{bm}				%allows bm command for boldfaced vectors in math mode
@@ -68,32 +69,23 @@
 \clearpage
 
 \section{Abstract}
-\input{abstract}
+\import{../abstract/}{abstract.tex}
 \clearpage
 
 \tableofcontents
 \clearpage
 
 \section{Physical Background}
-\input{background}
+\import{../background/}{background.tex}
 \clearpage
 
 \section{The Algorithm}
-\input{algorithm}
-\clearpage
-
-\section{The Neural Network}
-\clearpage
-
-\section{The Optimizer}
-\clearpage
-
-\section{Results}
+\import{../algorithm/}{algorithm.tex}
 \clearpage
 
 
 \section{Literaturverzeichnis}
-\input{ba_literaturverzeichnis}
+\import{../sources/}{literaturverzeichnis.tex}
 \clearpage
 
 \section{Anhang}
