@@ -1,4 +1,3 @@
-\subsection{Neural Networks}
 Artificial Neural Networks (ANN's or short NN's) are a kind of data structure inspired by the biological neurons found in nature. They can be used to find a wide range of input output relations. One classic example is mapping pictures of hand written digits to the actual digits. Rather then explicitly program the relation NN's are trained on a dataset $(X, \, Y)$ of correct input output pairs.
 \\
 
@@ -85,15 +84,32 @@ These problems led to the development of a new kind of layer called \textit{Conv
     \label{fig:bg:convolution}
 \end{figure}
 
-\paragraph{Max Pooling Layers}
-For a big image and and a large number of kernels the output shape of the convolutional layers is still $\approx n \times n \times k$, so quite large. Also notice how the "T kernel's" feature map is not only active at the exact position of the T but in the general region. The solution to this is to downsample the output with a \textit{Pooling Layer}. Here a smaller kernel, usually $2 \times 2$ is shifted over the matrix two steps at a time and at every position the maximum of the 4 underlaying values is calculated.
+\paragraph{Pooling Layers}
+For a big image and and a large number of kernels the output shape of a convolutional layers is still $n \times n \times k$, so quite large. Also notice how the "T kernel's" feature map is not only active at the exact position of the T but in the general region. The solution to this is to downsample the output with a \textit{Pooling Layer}. Here a smaller kernel, usually $2 \times 2$ is shifted over the matrix two steps at a time and at every position an operation is performed to reduce the number values to one. This could be taking the maximum or the average. This operation reduces the matrix in the x and y dimension by a factor of 2.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_pooling}
-    \caption{}
+    \caption{Example of a Max Pooling Layer. For every 2 by 2 field the maximum is calculated. After applying first the convolution and then the pooling layer the information "T in the top right corner" is still there and size of the resulting matrix is very manageable}
     \label{fig:bg:pooling}
 \end{figure}
 
+\paragraph{Example Network Architecture}
+Now all the building blocks for a complete ConvNet are available. Repeatedly alternating convolution and pooling changes the input from wide in x and y dimension and narrow in z to a long z-strip. At the very end this strip is fed into one densely connected layer which is in turn connected to the output neurons.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{conv_net_example}
+    \caption{Example for a complete ConvNet. Note the input is in this case an RGB image so there are three layers in the z dimension corresponding to the different colors. In this case the the first layer has 64 kernels of size $3 \times 3 \times 3$. The next convolution then has 128 kernels of size $3 \times 3 \times 64$. [citation needed]}
+    \label{}
+\end{figure}
 
 \paragraph{1D ConvNets}
+The algorithm is applied to spectra, so a functions $I(\lambda)$. This data is only one dimensional but all the same ideas apply. Kernels are here sized $1 \times 3 \times z$ and are shifted in one dimension. Same goes for the pooling. These 1D convolution might detect features like rising and falling edges.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.5\linewidth]{bg_1D_conv}
+    \caption{Example of a 1D convolution. A $1 \times 3$ kernel is shifted over a spectrum discretized at 9 wavelengths}
+    \label{fig:bg:1D_conv}
+\end{figure}
