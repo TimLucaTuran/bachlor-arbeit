@@ -1,0 +1,78 @@
+\paragraph{Jones Formalism}
+ A planar lightwave propagating along the z axis trough a homogeneous material can be described as:
+
+\begin{equation}
+    \vb E =
+    \begin{pmatrix}
+        E_x e^{i(kz - \omega t + \varphi_x)}\\
+        E_y e^{i(kz - \omega t + \varphi_y)}\\
+        0\\
+    \end{pmatrix}
+    =
+    \qty(E_x \, e^{i \varphi_x} \, \va{e_x} +
+         E_y \, e^{i \varphi_y} \, \va{e_y})
+        e^{i(kz - \omega t)}
+\end{equation}
+\\
+
+\noindent
+the waves polarization is determined by the scaling factors of $\va{e_x}$ and $\va{e_y}$ and can be expressed as a \textit{Jones Vector} $\vb j \in \mathbb{C}^2$.
+
+\begin{equation}
+    \vb j = \frac{1}{\sqrt{E_x^2 + E_y^2}}
+    \begin{pmatrix}
+        E_x\\
+        E_y \, e^{i \delta}
+    \end{pmatrix}
+    \qq{with}
+    \delta := \varphi_y - \varphi_x
+\end{equation}
+
+\noindent
+Now all linear operations on the polarization are matrices $\hat{M} \in \mathbb{C}^{2 \times 2}$. That means all passive components have a corresponding matrix. A couple examples are for components in horizontal position:
+
+
+\begin{equation}
+\begin{split}
+    \qq*{polarizer:} \hat{M} &=
+    \begin{pmatrix}
+        1 & 0\\
+        0 & 0
+    \end{pmatrix}\\
+    \qq*{$\lambda / 4$ plate:} \hat{M} &=
+    \begin{pmatrix}
+        1 & 0\\
+        0 & i
+    \end{pmatrix}
+    e^{-\frac{i \pi}{4}}\\
+    \qq*{$\lambda / 2$ plate:} \hat{M} &=
+    \begin{pmatrix}
+        -i & 0\\
+        0 & i
+    \end{pmatrix}\\
+\end{split}
+\end{equation}
+
+\noindent
+By using matrices one can easily compute the effect of multiple components using the matrix product or rotated components using the standard rotation matrix.
+
+\begin{equation}
+    \hat{M}_{\varphi} = \hat{R}(-\varphi) \, \hat{M} \, \hat{R}(\varphi)
+    \qq{where}
+    \hat{R}(\varphi) =
+    \begin{pmatrix}
+        \cos \varphi & \sin \varphi \\
+        -\sin \varphi & \cos \varphi
+    \end{pmatrix}
+\end{equation}
+\paragraph{SASA}
+
+\begin{equation}
+    \hat{S} =
+    \begin{pmatrix}
+        \hat{T}^f & \hat{R}^b \\
+        \hat{R}^f & \hat{T}^b
+    \end{pmatrix}
+\end{equation}
+
+\paragraph{Boundary Conditions}
