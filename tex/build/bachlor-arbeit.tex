@@ -1,70 +1,45 @@
 \documentclass[a4paper,headsepline,11pt]{scrartcl}
+\input{preamble.tex}
 
-
-\usepackage{scrlayer-scrpage}
-\usepackage{graphicx}
-\graphicspath{{../../fig/}}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{import}
-%\usepackage{placeins}		%allows FloatBarrier command
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{bm}				%allows bm command for boldfaced vectors in math mode
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{import}
-\usepackage{float}
-\usepackage{multirow}
-%\usepackage{epstopdf}		%converts every .eps-file to a .pdf-file, which can then be included
-\usepackage{booktabs}		%table_package
-\usepackage{url}
-%\usepackage[numbers,square,sort&compress]{natbib}
-
-\usepackage{geometry}
-\geometry{margin=2cm}
-
-\usepackage{physics}
-\usepackage[version=4]{mhchem}
-
-\newcommand{\s}[1]{\mathrm{#1}}
-\newcommand{\bs}[1]{\boldsymbol{#1}}
-\newcommand*\diff{\mathop{}\!\mathrm{d}}
-%colon equal sign
-\mathchardef\ordinarycolon\mathcode`\:
-\mathcode`\:=\string"8000
-\begingroup \catcode`\:=\active
-  \gdef:{\mathrel{\mathop\ordinarycolon}}
-\endgroup
-
-
-\usepackage{scrlayer-scrpage}
-\automark*{section}
-\clearpairofpagestyles
-\ihead{\headmark}
-\ohead{\pagemark}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%colorful linking within a PDF-Viewer
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-}
-
-\title{Working Title: Reverse Design of Meta Surface Stacks}
-\author{Tim Turan}
-\date{\today}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Titelseite%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+	\centering
+
+	{\scshape\Large \textbf{Working Title: Reverse Design of Meta Surface Stacks} \par}
+	\vspace{1cm}
+	{\scshape\Large Bachelor Thesis \par}
+	\vspace{1.5cm}
+	\includegraphics[width=0.4\textwidth]{uni_jena_bildmarke_700x700}\par
+	{\huge\bfseries \par}
+	\vspace{10cm}
+	{\scshape\large Friedrich-Schiller-Universität Jena\par}
+	{\scshape\large Physikalisch-Astronomische-Fakultät\par}
+	{\scshape\large Institute of Quantum and Nano-Optics\par}
+	\vfill
+	{\Large Tim Luca Turan}
+
+	\vfill
+
+% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%Gutachterseite%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\vspace*{\fill}
+\textbf{\Large Evaluators}\\[1.5cm]
+
+\begin{tabular}{ll}
+First Assessor: & Prof. Dr. rer. nat. Thomas Pertsch\\
+ & Institute of Quantum and Nano Optics \\
+ & Friedrich-Schiller-Universität Jena \\
+Second Assessor: & M.Sc. Jan Sperrhake \\
+ & Institute of Quantum and Nano Optics \\
+ & Friedrich-Schiller-Universität Jena \\
+\end{tabular}
+
+
 
 \clearpage
 
@@ -72,6 +47,7 @@
 \import{../abstract/}{abstract.tex}
 \clearpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%Inhaltsangabe%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents
 \clearpage
 
