@@ -1,9 +1,10 @@
 \usepackage{scrlayer-scrpage}
 \usepackage{graphicx}
-\graphicspath{{../../fig/}}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{import}
+\usepackage[textwidth=2cm]{todonotes}
+\newcommand\note[1]{\textcolor{red}{#1}}
 %\usepackage{placeins}		%allows FloatBarrier command
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{bm}				%allows bm command for boldfaced vectors in math mode
@@ -26,6 +27,7 @@
 \newcommand{\s}[1]{\mathrm{#1}}
 \newcommand{\bs}[1]{\boldsymbol{#1}}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
 %colon equal sign
 \mathchardef\ordinarycolon\mathcode`\:
 \mathcode`\:=\string"8000
