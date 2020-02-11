@@ -1,12 +1,12 @@
 \begin{tabular}{ll}
     \toprule
-    Input: & layer parameters $p = (w, \, l, \, t, \, \Lambda)$ \\
+    Input: & layer parameters $p = (w, \, l, \, t, \, \Lambda)$, material and geometry \\
     Output: & approximation of the $S$-matrix of this layer $\hat{S} = \hat{S}(p)$\\
     \bottomrule
 \end{tabular}
 \\
 \\
-The database consist of $\approx$ 5000 $S$-matrices of single layers which were simulated with the Fourier Modal Method (FMM) on a compute cluster. Its input are the layer parameters width, length, thickness and period, so $p = (w, \, l, \, t, \, \Lambda)$. This module first looks for the $n$ closest neighbors of $p$. To do that the input is scaled:
+The database consist of $\approx$ 5000 $S$-matrices of single layers which were simulated with the Fourier Modal Method (FMM) on a compute cluster. Its main input are the layer parameters width, length, thickness and period, so $p = (w, \, l, \, t, \, \Lambda)$. This module first looks for the $n$ closest neighbors of $p$. To do that the input is scaled:
 
 \begin{equation}
     \tilde{p}_i = \frac{p_i - p_i^\s{min}}{p_i^\s{max} - p_i^\s{min}}
@@ -14,7 +14,7 @@ The database consist of $\approx$ 5000 $S$-matrices of single layers which were 
 \end{equation}
 
 \noindent
-Now the distance $d$ to every entry in the database is calculated and the $n$ entries with the smallest distance are selected:
+Now the distance $d$ to every entry in the database satisfying the material geometry combination is calculated and the $n$ entries with the smallest distance are selected:
 
 \begin{equation}
     d(p, \,q) = \sum_i \ \qty|p_i - q_i|

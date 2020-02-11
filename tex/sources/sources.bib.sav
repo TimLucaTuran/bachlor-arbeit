@@ -36,4 +36,17 @@
   doi       = {10.1145/800186.810616},
 }
 
+@Article{1965,
+  author    = {J. A. Nelder, R. Mead},
+  title     = {A Simplex Method for Function Minimization},
+  journal   = {The Computer Journal},
+  year      = {1965},
+  volume    = {8},
+  number    = {1},
+  pages     = {27--27},
+  month     = {apr},
+  doi       = {10.1093/comjnl/8.1.27},
+  publisher = {Oxford University Press ({OUP})},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
