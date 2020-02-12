@@ -6,4 +6,6 @@
 *.dvi
 *.aux
 *.toc
+*.bbl
+*.blg
 Literatur/
