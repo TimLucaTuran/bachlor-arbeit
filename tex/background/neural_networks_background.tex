@@ -103,6 +103,7 @@ Now all the building blocks for a complete ConvNet are available. Repeatedly alt
     \label{fig:bg:NN_example}
 \end{figure}
 
+\newpage
 \paragraph{1D ConvNets}
 The algorithm is applied to spectra, so a functions $I(\lambda)$. This data is only one dimensional but all the same ideas apply. Kernels are here sized $1 \times 3 \times z$ and are shifted in one dimension. Same goes for the pooling. These 1D convolution might detect features like rising and falling edges.
 
@@ -111,4 +112,26 @@ The algorithm is applied to spectra, so a functions $I(\lambda)$. This data is o
     \includegraphics[width=.4\linewidth]{bg_1D_conv}
     \caption{Example of a 1D convolution. A $1 \times 3$ kernel is shifted over a spectrum $I$ discretized at 9 wavelengths}
     \label{fig:bg:1D_conv}
+\end{figure}
+
+\paragraph{Dropout Layer}
+In 2014 Srivastava et al.\cite{Srivastava2014} presented a method to prevent overfitting and speed up the training process of large Neural Networks. During training they randomly drop a number of neurons in a layer along with all connections to and from these neuron. This prevents the neurons from co-adapting \note{?} and because there are less weights and biases to tune for each step the training becomes overall faster.
+\\
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{bg_no_dropout}
+    \caption{no dropout}
+    \label{}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{bg_dropout}
+    \caption{with dropout}
+    \label{}
+\end{subfigure}
+\caption{Example of a dropout applied to the bottom layer. Only two of the neurons remain active and only their weights and biases are modified during this training step. Figure found in \cite{Srivastava2014} (modified)}
+\label{}
 \end{figure}

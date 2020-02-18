@@ -3,11 +3,17 @@
     Input: &
     \begin{tabular}[t]{@{}l@{}}
         Spectrum $I=(I_\s{x}, \,I_\s{y})$ a $\lambda \times 2$ array\\
-        $I_\s{x/y}$ ... X and Y-transmission spectra,
-        $\lambda$ ... number of wavelengths
+        $I_\s{x/y}$...X- and Y-transmission spectra,
+        $\lambda$...number of wavelengths
     \end{tabular}\\
-    Output: & two sets layer parameters $p, \, m, \, g$ and stack parameters
+    Output: &
+    \begin{tabular}[t]{@{}l@{}l@{}}
+    two sets layer parameters $p=(w, \, l, \, t, \, \Lambda), \, m, \, g$ and stack parameters
     $\varphi, \, h$ \\
+    $w$...width, $l$...length, $t$...thickness, $\Lambda$...Period,
+    $m$...material, $g$...geometry \\
+    $\varphi$...rotation angle, $h$...distance between layers
+    \end{tabular}\\
     \bottomrule
 \end{tabular}
 
@@ -40,11 +46,24 @@ The final architecture is similar to the example given in figure \ref{fig:bg:NN_
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{al_NN_architecture}
-    \caption{The network starts with 4 pairs of convolutional and pooling layers. The convolutions are characterized by (\textit{number of kernels}, \textit{kernel size}). The kernel size is always 5 and the number of kernels is gradually increased. Then the Network splits into a discrete and a continuous branch via two Dense layers with (\textit{number of neurons}). \note{Dropout missing}
+    \caption{The network starts with 4 pairs of convolutional and pooling layers. The convolutions are characterized by (\textit{number of kernels}, \textit{kernel size}). The kernel size is always 5 and the number of kernels is gradually increased. Then the Network splits into a discrete and a continuous branch via two Dense layers with (\textit{number of neurons}). In the discrete branch a dropout is applied to the dense layer where (0.5) is (\textit{fraction of neurons to drop}).
     All the internal activations $\sigma_\s{r}$ are ReLu's and the final activations $\sigma_\s{s}$ and $\sigma_{l}$ are a sigmoid and a linear function.}
     \label{fig:al:NN_architecture}
 \end{figure}
 
 \newpage
 \paragraph{Network Training}
-To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the Database which are randomly combined into a stacks. Then the input spectrum is calculated via SASA.
+To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the database which are randomly combined into a stacks. Then this stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
+That means $(I_x, \, I_y) \in X$ are the networks input and the random parameters $(p_1, \, m_1, \, g_1, \, p_2, \, m_2, \, g_2) \in Y$ are the output.
+Using this approach the following accuracy is reached:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{al_training_simple}
+    \caption{\note{wrong plot} Shown are the total loss and the training and validation accuracy for both the continuous and the discrete branch. After each epoch the network is validated on data not used in training to check for overfitting.}
+    \label{}
+\end{figure}
+
+Training and validation accuracy are very similar which indicates that there is no overfitting. The discrete accuracy quickly reaches a maximum of $\sim 70\%$
+which is less than expected for this classification problem. The issue here lies not in the networks arichtecture but in the data generation process. In \note{missing}
+we have shown that for a two layer stack the transmission spectrum is the same for both directions. That means the data generation can result in two different stacks which share the same spectrum.
