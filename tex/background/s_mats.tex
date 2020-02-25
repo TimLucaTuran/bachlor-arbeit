@@ -1,0 +1,59 @@
+To implement the desired algorithm we need to be able to calculate the optical behavior of stacked Meta Surfaces. The mathematical framework we will use is called Scatter Matrix Calculus and this section will give some insight into its physical origin and how to use it. We will start at the very beginning with the Maxwell Equations in matter:
+\\
+
+\noindent
+\begin{tabular*}{\textwidth}{ll}
+\begin{minipeqn}
+    \curl{\vb{E}(\vb{r}, t)} = - \pdv{t} \vb{B}(\vb{r}, t)
+\end{minipeqn}&
+\begin{minipeqn}[c]
+    \div \vb{D}(\vb{r}, t) = \rho_\s{ext}(\vb r, t)
+\end{minipeqn}\\
+\begin{minipeqn}
+    \curl \vb H(\vb r, t) = \vb j(\vb r, t) + \pdv{t} \vb D(\vb r, t)
+\end{minipeqn}&
+\begin{minipeqn}[c]
+    \div \vb B(\vb r, t) = 0
+\end{minipeqn}
+\end{tabular*}
+\\
+\\
+
+
+\noindent
+The four involved fields are:
+$\vb E$...electric field, $\vb B$...magnetic flux density, $\vb D$...electric flux density and $\vb H$...magnetic field and the sources are the external charges $\rho_\s{ext}$ and the macroscopic currents $j$. All the material properties are captured by the $\vb D$ and $\vb H$ fields which are defined as follows:
+\\
+
+\noindent
+\begin{tabular*}{\textwidth}{ll}
+\begin{minipeqn}\label{eq:bg:D}
+    \vb D = \varepsilon_0 \vb E (\vb r, t) + \vb P (\vb r, t)
+\end{minipeqn}&
+\begin{minipeqn}[c]
+    \vb H(\vb r, t) = \frac{1}{\mu_0} \qty[\vb B(\vb r, t) - \vb M(\vb r, t)]
+\end{minipeqn}
+\end{tabular*}
+\\
+\\
+Where $\vb P$ is the dielectric polarization and $\vb M$ is the magnetic polarisation. One can read equation \ref{eq:bg:D} in the following way:
+When the electric field $\vb E$ interacts with matter it exerts a force on all its charges and displaces them by a small amount. The separation of charges results in a counter field $\vb P$ and the total field is now a superposition of $\vb E$ and $\vb P$.
+This set of equations describes the whole electromagnetic spectrum, in this work however we are only interested in visible (VIS) and near infra red (NIR) light $\sim$ so we can make some simplifications. $\rho$ = 0 and $\vb M = 0$ \note{why?}. Inserting these assumptions into the maxwell equation gives:
+\\
+
+\noindent
+\begin{tabular*}{\textwidth}{ll}
+\begin{minipeqn}
+    \curl{\vb{E}(\vb{r}, t)} = - \mu_0 \pdv t \vb H(\vb r, t)
+\end{minipeqn}&
+\begin{minipeqn}[c]
+    \varepsilon_0 \div \vb{E}(\vb{r}, t) = - \div \vb P(\vb r, t)
+\end{minipeqn}\\
+\begin{minipeqn}
+    \curl \vb H(\vb r, t) = \vb j(\vb r, t) + \pdv{t} \vb P(\vb r, t)
+    + \varepsilon_0 \pdv{t} \vb E(\vb r, t)
+\end{minipeqn}&
+\begin{minipeqn}[c]
+    \div \vb H(\vb r, t) = 0
+\end{minipeqn}
+\end{tabular*}

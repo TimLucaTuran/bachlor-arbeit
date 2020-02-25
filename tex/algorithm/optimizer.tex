@@ -17,7 +17,7 @@ $C_\s{mse}\qty(I_\s{c}(p), \, I_\s{t})$
 This standard method is however unable to follow the constraints and has to be modified in that regard. To achieve this one can introduce a distance to the boundary $D$. Let $p$ be a single parameter with lower bound $p^l$ and upper bound $p^u$, then:
 
 \begin{equation}
-    D\qty(p, \, [p^l, \, p^u]) =
+    D\qty(p, \, p^l, \, p^u) =
     \begin{cases}
         p^l - p, & \text{for } p < p^l\\
         0, & \text{for } p^l \leq p \leq p^u\\
@@ -35,7 +35,7 @@ In this way one can penalize the simplex for stepping over the set boundaries by
     C_\s{mse}(I_\s{c}, \, I_\s{t})}_{\text{find target}}}
     +
     {\underbrace{%
-    \qty[\sum_i D\qty(p_i, \, [p_i^l, \, p_i^u])]^2
+    \qty[\sum_i D\qty(p_i, \, p_i^l, \, p_i^u)]^2
     }_{\text{stay within bounds}}}\\
 \end{equation}
 \note{align underbraces}

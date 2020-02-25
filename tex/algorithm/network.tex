@@ -60,13 +60,13 @@ Using this approach the following accuracy is reached:
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{al_random_plot}
-    \caption{\note{wrong plot} Shown are the total loss and the training and validation accuracy for both the continuous and the discrete branch. After each epoch the network is validated on data not used in training to check for overfitting.}
+    \caption{Shown are the total loss and the training and validation accuracy for both the continuous and the discrete branch. After each epoch the network is validated on data not used in training to check for overfitting.}
     \label{}
 \end{figure}
 
-Training and validation accuracy are very similar which indicates that there is no overfitting. The discrete accuracy quickly reaches a maximum of $\sim 70\%$
+Training and validation accuracy are very similar which indicates that there is no overfitting. The discrete accuracy quickly reaches a maximum of $\sim 80\%$
 which is less than expected for this classification problem. The issue here lies not in the networks arichtecture but in the data generation process. In \note{missing}
-we have shown that for a two layer stack the transmission spectrum is the same for both directions. That means the data generation can result in two different stacks which share the same spectrum. Lets consider a stack where one layer is Aluminium and the other is Gold. As both of them produce the same spectrum one time the network is taught that the first layer is Gold and another time its taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only constellation it can get right.
+we have shown that for a two layer stack the transmission spectrum is the same for both directions. That means the data generation can result in two different stacks which produce the same spectrum. Lets consider a stack where one layer is Aluminium and the other is Gold. As both of them produce the same spectrum one time the network is taught that the first layer is Gold and another time its taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only constellation it can get right.
 \\
 
 \begin{figure}[H]
@@ -74,4 +74,15 @@ we have shown that for a two layer stack the transmission spectrum is the same f
     {\caption{A stack of one Gold and one Aluminium layer separated by a glass spacer. Both orientations produce the same spectrum which leads to issues when using completely random stacks to train the network.}
     \label{fig:test}}
     {\includegraphics[width=.4\textwidth]{al_flipped_stack}}
+\end{figure}
+
+
+\newpage
+One can prevent this issue simply by allowing only one of the equivalent orientations into the training data. This does not limit the capabilities of the trained network as the variety of input spectra stays the same.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\linewidth]{al_final_training}
+    \caption{Network loss and accuracy after reducing equivalent stacks to one orientation. The discrete accuracy has improved and }
+    \label{}
 \end{figure}
