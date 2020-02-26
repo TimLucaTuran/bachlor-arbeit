@@ -65,12 +65,15 @@ Now we can derive the famous wave equation by considering $\curl$ \eqref{eq:bg:M
 
 \begin{equation}
 \begin{aligned}
+    \hspace{2.5cm}
     \curl \bigg [\curl \vb E \bigg ] &= \curl[- \mu_0 \pdv t \vb H]\\
+    \hspace{2.5cm}
     \Leftrightarrow
     \grad(\div \vb E) - \Delta \vb E &=
     - \mu_0 \pdv t \curl \vb H
     \qquad \bigg | \qq{subs. \eqref{eq:bg:M3} and \eqref{eq:bg:M2}}
     \\
+    \hspace{2.5cm}
     \Leftrightarrow
     \frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E
     &= -\mu_0 \pdv t \vb j - \mu_0 \pdv[2] t \vb P +
@@ -86,7 +89,7 @@ $\frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0$ which is solved by the plane 
 \newlparagraph{Light in homogeneous, isotropic materials}
 \noindent
 The next question we can answer is how light propagates through a homogeneous and isotropic material. For us the dielectric polarization is some linear function of the electric field so $\vb P(\vb r, t) = \hat{\chi}(\omega, \vb r) \vb E(\vb r, t)$. An isotropic material behaves the same for all orientations of $\vb E$ that means $\hat{\chi}(\omega, \vb r)$ becomes a scalar property $\chi(\omega, \vb r)$. If the material is additionally homogeneous, that is the same everywhere independent of $\vb r$, then $\div \chi(\omega, \vb r) = 0$. With equation \eqref{eq:bg:M2} this gives us $\div \vb P = 0$
-and the wave equation simplifies to:
+and the wave equation simplifies to \note{why is j=0}:
 
 \begin{equation}
 \begin{aligned}
@@ -110,4 +113,39 @@ A complex valued $n := \eta + i \kappa$ even captures the possibility of a decay
 \end{equation}
 
 \newlparagraph{Fresnel Equations}
-The meta surface stacks we want to use are obviously not one homogeneous material. They contain many interfaces between different materials and we can again use the maxwell equations to predict how light will behave at such an interface. 
+The meta surface stacks we want to understand are obviously not one homogeneous material. They contain many interfaces between different materials and we can again use the maxwell equations to predict how light will behave at such an interface.
+\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\linewidth]{bg_interface}
+    \caption{An interface of two materials with different refractive indices $n_1$ and $n_2$  }
+    \label{fig:bg:interface}
+\end{figure}
+
+Let us consider a closed contour $C$ around an interface as seen in Figure \ref{fig:bg:interface} and integrate the first maxwell equation \eqref{eq:bg:M1} over the surface $A$ enclosed by that contour:
+
+\begin{equation}
+\begin{aligned}
+    \int_A \curl \vb E(\vb r, t) \, \dd \vb A
+    &= - \mu_0 \pdv t \int_A \vb H(\vb r, t) \dd \vb A\\
+    \overset{\s{stokes}}{\Longleftrightarrow} \hspace{3em}
+    \int_{C = \partial A} \vb E(\vb r, t) \dd \vb r
+    &= - \mu_0 \pdv t \int_A \vb H(\vb r, t) \dd \vb A\\
+\end{aligned}
+\end{equation}
+
+Now we can bring the contour infinitely close to the interface and thus reduce the right hand side of the equation, the total magnetic flux\note{?} through the surface, to zero. That leaves us with:
+
+\begin{equation}
+\begin{aligned}
+    \int_a^b \vb E_1 \, \dd \vb r + &\int_b^a \vb E_2 \,  \dd \vb r = 0\\
+    \Longleftrightarrow \hspace{3em}
+    \int_a^b \vb E_1 \, \dd \vb r &= \int_a^b \vb E_2 \,  \dd \vb r \\
+\end{aligned}
+\end{equation}
+
+Because $a$ and $b$ were also chosen arbitrarily that means that the transverse field components along the path need to be continuous so
+$\vb E_1^{\parallel} = \vb E_2^{\parallel}$.
+The analog expression
+$\vb H_1^{\parallel} = \vb H_2^{\parallel}$
