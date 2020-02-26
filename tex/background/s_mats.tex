@@ -119,7 +119,7 @@ The meta surface stacks we want to understand are obviously not one homogeneous 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_interface}
-    \caption{An interface of two materials with different refractive indices $n_1$ and $n_2$  }
+    \caption{An interface of two materials with different refractive indices $n_1$ and $n_2$}
     \label{fig:bg:interface}
 \end{figure}
 
@@ -139,7 +139,7 @@ Now we can bring the contour infinitely close to the interface and thus reduce t
 
 \begin{equation}
 \begin{aligned}
-    \int_a^b \vb E_1 \, \dd \vb r + &\int_b^a \vb E_2 \,  \dd \vb r = 0\\
+    \int_a^b \vb E_1 \, \dd \vb r \ &+ \int_b^a \vb E_2 \,  \dd \vb r = 0\\
     \Longleftrightarrow \hspace{3em}
     \int_a^b \vb E_1 \, \dd \vb r &= \int_a^b \vb E_2 \,  \dd \vb r \\
 \end{aligned}
@@ -149,3 +149,31 @@ Because $a$ and $b$ were also chosen arbitrarily that means that the transverse 
 $\vb E_1^{\parallel} = \vb E_2^{\parallel}$.
 The analog expression
 $\vb H_1^{\parallel} = \vb H_2^{\parallel}$
+can be shown by starting with the first maxwell equation \eqref{eq:bg:M1} instead.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\linewidth]{bg_fresnel}
+    \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$. Shown is an incident wave with wave vector $\vb k_\s{i}$ which is partially transmitted and partially reflected.}
+    \label{fig:bg:fresnel}
+\end{figure}
+
+Let us consider the same interface from before and have an incident field
+$\vb E_\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
+
+\begin{equation}
+    \vb k_\s{i} = k_0
+    \begin{pmatrix}
+        -\sin(\varphi_\s{i})\\ 0\\ -\cos(\varphi_\s{i})
+    \end{pmatrix}
+    , \
+    \vb k_\s{r} = k_0
+    \begin{pmatrix}
+        \sin(\varphi_\s{r})\\ 0\\ -\cos(\varphi_\s{r})
+    \end{pmatrix}
+    , \
+    \vb k_\s{r} = k_0
+    \begin{pmatrix}
+        \sin(\varphi_\s{t})\\ 0\\ \cos(\varphi_\s{t})
+    \end{pmatrix}
+\end{equation}
