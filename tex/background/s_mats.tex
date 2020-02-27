@@ -1,7 +1,6 @@
 To implement the desired algorithm we need to be able to calculate the optical behavior of stacked Meta Surfaces. The mathematical framework we will use is called Scatter Matrix Calculus and this section will give some insight into its physical origin and how to use it. We will start at the very beginning with the Maxwell Equations in matter.
 \newlparagraph{Maxwell Equations}
 
-\\
 
 \noindent
 \begin{tabular*}{\textwidth}{ll}
@@ -34,12 +33,11 @@ $\vb E$...electric field, $\vb B$...magnetic flux density, $\vb D$...electric fl
 \end{aligned}
 \end{equation}
 
-\\
-\\
+
 Where $\vb P$ is the dielectric polarization and $\vb M$ is the magnetic polarisation. One can read equation \ref{eq:bg:D} in the following way:
 When the electric field $\vb E$ interacts with matter it exerts a force on all its charges and displaces them by a small amount. The separation of charges results in a counter field $\vb P$ and the total field $\vb D$ is now a superposition of $\vb E$ and $\vb P$.
 This set of equations describes the whole electromagnetic spectrum, in this work however we are only interested in visible (VIS) and near infra red (NIR) light so we can make some simplifications. $\rho_\s{ext}$ = 0 and $\vb M = 0$ \note{why?}. Inserting these assumptions into the maxwell equation gives:
-\\
+
 
 \noindent
 \begin{tabular*}{\textwidth}{ll}
@@ -83,8 +81,7 @@ Now we can derive the famous wave equation by considering $\curl$ \eqref{eq:bg:M
 
 In vacuum ($\vb P = 0$ and $\vb j = 0$) the right side of this equation vanishes and we are left with\\
 $\frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0$ which is solved by the plane wave $\vb E = \vb E_0 e^{i(\vb k \vb r - \omega t)}$ where $\frac{\omega}{k} = c$. This describes the propagation of light through empty space: a sinusoidal occilation in time and space along the $\vb k$ direction where $\vb E, \, \vb B$ and $\vb k$ are all perpendicular to each other.
-\note{show figure?}
-\clearpage
+\note{this needs details} \note{show figure?}
 
 \newlparagraph{Light in homogeneous, isotropic materials}
 \noindent
@@ -93,7 +90,7 @@ and the wave equation simplifies to \note{why is j=0}:
 
 \begin{equation}
 \begin{aligned}
-    $&\frac{\varepsilon}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0$\\
+    &\frac{\varepsilon}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0\\
     \qq*{where} &\varepsilon \, \vb E := \qty(1 + \chi) \vb E = \vb E + \vb P
 \end{aligned}
 \end{equation}
@@ -101,6 +98,10 @@ and the wave equation simplifies to \note{why is j=0}:
 So light behaves in these materials exactly as it would in vacuum we only have to account for a decreased speed of light
 $c' = \frac{c}{\sqrt{\varepsilon}} =: \frac{c}{n}$
 with the refractive index $n$.
+This is equivalent to a decreased wavelength
+$\lambda' =: \frac{\lambda}{n}$
+which results in an increased wave vector
+$k' = \frac{2 \pi}{\lambda'} = n \, k$
 A complex valued $n := \eta + i \kappa$ even captures the possibility of a decaying field:
 
 \begin{equation}
@@ -112,8 +113,8 @@ A complex valued $n := \eta + i \kappa$ even captures the possibility of a decay
     oscillation}
 \end{equation}
 
-\newlparagraph{Fresnel Equations}
-The meta surface stacks we want to understand are obviously not one homogeneous material. They contain many interfaces between different materials and we can again use the maxwell equations to predict how light will behave at such an interface.
+\newlparagraph{Interfaces}
+The meta surface stacks we want to understand are obviously not one homogeneous material. Rather they contain many interfaces between different materials and we can again use the maxwell equations to predict how light will behave at such an interface.
 \\
 
 \begin{figure}[H]
@@ -159,21 +160,91 @@ can be shown by starting with the first maxwell equation \eqref{eq:bg:M1} instea
 \end{figure}
 
 Let us consider the same interface from before and have an incident field
-$\vb E_\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
+$\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
+
+\begin{equation} \label{eq:bg:k}
+    \vb k^\s{i} = k_0 n_1
+    \begin{pmatrix}
+        -\sin \varphi_\s{i}\\ 0\\ -\cos \varphi_\s{i}
+    \end{pmatrix}
+    , \
+    \vb k^\s{r} = k_0 n_1
+    \begin{pmatrix}
+        \phantom{-} \sin \varphi_\s{r} \\ 0\\ -\cos \varphi_\s{r}
+    \end{pmatrix}
+    , \
+    \vb k^\s{r} = k_0 n_2
+    \begin{pmatrix}
+        \sin \varphi_\s{t}\\ 0\\ \cos \varphi_\s{t}
+    \end{pmatrix}
+\end{equation}
+
+Now we can decompose the electric field into a component were $\vb E = E \, \va{e_y}$ called transverse electric (TE) and its orthogonal component where $\vb H = H \, \va{e_y}$ called transverse magnetic (TM). If we apply the continuity condition from before on the TE component we get $\vb E_1 = \vb E_2$ at $z = 0$:
 
 \begin{equation}
-    \vb k_\s{i} = k_0
-    \begin{pmatrix}
-        -\sin(\varphi_\s{i})\\ 0\\ -\cos(\varphi_\s{i})
-    \end{pmatrix}
-    , \
-    \vb k_\s{r} = k_0
-    \begin{pmatrix}
-        \sin(\varphi_\s{r})\\ 0\\ -\cos(\varphi_\s{r})
-    \end{pmatrix}
-    , \
-    \vb k_\s{r} = k_0
-    \begin{pmatrix}
-        \sin(\varphi_\s{t})\\ 0\\ \cos(\varphi_\s{t})
-    \end{pmatrix}
+\begin{aligned}
+    \vb E^\s{i} + \vb E^\s{r} &= \vb E^\s{t} \\
+    E^\s{i} e^{i(k^\s{i}_x x)} + E^\s{r} e^{i(k^\s{r}_x x)}
+    &= E^\s{t} e^{i(k^\s{t}_x x)}
+\end{aligned}
+\end{equation}
+
+This is only possible for all $x$ if:
+
+\begin{equation}
+    E^\s{i} + E^\s{r} = E^\s{t} \qq{and}
+    k^\s{i}_x = k^\s{r}_x = k^\s{t}_x
+\end{equation}
+
+Two basic laws of optics lie in this relation: The law of reflection \note{fix the signs}
+
+\begin{equation}
+    k^\s{i}_x = k^\s{r}_x
+    \quad \Rightarrow \quad
+    - k_0 n_1 \sin \varphi_i =  k_0 n_1 \sin \varphi_r
+    \quad \Rightarrow \quad
+    \varphi_i = \varphi_r
+\end{equation}
+
+and the Snells law of refraction
+
+\begin{equation}
+    k^\s{i}_x = k^\s{t}_x
+    \quad \Rightarrow \quad
+    - k_0 n_1 \sin \varphi_i =  k_0 n_2 \sin \varphi_t
+    \quad \Rightarrow \quad
+    n_1 \sin \varphi_i = n_2 \sin \varphi_t
+\end{equation}
+
+\newlparagraph{Fresnel Equations}
+To fully describe an interface we also need know the fraction of the transmitted
+$t := \frac{\vb E^t}{\vb E^i}$
+and the reflected
+$r := \frac{\vb E^r}{\vb E^i}$ fields.
+We are still only considering the TE polarization for the derivation. Here as $\vb E = E \, \va e_y$ the $\vb H$ field has both $x$ and $z$ components and only $\vb H_x$ has to follow the continuity condition because it is oriented  transverse to the interface:
+
+\begin{equation}
+    \vb H^\s{i}_x + \vb H^\s{r}_x = \vb H^\s{t}_x \\
+\end{equation}
+
+Using the third maxwell equation \eqref{eq:bg:M3} this $\vb H_x$ component can be expressed by the electric field:
+
+\begin{equation}
+\begin{aligned}
+    \quad \phantom{\Rightarrow} \quad
+    \curl \vb E_0 e^{i(\vb k \vb r - \omega t)} &=
+    \varepsilon_0 \pdv t \vb H_0 e^{i(\vb k \vb r - \omega t)} \\
+    \quad \Rightarrow \quad
+    \vb k \times \vb E_0 e^{i(\vb k \vb r - \omega t)} &=
+    \varepsilon_0 \omega \ \vb H_0 e^{i(\vb k \vb r - \omega t)} \\
+    \quad \Rightarrow \quad
+    \vb k \times \vb E_0 &=
+    \varepsilon_0 \omega \ \vb H_0 \\
+    \quad \Rightarrow \quad
+    \vb H_{0x} =
+    \frac{1}{\varepsilon_0 \omega} \ \qty(\vb k \times \vb E_0)_x
+    &\stackrel{\eqref{eq:bg:k}}{=}
+    \frac{1}{\varepsilon_0 \omega} \\
+
+\end{aligned}
 \end{equation}

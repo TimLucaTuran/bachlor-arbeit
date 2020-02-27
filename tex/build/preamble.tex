@@ -4,7 +4,11 @@
 \usepackage{subcaption}
 \usepackage{import}
 \usepackage{floatrow}
-\newcommand\note[1]{\textcolor{red}{#1}}
+\usepackage{calc}
+\usepackage{easy-todo}
+\newcommand\note[1]{\todo{#1}}
+
+%\usepackage{todonotes}
 %\usepackage{placeins}		%allows FloatBarrier command
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{bm}				%allows bm command for boldfaced vectors in math mode
@@ -22,7 +26,7 @@
 \usepackage{geometry}
 \geometry{margin=2cm}
 
-\addtolength{\jot}{0.7em}
+\addtolength{\jot}{1em}
 
 \usepackage{physics}
 \usepackage[version=4]{mhchem}
