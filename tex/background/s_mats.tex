@@ -1,8 +1,6 @@
 To implement the desired algorithm we need to be able to calculate the optical behavior of stacked Meta Surfaces. The mathematical framework we will use is called Scatter Matrix Calculus and this section will give some insight into its physical origin and how to use it. We will start at the very beginning with the Maxwell Equations in matter.
 \newlparagraph{Maxwell Equations}
 
-
-\noindent
 \begin{tabular*}{\textwidth}{ll}
 \begin{minipeqn}
     \curl{\vb{E}(\vb{r}, t)} = - \pdv{t} \vb{B}(\vb{r}, t)
@@ -17,14 +15,12 @@ To implement the desired algorithm we need to be able to calculate the optical b
     \div \vb B(\vb r, t) = 0
 \end{minipeqn}
 \end{tabular*}
-\\
-\\
 
 
 \noindent
 The four involved fields are:
 $\vb E$...electric field, $\vb B$...magnetic flux density, $\vb D$...electric flux density and $\vb H$...magnetic field and the sources are the external charges $\rho_\s{ext}$ and the macroscopic currents $j$. All the material properties are captured by the $\vb D$ and $\vb H$ fields which are defined as follows:
-\\
+
 
 \begin{equation}\label{eq:bg:D}
 \begin{aligned}
@@ -173,7 +169,7 @@ $\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
         \phantom{-} \sin \varphi_\s{r} \\ 0\\ -\cos \varphi_\s{r}
     \end{pmatrix}
     , \
-    \vb k^\s{r} = k_0 n_2
+    \vb k^\s{t} = k_0 n_2
     \begin{pmatrix}
         \sin \varphi_\s{t}\\ 0\\ \cos \varphi_\s{t}
     \end{pmatrix}
@@ -203,7 +199,7 @@ Two basic laws of optics lie in this relation: The law of reflection \note{fix t
     \quad \Rightarrow \quad
     - k_0 n_1 \sin \varphi_i =  k_0 n_1 \sin \varphi_r
     \quad \Rightarrow \quad
-    \varphi_i = \varphi_r
+    \varphi_i = \varphi_r := \varphi_1
 \end{equation}
 
 and the Snells law of refraction
@@ -221,30 +217,21 @@ To fully describe an interface we also need know the fraction of the transmitted
 $t := \frac{\vb E^t}{\vb E^i}$
 and the reflected
 $r := \frac{\vb E^r}{\vb E^i}$ fields.
-We are still only considering the TE polarization for the derivation. Here as $\vb E = E \, \va e_y$ the $\vb H$ field has both $x$ and $z$ components and only $\vb H_x$ has to follow the continuity condition because it is oriented  transverse to the interface:
+Again using the TE polarization we get that $\vb E = E \, \va e_y$ and $\vb H$ is perpendicular to $\vb E$ in the $x$-$z$ plane. So
 
-\begin{equation}
-    \vb H^\s{i}_x + \vb H^\s{r}_x = \vb H^\s{t}_x \\
-\end{equation}
-
-Using the third maxwell equation \eqref{eq:bg:M3} this $\vb H_x$ component can be expressed by the electric field:
-
-\begin{equation}
-\begin{aligned}
-    \quad \phantom{\Rightarrow} \quad
-    \curl \vb E_0 e^{i(\vb k \vb r - \omega t)} &=
-    \varepsilon_0 \pdv t \vb H_0 e^{i(\vb k \vb r - \omega t)} \\
-    \quad \Rightarrow \quad
-    \vb k \times \vb E_0 e^{i(\vb k \vb r - \omega t)} &=
-    \varepsilon_0 \omega \ \vb H_0 e^{i(\vb k \vb r - \omega t)} \\
-    \quad \Rightarrow \quad
-    \vb k \times \vb E_0 &=
-    \varepsilon_0 \omega \ \vb H_0 \\
-    \quad \Rightarrow \quad
-    \vb H_{0x} =
-    \frac{1}{\varepsilon_0 \omega} \ \qty(\vb k \times \vb E_0)_x
-    &\stackrel{\eqref{eq:bg:k}}{=}
-    \frac{1}{\varepsilon_0 \omega} \\
-
-\end{aligned}
+\begin{equation} \label{eq:bg:H}
+    \vb H^\s{i} = H^\s{i}
+    \begin{pmatrix}
+        -\cos \varphi_\s{i}\\ 0\\ -\sin \varphi_\s{i}
+    \end{pmatrix}
+    , \
+    \vb H^\s{r} = H^\s{r}
+    \begin{pmatrix}
+        \cos \varphi_\s{r} \\ 0\\ \sin \varphi_\s{r}
+    \end{pmatrix}
+    , \
+    \vb H^\s{t} = H^\s{t}
+    \begin{pmatrix}
+        -\cos \varphi_\s{t}\\ 0\\ \sin \varphi_\s{t}
+    \end{pmatrix}
 \end{equation}
