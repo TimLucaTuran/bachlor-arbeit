@@ -1,4 +1,4 @@
-To implement the desired algorithm we need to be able to calculate the optical behavior of stacked Meta Surfaces. The mathematical framework we will use is called Scatter Matrix Calculus and this section will give some insight into its physical origin and how to use it. We will start at the very beginning with the Maxwell Equations in matter.
+To implement the desired algorithm we need to be able to calculate the optical behavior of stacked meta surfaces. The mathematical framework we will use is called Scatter Matrix Calculus and this section will give some insight into its physical origin and how to use it. We will start at the very beginning with the Maxwell Equations in matter.
 \newlparagraph{Maxwell Equations}
 
 \begin{tabular*}{\textwidth}{ll}
@@ -58,17 +58,17 @@ Now we can derive the famous wave equation by considering $\curl$ \eqref{eq:bg:M
 
 
 \begin{equation}
+\hspace{3cm}
 \begin{aligned}
-    \hspace{2.5cm}
-    \curl \bigg [\curl \vb E \bigg ] &= \curl[- \mu_0 \pdv t \vb H]\\
-    \hspace{2.5cm}
-    \Leftrightarrow
+    \phantom{\Longleftrightarrow} \quad
+    \curl \bigg [\curl \vb E \bigg ] &= \curl[- \mu_0 \pdv t \vb H]
+    \\
+    \Longleftrightarrow \quad
     \grad(\div \vb E) - \Delta \vb E &=
     - \mu_0 \pdv t \curl \vb H
     \qquad \bigg | \qq{subs. \eqref{eq:bg:M3} and \eqref{eq:bg:M2}}
     \\
-    \hspace{2.5cm}
-    \Leftrightarrow
+    \Longleftrightarrow \quad \ \
     \frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E
     &= -\mu_0 \pdv t \vb j - \mu_0 \pdv[2] t \vb P +
     \frac{1}{\varepsilon_0} \grad(\div \vb P)
@@ -116,7 +116,7 @@ The meta surface stacks we want to understand are obviously not one homogeneous 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_interface}
-    \caption{An interface of two materials with different refractive indices $n_1$ and $n_2$}
+    \caption{An interface of two materials with different refractive indices $n_1$ and $n_2$ and a closed contour $C$ which is tangent to the interface between the points $a$ and $b$.}
     \label{fig:bg:interface}
 \end{figure}
 
@@ -146,7 +146,7 @@ Because $a$ and $b$ were chosen arbitrarily that means that the transverse field
 $\vb E_1^{\parallel} = \vb E_2^{\parallel}$.
 The analog expression
 $\vb H_1^{\parallel} = \vb H_2^{\parallel}$
-can be shown by starting with the first maxwell equation \eqref{eq:bg:M1} instead.
+can be shown by starting with the first maxwell equation \eqref{eq:bg:M1} instead. We can now use these continuity conditions to learn more about the behavior of light at these interfaces.
 
 \begin{figure}[H]
     \centering
@@ -155,7 +155,7 @@ can be shown by starting with the first maxwell equation \eqref{eq:bg:M1} instea
     \label{fig:bg:fresnel}
 \end{figure}
 
-Let us now consider the same interface from before and have an incident field
+Let us consider the same interface from before and have an incident field
 $\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
 
 \begin{equation} \label{eq:bg:k}
@@ -214,10 +214,10 @@ and the Snells law of refraction
 
 \newlparagraph{Fresnel Equations}
 To fully describe an interface we also need know the fraction of the transmitted
-$t := \frac{\vb E^t}{\vb E^i}$
+$t := \frac{ E^t}{ E^i}$
 and the reflected
-$r := \frac{\vb E^r}{\vb E^i}$ fields.
-Again using the TE polarization we get that $\vb E = E \, \va e_y$ and $\vb H$ is perpendicular to $\vb E$ in the $x$-$z$ plane. So
+$r := \frac{ E^r}{ E^i}$ fields.
+Again using the TE polarization we have an orientation of fields were $\vb E = E \, \va e_y$ and $\vb H$ contained perpendicular to $\vb E$ in the $x$-$z$ plane:
 
 \begin{equation} \label{eq:bg:H}
     \vb H^\s{i} = H^\s{i}
@@ -239,7 +239,7 @@ Again using the TE polarization we get that $\vb E = E \, \va e_y$ and $\vb H$ i
 
 The $H_x$ component is tangent to the interface so it also needs to be continuous across the boundary:
 
-\begin{equation}
+\begin{equation}\label{eq:bg:Hx}
 \begin{aligned}
     \vb H^\s{i}_x + \vb H^\s{r}_x &= \vb H^\s{t}_x \\
     \Longleftrightarrow \qquad
@@ -248,7 +248,7 @@ The $H_x$ component is tangent to the interface so it also needs to be continuou
 \end{aligned}
 \end{equation}
 
-At last maxwells first equation \eqref{eq:bg:M1} allows us connect the magnitudes of $\vb H$ and $\vb E$ via the refractive index $H \sim n \, E$:
+And maxwells first equation \eqref{eq:bg:M1} allows us connect the magnitudes of $\vb H$ and $\vb E$ via the refractive index $H \sim n \, E$. This changes \eqref{eq:bg:Hx} to:
 
 \begin{equation}
     n_1 \, E^\s i \cos \varphi_1 - n_1 \, E^\s r \cos \varphi_1 =
@@ -277,4 +277,11 @@ For perpendicular incident light at $\varphi = 90^\circ$ these should describe t
 
 \begin{equation}
     t = \frac{2 n_1}{n_1 + n_2} \qq{and} r = \frac{n_1 - n_2}{n_1 + n_2}
+\end{equation}
+
+\newlparagraph{Stacking}
+We can take this one step further by including interfaces which have incident light from both sides. Let $\vb E^f$ be the light comming from the front travelling in $z$ direction and $\vb E^b$ light from the back travelling in the $-z$ direction:
+
+\begin{equation}
+    E^b_1 = E^
 \end{equation}
