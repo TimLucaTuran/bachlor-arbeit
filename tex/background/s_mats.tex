@@ -280,8 +280,25 @@ For perpendicular incident light at $\varphi = 90^\circ$ these should describe t
 \end{equation}
 
 \newlparagraph{Stacking}
-We can take this one step further by including interfaces which have incident light from both sides. Let $\vb E^f$ be the light comming from the front travelling in $z$ direction and $\vb E^b$ light from the back travelling in the $-z$ direction:
+We can take this one step further by including interfaces which have incident light from both sides. Let $\vb E^f$ be the light coming from the front traveling in $z$ direction and $\vb E^b$ be the light from the back traveling in the $-z$ direction as in figure \ref{fig:bg:both}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\linewidth]{bg_both_directions}
+    \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$ were incident light is coming from the front and back direction.}
+    \label{fig:bg:both}
+\end{figure}
+
+Using the factors from the Fresnel equations we get:
 
 \begin{equation}
-    E^b_1 = E^
+    E^b_1 = E^f_1 \, r_{12} + E^b_2 \, t_{21}
+    \qq{and}
+    E^f_2 = E^b_12\, r_{21} + E^f_1 \, t_{12}
+\end{equation}
+
+This can concisely be expressed using matrices and vectors:
+
+\begin{equation}
+
 \end{equation}
