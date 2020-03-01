@@ -1,3 +1,4 @@
+% !TEX root = ../bachlor-arbeit.tex
 To implement the desired algorithm we need to be able to calculate the optical behavior of stacked meta surfaces. The mathematical framework we will use is called Scatter Matrix Calculus and this section will give some insight into its physical origin and how to use it. We will start at the very beginning with the Maxwell Equations in matter.
 \newlparagraph{Maxwell Equations}
 
@@ -79,7 +80,7 @@ In vacuum ($\vb P = 0$ and $\vb j = 0$) the right side of this equation vanishes
 $\frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0$ which is solved by the plane wave $\vb E = \vb E_0 e^{i(\vb k \vb r - \omega t)}$ where $\frac{\omega}{k} = c$. This describes the propagation of light through empty space: a sinusoidal occilation in time and space along the $\vb k$ direction where $\vb E, \, \vb B$ and $\vb k$ are all perpendicular to each other.
 \note{this needs details} \note{show figure?}
 
-\newlparagraph{Light in homogeneous, isotropic materials}
+\newlparagraph{Light in homogeneous, isotropic materials}\label{par:light_in_materials}
 \noindent
 The next question we can answer is how light propagates through a homogeneous and isotropic material. For us the dielectric polarization is some linear function of the electric field so $\vb P(\vb r, t) = \hat{\chi}(\omega, \vb r) \vb E(\vb r, t)$. An isotropic material behaves the same for all orientations of $\vb E$ that means $\hat{\chi}(\omega, \vb r)$ becomes a scalar function $\chi(\omega, \vb r)$. If the material is additionally homogeneous, that is the same everywhere independent of $\vb r$, then $\div \chi(\omega, \vb r) = 0$. With equation \eqref{eq:bg:M2} this gives us $\div \vb P = 0$
 and the wave equation simplifies to \note{why is j=0}:
@@ -280,25 +281,68 @@ For perpendicular incident light at $\varphi = 90^\circ$ these should describe t
 \end{equation}
 
 \newlparagraph{Stacking}
-We can take this one step further by including interfaces which have incident light from both sides. Let $\vb E^f$ be the light coming from the front traveling in $z$ direction and $\vb E^b$ be the light from the back traveling in the $-z$ direction as in figure \ref{fig:bg:both}:
+We can take this one step further by including interfaces which have incident light from both sides. Let $\vb E_\s{out}$ be the light coming out of the interface and $\vb E_\s{in}$ be the light going into the interface as seen in figure \ref{fig:bg:both}:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_both_directions}
-    \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$ were incident light is coming from the front and back direction.}
+    \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$ were incident light is coming from the front and the back.}
     \label{fig:bg:both}
 \end{figure}
 
 Using the factors from the Fresnel equations we get:
 
 \begin{equation}
-    E^b_1 = E^f_1 \, r_{12} + E^b_2 \, t_{21}
+    E^b_\s{out} = E^f_\s{in} \, t^f + E^b_\s{in} \, r^b
     \qq{and}
-    E^f_2 = E^b_12\, r_{21} + E^f_1 \, t_{12}
+    E^f_\s{out} = E^b_\s{in} \, t^b + E^f_\s{in} \, r^f
 \end{equation}
 
 This can concisely be expressed using matrices and vectors:
 
 \begin{equation}
+\begin{pmatrix}
+    E^f_\s{out} \\
+    E^b_\s{out}
+\end{pmatrix} =
+\underbrace{
+\begin{pmatrix}
+    t^f & r^b \\
+    r^f & t^b
+\end{pmatrix}
+}_{
+ =: \hat{S}
+}
+\begin{pmatrix}
+    E^f_\s{in} \\
+    E^b_\s{in}
+\end{pmatrix}
+\end{equation}
 
+We call these matrices mapping light-in to light-out $S$-matrices. They can be used to describe more than just an interface. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$ where $d$ is the distance traveled. We can express this by alowing complex valued $t$ and $r$:
+
+\begin{equation}
+    \hat S_{n, d} =
+    \begin{pmatrix}
+        e^{i k_0 n d} & 0 \\
+        0 & e^{i k_0 n d}
+    \end{pmatrix}
+\end{equation}
+
+One big question remains: Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is every interface and every propagation between interfaces but we cannot predict the behavior of the stack as a whole.
+
+\note{add figure of two layer stack}
+
+The combined $S$-matrix cannot be obtained by simply using the matrix product. The result would be:
+
+\begin{equation}
+    \hat S_1 \, \hat S_2 =
+    \begin{pmatrix}
+        t^f_1 \, t^f_2 + r^b_1 \, r^f_2 & t^f_1 \, r^b_2 + r^b_1 \, t^b_2 \\
+        r^f_1 \, t^f_2 + t^b_1 \, r^f_2 & r^f_1 \, r^b_2 + t^b_1 \, t^b_2
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        t^f & r^b \\
+        r^f & t^b
+    \end{pmatrix}
 \end{equation}

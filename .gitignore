@@ -8,4 +8,6 @@
 *.toc
 *.bbl
 *.blg
+*.lod
+*.out
 Literatur/
