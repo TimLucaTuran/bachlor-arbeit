@@ -329,20 +329,48 @@ We call these matrices mapping light-in to light-out $S$-matrices. They can be u
     \end{pmatrix}
 \end{equation}
 
-One big question remains: Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is every interface and every propagation between interfaces but we cannot predict the behavior of the stack as a whole.
+One big question remains: Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is every interface and every propagation between interfaces but we cannot predict the behavior of the stack as a whole. See Figure \ref{fig:bg:star_prod}:
 
-\note{add figure of two layer stack}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\linewidth]{bg_starprod}
+    \caption{A slab of one homogeneous isotropic material with thickness $d$ in air $(n_0)$. This setup is described by two interface and one propergation $S$-matrices.}
+    \label{fig:bg:star_prod}
+\end{figure}
 
-The combined $S$-matrix cannot be obtained by simply using the matrix product. The result would be:
+
+
+The combined $S$-matrix $\hat S$ consisting of $\hat S_1$ and $\hat S_2$ cannot be obtained by simply using the matrix product. The result would be:
 
 \begin{equation}
     \hat S_1 \, \hat S_2 =
     \begin{pmatrix}
         t^f_1 \, t^f_2 + r^b_1 \, r^f_2 & t^f_1 \, r^b_2 + r^b_1 \, t^b_2 \\
         r^f_1 \, t^f_2 + t^b_1 \, r^f_2 & r^f_1 \, r^b_2 + t^b_1 \, t^b_2
-    \end{pmatrix} = 
+    \end{pmatrix} \neq
     \begin{pmatrix}
         t^f & r^b \\
         r^f & t^b
+    \end{pmatrix} =
+    \hat S
+\end{equation}
+
+and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. Redheffer \note{find the original paper} studied these kind of systems in the 70s and found an operator $\star$ which yields the combined $S$-matrix:
+
+\begin{equation}\label{eq:bg:star}
+    \hat S_1 \star \hat S_2 :=
+    \begin{pmatrix}
+        t^f_2 (1 - r^b_1 r^f_2)^{-1} t^f_1 &
+        r^b_2 + t^f_2 r^b_1 (1 - r^f_2 r^b_1)^{-1} t^b_2\\
+        r^f_1 + t^b_1 r^f_2 (1 - r^b_1 r^f_2)^{-1} t^f_1 &
+        t^b_1 (1 - r^f_2 r^b_1)^{-1} t^b_2
     \end{pmatrix}
 \end{equation}
+
+Applied to the example of figure \ref{fig:bg:star_prod} that gives:
+
+\begin{equation}
+    \hat S = \hat S_{n, n_0} \star \hat S_{n, d} \star \hat S_{n_0, n}
+\end{equation}
+
+Notice the last to first order of the $S$-matrices where the physically last $S$-matrix is first in the product.
