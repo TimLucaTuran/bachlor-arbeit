@@ -374,3 +374,88 @@ Applied to the example of figure \ref{fig:bg:star_prod} that gives:
 \end{equation}
 
 Notice the last to first order of the $S$-matrices where the physically last $S$-matrix is first in the product.
+
+
+\newlparagraph{Polarization}
+Up to this point we are dealing with vectors of the form
+$
+\begin{pmatrix}
+    E^f_\s{in} \\
+    E^b_\s{in}
+\end{pmatrix}
+$
+where $E^f_\s{in}$ and $E^b_\s{in}$ are scalar properties. That means we can only describe linear polarized light in one direction. The last generalization we want to make is to extend this formalism to all polarizations. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} a planar light wave propagating along the $z$ axis through a homogeneous material can be described as:
+
+\begin{equation}
+   \vb E =
+   \begin{pmatrix}
+       E_x e^{i(kz - \omega t + \varphi_x)}\\
+       E_y e^{i(kz - \omega t + \varphi_y)}\\
+       0\\
+   \end{pmatrix}
+   =
+   \qty(E_x \, e^{i \varphi_x} \, \va{e_x} +
+        E_y \, e^{i \varphi_y} \, \va{e_y})
+       e^{i(kz - \omega t)}
+\end{equation}
+\\
+
+\noindent
+the waves polarization is determined by the scaling factors of $\va{e_x}$ and $\va{e_y}$ and can be expressed as a \textit{Jones Vector} $\vb j \in \mathbb{C}^2$.
+
+\begin{equation}
+   \vb j = \frac{1}{\sqrt{E_x^2 + E_y^2}}
+   \begin{pmatrix}
+       E_x\\
+       E_y \, e^{i \delta}
+   \end{pmatrix}
+   \qq{with}
+   \delta := \varphi_y - \varphi_x
+\end{equation}
+
+\noindent
+Now all linear operations on the polarization are matrices $\hat{M} \in \mathbb{C}^{2 \times 2}$. That means all passive components have a corresponding matrix. A couple examples for components in horizontal position:
+
+
+\begin{equation}
+\begin{split}
+   \qq*{polarizer:} \hat{M} &=
+   \begin{pmatrix}
+       1 & 0\\
+       0 & 0
+   \end{pmatrix}\\
+   \qq*{$\lambda / 4$ plate:} \hat{M} &=
+   \begin{pmatrix}
+       1 & 0\\
+       0 & i
+   \end{pmatrix}
+   e^{-\frac{i \pi}{4}}\\
+   \qq*{$\lambda / 2$ plate:} \hat{M} &=
+   \begin{pmatrix}
+       -i & 0\\
+       0 & i
+   \end{pmatrix}\\
+\end{split}
+\end{equation}
+
+We can now generalize the formalism simply by allowing proper Jones matrices in place of the Fresnel factors: $t \rightarrow \hat T$ and $r \rightarrow \hat R$. The star product of two $S$-matrices becomes:
+
+\begin{equation}\label{eq:bg:star}
+    \hat S_1 \star \hat S_2 =
+    \begin{pmatrix}
+        \hat T^f_1 & \hat R^b_1 \\
+        \hat R^f_1 & \hat T^b_1
+    \end{pmatrix}
+    \star
+    \begin{pmatrix}
+        \hat T^f_2 & \hat R^b_2 \\
+        \hat R^f_2 & \hat T^b_2
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \hat T^f_2 (\mathbb 1 - \hat R^b_1 \hat R^f_2)^{-1} \hat T^f_1 &
+        \hat R^b_2 + \hat T^f_2 \hat R^b_1 (\mathbb 1 - \hat R^f_2 \hat R^b_1)^{-1} \hat T^b_2\\
+        \hat R^f_1 + \hat T^b_1 \hat R^f_2 (\mathbb 1 - \hat R^b_1 \hat R^f_2)^{-1} \hat T^f_1 &
+        \hat T^b_1 (\mathbb 1 - \hat R^f_2 \hat R^b_1)^{-1} \hat T^b_2
+    \end{pmatrix}
+\end{equation}
