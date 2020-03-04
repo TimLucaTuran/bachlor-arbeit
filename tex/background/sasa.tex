@@ -30,5 +30,31 @@ On this basis we can rotate $S$-matrices in a similar manner:
     \endgroup
 \end{equation}
 
-Flipping and mirroring of $S$-matrices is done analogously. 
+Flipping and mirroring of $S$-matrices is done analogously.With this all mathematical operations are well defined and we can write down SASA in pseudo code:
+\\
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwIn{Stack = $[\text{Layer}\, 1, \, \text{Layer 2}, \, \, \dots]$}
+    \KwOut{Stack $S$-matrix}
+    $S$-mats = $[\ ]$ \\
+    \For{$i = 0$;  $i < \s{len}(\s{Stack})$;  $i = i+1$;}{
+        \uIf{Stack$[i]$ \KwIs meta surface}{
+            add layer $\hat S$ to $S$-mats
+        } \Else {
+            calculate propagation $S$-matrix $\hat S_{n_i,d_i}$ \\
+            add $\hat S_{n_i,d_i}$ to $S$-mats
+        }
+        calculate interface $S$-matrix $\hat S_{n_i,n_{i+1}}$ \\
+        add $\hat S_{n_i,n_{i+1}}$ to $S$-mats
+    }
+    $\hat S = \mathbb 1$ \\
+    \For{$i = 0$;  $i < \s{len}(\text{S-mats})$;  $i = i+1$;}{
+        $\hat S = \hat S \star S$-mats$[i]$
+    }
+    \KwRet{$\hat S$}
+\end{algorithm}
+\note{fix cursive?}
+
 \newlparagraph{Conditions} \label{par:conditions}
+For this algorithm to produce physical valid output some conditions need to be met
