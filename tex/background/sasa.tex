@@ -1,1 +1,34 @@
 % !TEX root = ../bachlor-arbeit.tex
+The $S$-matrix calculus enables us to calculate the optical behavior of a stack if we know the optical behavior of all its layers in the form of their $S$-matrices. In section \ref{sec:s_mats} we derived the $S$-matrices of propagation through and interfaces between homogeneous isotropic materials. This calculation is based on the Fresnel equations and is analytic. We cannot however calculate the $S$-matrix of a meta surface analytically. This results in a "Semi Analytic" Stacking Algorithm where the $S$-matrices of the meta surfaces need to be provided but the remaining $S$-matrices can be calculated based on the stack parameters.
+
+\note{insert figure of two layer stack}
+
+Importantly symmetry operations like rotation and mirroring can be applied directly to Jones matrices. For example let $\hat M$ be the Jones matrix of an optical component then the Jones matrix of the rotated component $\hat{M}_{\varphi}$ is calculated as:
+
+\begin{equation}
+    \hat{M}_{\varphi} = \hat \Theta(-\varphi) \, \hat{M} \, \hat \Theta(\varphi)
+    \qq{where}
+    \hat \Theta(\varphi) =
+    \begin{pmatrix}
+        \cos \varphi & \sin \varphi \\
+        -\sin \varphi & \cos \varphi
+    \end{pmatrix}
+\end{equation}
+
+On this basis we can rotate $S$-matrices in a similar manner:
+
+\begin{equation}
+    \hat S_\varphi =
+    \begingroup
+    \renewcommand*{\arraystretch}{1.5}
+        \begin{pmatrix}
+            \hat \Theta(-\varphi) \hat T^f \hat \Theta(\varphi)&
+            \hat \Theta(-\varphi) \hat R^b \hat \Theta(\varphi)\\
+            \hat \Theta(-\varphi) \hat R^f \hat \Theta(\varphi)&
+            \hat \Theta(-\varphi) \hat T^b \hat \Theta(\varphi)
+        \end{pmatrix}
+    \endgroup
+\end{equation}
+
+Flipping and mirroring of $S$-matrices is done analogously. 
+\newlparagraph{Conditions} \label{par:conditions}

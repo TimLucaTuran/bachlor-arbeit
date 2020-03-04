@@ -34,7 +34,7 @@ $\vb E$...electric field, $\vb B$...magnetic flux density, $\vb D$...electric fl
 
 Where $\vb P$ is the dielectric polarization and $\vb M$ is the magnetic polarization. One can read equation \eqref{eq:bg:D} in the following way:
 When the electric field $\vb E$ interacts with matter it exerts a force on all its charges and displaces them by a small amount. The separation of charges results in a counter field $\vb P$ and the total field $\vb D$ is now a superposition of $\vb E$ and $\vb P$.
-This set of equations describes the whole electromagnetic spectrum, in this work however we are only interested in visible (VIS) and near infra red (NIR) light were we can make some simplifications. Generally in optics materials are non-magnetizable so $\vb M = 0$ and there are no free charges $\rho_\s{ext}$ = 0. Inserting these assumptions into the maxwell equation gives:
+This set of equations describes the whole electromagnetic spectrum, in this work however we are only interested in visible (VIS) and near infrared (NIR) light where we can make some simplifications. Generally in optics materials are non-magnetizable so $\vb M = 0$ and there are no free charges $\rho_\s{ext}$ = 0. Inserting these assumptions into the maxwell equation gives:
 \\
 
 
@@ -79,12 +79,11 @@ Now we can derive the famous wave equation by considering $\curl$ \eqref{eq:bg:M
 \end{equation}
 
 In vacuum ($\vb P = 0$ and $\vb j = 0$) the right side of this equation vanishes and we are left with\\
-$\frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0$ which is solved by the plane wave $\vb E = \vb E_0 e^{i(\vb k \vb r - \omega t)}$ where $\frac{\omega}{k} = c$. This describes the propagation of light through empty space: a sinusoidal occilation in time and space along the $\vb k$ direction where $\vb E, \, \vb B$ and $\vb k$ are all perpendicular to each other.
+$\frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0$ which is solved by the plane wave $\vb E = \vb E_0 e^{i(\vb k \vb r - \omega t)}$ where $\frac{\omega}{k} = c$. This describes the propagation of light through empty space: a sinusoidal oscillation in time and space along the $\vb k$ direction where $\vb E, \, \vb B$ and $\vb k$ are all perpendicular to each other.
 \note{this needs details} \note{show figure?}
 
 \newlparagraph{Light in homogeneous, isotropic materials}\label{par:light_in_materials}
-\noindent
-The next question we can answer is how light propagates through a homogeneous and isotropic material. For us the dielectric polarization is some linear function of the electric field so $\vb P(\vb r, t) = \hat{\chi}(\omega, \vb r) \vb E(\vb r, t)$. An isotropic material behaves the same for all orientations of $\vb E$ that means $\hat{\chi}(\omega, \vb r)$ becomes a scalar function $\chi(\omega, \vb r)$. If the material is additionally homogeneous, that is the same everywhere independent of $\vb r$, then $\grad \chi(\omega, \vb r) = 0$. With equation \eqref{eq:bg:M2} this gives us $\div \vb P = 0$
+The next question we can answer is how light propagates through a homogeneous and isotropic material. For us, the dielectric polarization is some linear function of the electric field so $\vb P(\vb r, t) = \hat{\chi}(\omega, \vb r) \vb E(\vb r, t)$. An isotropic material behaves the same for all orientations of $\vb E$ that means $\hat{\chi}(\omega, \vb r)$ becomes a scalar function $\chi(\omega, \vb r)$. If the material is additionally homogeneous, that is the same everywhere independent of $\vb r$, then $\grad \chi(\omega, \vb r) = 0$. With equation \eqref{eq:bg:M2} this gives us $\div \vb P = 0$
 and the wave equation simplifies to:
 
 \begin{equation}
@@ -178,7 +177,7 @@ $\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
     \end{pmatrix}
 \end{equation}
 
-Now we can decompose the electric field into a component were $\vb E = E \, \va{e_y}$ called transverse electric (TE) and its orthogonal component where $\vb H = H \, \va{e_y}$ called transverse magnetic (TM). If we apply the continuity condition from before to the TE component we get $\vb E_1 = \vb E_2$ at $z = 0$:
+Now we can decompose the electric field into two orthogonal polarizations. One component were $\vb E = E \, \va{e_y}$ called transverse electric (TE) as shown in figure \ref{fig:bg:fresnel} and its orthogonal component where $\vb H = H \, \va{e_y}$ called transverse magnetic (TM). If we apply the continuity condition from before to the TE component we get $\vb E_1 = \vb E_2$ at $z = 0$:
 
 \begin{equation}
 \begin{aligned}
@@ -220,7 +219,7 @@ To fully describe an interface we also need know the fraction of the transmitted
 $t := E^t / E^i$
 and the reflected
 $r := E^r / E^i$ fields.
-Again using the TE polarization we have an orientation of fields were $\vb E = E \, \va e_y$ and $\vb H$ contained perpendicular to $\vb E$ in the $x$-$z$ plane:
+Again using the TE polarization we have an orientation of fields were $\vb E = E \, \va e_y$ and $\vb H$ is contained perpendicular to $\vb E$ in the $x$-$z$ plane:
 
 \begin{equation} \label{eq:bg:H}
     \vb H^\s{i} = H^\s{i}
@@ -244,7 +243,7 @@ The $H_x$ component is tangent to the interface so it also needs to be continuou
 
 \begin{equation}\label{eq:bg:Hx}
 \begin{aligned}
-    \vb H^\s{i}_x + \vb H^\s{r}_x &= \vb H^\s{t}_x \\
+     H^\s{i}_x +  H^\s{r}_x &=  H^\s{t}_x \\
     \Longleftrightarrow \qquad
     H^\s i \cos \varphi_1 - H^\s r \cos \varphi_1 &= H^\s t \cos \varphi_2
     \qquad  \qquad
@@ -321,7 +320,7 @@ This can concisely be expressed using matrices and vectors:
 \end{pmatrix}
 \end{equation}
 
-We call these matrices mapping field-in to field-out $S$-matrices. They can be used to describe more than just an interface. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$ where $d$ is the distance traveled. We can express this by alowing complex valued $t$ and $r$:
+We call these matrices mapping field-in to field-out $S$-matrices. They can be used to describe more than just an interface. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$ where $d$ is the distance traveled. We can express this by allowing complex valued $t$ and $r$:
 
 \begin{equation}
     \hat S_{n, d} =
@@ -331,7 +330,22 @@ We call these matrices mapping field-in to field-out $S$-matrices. They can be u
     \end{pmatrix}
 \end{equation}
 
-One big question remains: Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is every interface and every propagation between interfaces but we cannot predict the behavior of the stack as a whole. See Figure \ref{fig:bg:star_prod}:
+Analogue the $S$-matrix for an interface from $n_1$ to $n_2$ is:
+
+\begin{equation}
+    \hat S_{n_1, n_2} =
+    %increase matrix spacing for the fractions
+    \begingroup
+    \renewcommand*{\arraystretch}{1.5}
+        \begin{pmatrix}
+            \frac{2 n_1}{n_1 + n_2} & \frac{n_2 - n_1}{n_1 + n_2} \\
+            \frac{n_1 - n_2}{n_1 + n_2} & \frac{2 n_1}{n_1 + n_2}
+        \end{pmatrix}
+    \endgroup
+\end{equation}
+
+
+Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is every interface and every propagation between interfaces as seen in figure \ref{fig:bg:star_prod}, but we cannot predict the behavior of the stack as a whole:
 
 \begin{figure}[H]
     \centering
@@ -357,7 +371,7 @@ The combined $S$-matrix $\hat S$ consisting of $\hat S_1$ and $\hat S_2$ cannot 
     \hat S
 \end{equation}
 
-and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. Redheffer \note{find the original paper} studied these kind of systems in the 70s and found an operator $\star$ which yields the combined $S$-matrix:
+and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. Redheffer \cite{Redheffer1960} studied these kind of systems in the 60s and found an operator $\star$ which yields the combined $S$-matrix:
 
 \begin{equation}\label{eq:bg:star}
     \hat S_1 \star \hat S_2 :=
@@ -369,13 +383,14 @@ and this would imply that the transmission from the front $t^f$ increases when t
     \end{pmatrix}
 \end{equation}
 
+For this operation to produce physically valid results certain condition have to be met. We will discuss these in detail in the paragraph \hyperref[par:conditions]{Conditions} of section \ref{sec:SASA}.
 Applied to the example of figure \ref{fig:bg:star_prod} that gives:
 
 \begin{equation}
     \hat S = \hat S_{n, n_0} \star \hat S_{n, d} \star \hat S_{n_0, n}
 \end{equation}
 
-Notice the order in which the matrices appear in the product where the physically first matrix appears last in the product. More on that in section \ref{sec:SASA}.
+Notice the order in which the matrices appear in the product where the physically first matrix appears last in the product. More on that also in section \ref{sec:SASA}.
 
 
 \newlparagraph{Polarization}

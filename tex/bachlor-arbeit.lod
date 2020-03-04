@@ -1,18 +1,15 @@
-\contentsline {todos}{{1. }why?}{5}{todos.0.1}% 
-\contentsline {todos}{{2. }this needs details}{5}{todos.0.2}% 
-\contentsline {todos}{{3. }show figure?}{5}{todos.0.3}% 
-\contentsline {todos}{{4. }why is j=0}{6}{todos.0.4}% 
-\contentsline {todos}{{5. }?}{6}{todos.0.5}% 
-\contentsline {todos}{{6. }fix the signs}{7}{todos.0.6}% 
-\contentsline {todos}{{7. }no they are not}{8}{todos.0.7}% 
-\contentsline {todos}{{8. }font is wrong}{10}{todos.0.8}% 
-\contentsline {todos}{{9. }explain backprop}{10}{todos.0.9}% 
-\contentsline {todos}{{10. }?}{13}{todos.0.10}% 
-\contentsline {todos}{{11. }why is this better?}{16}{todos.0.11}% 
-\contentsline {todos}{{12. }missing}{17}{todos.0.12}% 
-\contentsline {todos}{{13. }Insert some calculation of what is sufficiently dense}{19}{todos.0.13}% 
-\contentsline {todos}{{14. }align underbraces}{20}{todos.0.14}% 
-\contentsline {todos}{{15. }Maybe 3D plot of an example loss function}{20}{todos.0.15}% 
-\contentsline {todos}{{16. }How do symmetries in the MS result in $S$-Matrix symmetries.}{22}{todos.0.16}% 
-\contentsline {todos}{{17. }Here: Under which conditions can one describe the effect of a MS with a jones matrix?}{22}{todos.0.17}% 
-\contentsline {todos}{{18. }Maybe mark equations used as boundary conditions for the algorithm differently(e.g. fat)}{22}{todos.0.18}% 
+\contentsline {todos}{{1. }this needs details}{5}{todos.0.1}% 
+\contentsline {todos}{{2. }show figure?}{5}{todos.0.2}% 
+\contentsline {todos}{{3. }find the original paper}{9}{todos.0.3}% 
+\contentsline {todos}{{4. }write section about SASA}{11}{todos.0.4}% 
+\contentsline {todos}{{5. }font is wrong}{12}{todos.0.5}% 
+\contentsline {todos}{{6. }explain backprop}{12}{todos.0.6}% 
+\contentsline {todos}{{7. }?}{15}{todos.0.7}% 
+\contentsline {todos}{{8. }why is this better?}{18}{todos.0.8}% 
+\contentsline {todos}{{9. }missing}{19}{todos.0.9}% 
+\contentsline {todos}{{10. }Insert some calculation of what is sufficiently dense}{21}{todos.0.10}% 
+\contentsline {todos}{{11. }align underbraces}{22}{todos.0.11}% 
+\contentsline {todos}{{12. }Maybe 3D plot of an example loss function}{22}{todos.0.12}% 
+\contentsline {todos}{{13. }How do symmetries in the MS result in $S$-Matrix symmetries.}{24}{todos.0.13}% 
+\contentsline {todos}{{14. }Here: Under which conditions can one describe the effect of a MS with a jones matrix?}{24}{todos.0.14}% 
+\contentsline {todos}{{15. }Maybe mark equations used as boundary conditions for the algorithm differently(e.g. fat)}{24}{todos.0.15}% 
