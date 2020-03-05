@@ -21,7 +21,7 @@ To implement the desired algorithm we need to be able to calculate the optical b
 
 
 The four involved fields are:
-$\vb E$...electric field, $\vb B$...magnetic flux density, $\vb D$...electric flux density and $\vb H$...magnetic field and the sources are the external charges $\rho_\s{ext}$ and the macroscopic currents $j$. All the material properties are captured by the $\vb D$ and $\vb H$ fields which are defined as:
+$\vb E$...electric field, $\vb B$...magnetic flux density, $\vb D$...electric flux density and $\vb H$...magnetic field and the sources are the external charges $\rho_\s{ext}$ and the macroscopic currents $\vb j$. All the material properties are captured by the $\vb D$ and $\vb H$ fields which are defined as:
 
 
 \begin{equation}\label{eq:bg:D}
@@ -320,7 +320,7 @@ This can concisely be expressed using matrices and vectors:
 \end{pmatrix}
 \end{equation}
 
-We call these matrices mapping field-in to field-out $S$-matrices. They can be used to describe more than just an interface. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$ where $d$ is the distance traveled. We can express this by allowing complex valued $t$ and $r$:
+We call these matrices mapping field-in to field-out $S$-matrices. They can be used to describe more than just interfaces. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$ where $d$ is the distance traveled and $\vb k_0$ the wave vector in vacuum. We can express this by allowing complex valued $t$ and $r$:
 
 \begin{equation}
     \hat S_{n, d} =
@@ -345,7 +345,7 @@ Analogue the $S$-matrix for an interface from $n_1$ to $n_2$ is:
 \end{equation}
 
 
-Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is every interface and every propagation between interfaces as seen in figure \ref{fig:bg:star_prod}, but we cannot predict the behavior of the stack as a whole:
+Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is every interface and every propagation between interfaces as seen in figure \ref{fig:bg:star_prod}, but we cannot predict the behavior of the stack as a whole.
 
 \begin{figure}[H]
     \centering
@@ -371,7 +371,7 @@ The combined $S$-matrix $\hat S$ consisting of $\hat S_1$ and $\hat S_2$ cannot 
     \hat S
 \end{equation}
 
-and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. Redheffer \cite{Redheffer1960} studied these kind of systems in the 60s and found an operator $\star$ which yields the combined $S$-matrix:
+and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. Redheffer \cite{Redheffer1960} studied these kind of systems in the 60s and gave an operator $\star$ which yields the combined $S$-matrix:
 
 \begin{equation}\label{eq:bg:star}
     \hat S_1 \star \hat S_2 :=
@@ -452,7 +452,7 @@ Now all linear operations on the polarization are matrices $\hat{M} \in \mathbb{
 \end{split}
 \end{equation}
 
-We can now generalize the $S$-matrix Calculus simply by allowing proper Jones matrices in place of the Fresnel factors: $t \rightarrow \hat T$ and $r \rightarrow \hat R$. The star product of two $S$-matrices becomes:
+We can now generalize the $S$-matrix calculus simply by allowing Jones matrices in place of the Fresnel factors: $t \rightarrow \hat T$ and $r \rightarrow \hat R$. The star product of two $S$-matrices becomes:
 
 \begin{equation}\label{eq:bg:star}
     \hat S_1 \star \hat S_2 =
@@ -474,4 +474,14 @@ We can now generalize the $S$-matrix Calculus simply by allowing proper Jones ma
     \end{pmatrix}
 \end{equation}
 
-So the general $S$-matrix is $\hat S \in \mathbb C^{4 \times 4}$ and consist of four separate Jones matrices.
+So the general $S$-matrix is $\hat S \in \mathbb C^{4 \times 4}$ and consist of four separate Jones matrices and the general input vector
+$
+\begingroup
+\renewcommand*{\arraystretch}{1.2}
+\begin{pmatrix}
+    \vb E^f_\s{in} \\
+    \vb E^b_\s{in}
+\end{pmatrix}
+\endgroup
+$
+consists of two separate Jones vectors.

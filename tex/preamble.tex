@@ -33,6 +33,12 @@
 \newcommand{\s}[1]{\mathrm{#1}}
 \newcommand{\bs}[1]{\boldsymbol{#1}}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+\renewcommand\theequation{\thesection.\arabic{equation}}
+\newenvironment{boldequation}{
+\renewcommand\theequation{\textbf{\thesection.\arabic{equation}}}\equation}
+{\endequation}
+
 \renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
 \newcommand{\newlparagraph}[1]{\paragraph{#1}\mbox{}\\}
 \newenvironment{minipeqn}[1][]{\begin{minipage}[#1]{.45\textwidth}\begin{equation}}{\end{equation}\end{minipage}}
