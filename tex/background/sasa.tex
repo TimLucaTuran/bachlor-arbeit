@@ -38,6 +38,8 @@ On this basis we can rotate $S$-matrices in a similar manner:
 Flipping and mirroring of $S$-matrices is done analogously. With all mathematical operations well defined we can write down SASA in pseudo code:
 \\
 
+
+\begin{figure}[H]
 \begin{algorithm}[H]
     \SetAlgoLined
     \KwIn{Stack = $[\text{Layer}\, 0, \, \text{Layer 1}, \, \, \dots]$}
@@ -60,7 +62,10 @@ Flipping and mirroring of $S$-matrices is done analogously. With all mathematica
     }
     \KwRet{$\hat S$}
 \end{algorithm}
+\caption*{SASA pseudocode: A Layer variable holds all the information of that layer, that is the $S$-matrix if its a meta layer and the refractive index $n$ and thickness $d$ otherwise.}
+\end{figure}
 \note{fix cursive?}
+
 
 \newlparagraph{Conditions} \label{par:conditions}
 For this algorithm to produce physical valid output some conditions need to be met. Equations that are boundary conditions to the algorithm will be marked bold. It has been shown \note{needs cite} that the $S$-matrix calculus can only be used when the meta materials in the stack interact with each other via the far field. That is only the zeroth diffraction order of a meta surface can be non evanescent and the higher orders need to have decayed enough when they reach the next meta surface.
