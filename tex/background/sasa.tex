@@ -5,7 +5,7 @@ The $S$-matrix calculus enables us to calculate the optical behavior of a stack 
     \centering
     \includegraphics[width=.4\linewidth]{bg_two_layers}
     \caption{An example for a two meta layer stack. The top layer consist of rectangular gold particles arranged on a square matrix of period $\Lambda$. The bottom layer consist of rectangular holes in a gold sheet which are rotated by an angle of $\varphi$ in respect to the top layer. The two meta layers are separated by a glass spacer of thickness $d$.}
-    \label{fig:bg:tow_layer}
+    \label{fig:bg:two_layers}
 \end{figure}
 
 Importantly geometric transformations like rotation and mirroring can be applied directly to Jones matrices. For example let $\hat M$ be the Jones matrix of an optical component then the Jones matrix of the rotated component $\hat{M}_{\varphi}$ is calculated as:
@@ -62,9 +62,15 @@ Flipping and mirroring of $S$-matrices is done analogously. With all mathematica
     }
     \KwRet{$\hat S$}
 \end{algorithm}
-\caption*{SASA pseudocode: A Layer variable holds all the information of that layer, that is the $S$-matrix if its a meta layer and the refractive index $n$ and thickness $d$ otherwise.}
-\end{figure}
 \note{fix cursive?}
+\begin{tabular}{ll}
+    SASA pseudocode: &
+    \begin{tabular}[t]{@{}l@{}}
+        A Layer variable holds all the information of that layer, that is the $S$-matrix if \\
+        its a meta layer and the refractive index $n$ and thickness $d$ otherwise.
+    \end{tabular}\\
+\end{tabular}
+\end{figure}
 
 
 \newlparagraph{Conditions} \label{par:conditions}
@@ -74,7 +80,7 @@ For this algorithm to produce physical valid output some conditions need to be m
     \lambda > \max(n^f, n^b) \cdot \Lambda
 \end{boldequation}
 
-\eqref{bg:eq:lamda} ensures that only the zeroth diffraction order is non evanescent but additionally the spacer between the meta surfaces as seen in figure \ref{fig:bg:tow_layer} needs to be thick enough so that all non fundamental modes have decayed sufficiently. There is a calculation here \cite{Menzel2016} which concludes that if we require:
+\eqref{bg:eq:lamda} ensures that only the zeroth diffraction order is non evanescent but additionally the spacer between the meta surfaces as seen in figure \ref{fig:bg:two_layers} needs to be thick enough so that all higher order modes have decayed sufficiently. There is a calculation here \cite{Menzel2016} which concludes that if we require:
 
 \begin{boldequation}
     e^{\Im(k_z)d} < e^{-2} \approx 0.14 \qq{then}
@@ -84,13 +90,90 @@ For this algorithm to produce physical valid output some conditions need to be m
 The factor $e^{-2}$ is chosen arbitrarily. A smaller value increases the agreement of the $S$-matrix calculus and more rigoros methods which also  take into account the near field.
 
 \newlparagraph{Symmetries}
-We can use the rotation matrix $\hat \Theta(\varphi)$ to examine the $S$-matrices of meta surfaces which satisfy certain symmetries. A meta surface of a $C^4$ symmetry for example square shape meta particles, is equivalent if rotated $90^\circ$ so the $S$-matrix should be the same too:
+We can use geometric transformations to examine the $S$-matrices of meta surfaces which satisfy certain symmetries. Lets start with mirror symmetry. The Jones matrix $\hat M'$ of a mirrored component $\hat M$ can be calculate by:
 
 \begin{equation}
-    \hat S \stackrel{!}{=} \hat S_{\pi/2} \qq{and}
+    \hat M' = \hat F^{-1} \hat M \hat F \qq{where}
+    \hat F =
+    \begin{pmatrix}
+        1 & \phantom{-} 0 \\
+        0 & -           1
+    \end{pmatrix}
+\end{equation}
+
+If a meta surface has mirror symmetry like the ones seen in figure \ref{fig:bg:two_layers} the $S$-matrix needs to satisfy
+$\hat S = \hat S'$
+and that means all the contained Jones matrices need to satisfy the condition too:
+
+\begin{equation}
+\begin{aligned}
+    \qq*{Let} \hat T^f =
+    &\begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix}
+    \qq{then} \\
+    \qty(\hat T^f)' =
+    \hat F^{-1} \hat T^f \hat F =
+    \begin{pmatrix}
+        1 & \phantom{-} 0 \\
+        0 & -           1
+    \end{pmatrix}
+    &\begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & \phantom{-} 0 \\
+        0 & -           1
+    \end{pmatrix}
+    \stackrel{!}{=}
+    \begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix} =
+    \hat T^f \\
+    \Rightarrow \qquad
+    \hat T^f =
+    &\begin{pmatrix}
+        A & 0 \\
+        0 & D
+    \end{pmatrix}
+\end{aligned}
+\end{equation}
+
+We can also examine rotational symmetry with the rotation matrix $\hat \Theta(\varphi)$. A meta surface of a $C_4$ symmetry for example square shaped meta particles, is equivalent if rotated $90^\circ$ so the $S$-matrix should be the same too
+$\hat S \stackrel{!}{=} \hat S_{\pi/2}$:
+
+\begin{equation}
+\begin{aligned}
     \hat \Theta(\pi/2) =
     \begin{pmatrix}
         \phantom{-} 0 & 1 \\
         -1 & 0
     \end{pmatrix}
+    &\qq{and}
+    \hat T^f_{\pi/2} =
+    \hat \Theta(-\pi/2) \hat T^f \hat \Theta(\pi/2)
+    \stackrel{!}{=}
+    \hat T^f\\
+    \Rightarrow \qquad
+    \hat T^f &=
+    \begin{pmatrix}
+        \phantom{-} A & B \\
+        -           B & A
+    \end{pmatrix}
+\end{aligned}
 \end{equation}
+
+So if a meta surface has both mirror and $C_4$ symmetry its $\hat T^f$ matrix is shaped:
+
+\begin{equation}
+    \hat T^f =
+    \begin{pmatrix}
+        A & 0 \\
+        0 & A
+    \end{pmatrix}
+\end{equation}
+
+And it should be noted that these considerations apply to all Jones matrices and not only to $\hat T^f$
