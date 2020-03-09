@@ -1,2 +1,32 @@
-I hope this all works jada jada jada
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+% !TEX root = ../bachlor-arbeit.tex
+Metamaterials are materials whose physical properties emerge not from the kind of material they are but from their internal geometry. Optical metamaterials are mostly made of repeating sub-wavelength structures. They can be engineered to exhibit properties not found in nature like negative refractive indices \cite{Shelby2001}, \note{... and ...}. In recent years the focus has shifted to flat 2D metamaterials dubbed metasurfaces \cite{Yu2014}. Normal optical devices like lenses or phase plates rely on distances much larger than one wavelength to change the light's properties in contrast metasurfaces have sub-wavelength thickness and enable thin components not possible before. \note{too close to source?} These metasurfaces promise custom components which can be tailored to a wide range of applications
+but because of their small size metasurfaces with complex geometry are quite hard to manufacture. Also predicting the optical behavior of metasurfaces cannot be done analytically and involves computationally intensive simulations.
+\\
+
+$\quad$
+2016 \cite{Menzel2016} presented an algorithm called SASA to analytically calculate the optical behavior of metasurface stacks if one knows how the surfaces behave individually. The idea here is to create a target behavior not by using complex geometry but by using simple metasurfaces and stacking them ontop each other. Designing a component becomes an optimization problem of choosing the right surfaces and then tuning stack parameters like the distance between layers and their rotation angle. This approach is possible because SASA is analytical in nature and many different stacks can be considered very quickly. Conventional optimization methods rely on the underlying process being continuous so if we tune a parameters slightly it is possible to tell if that was a step in the right direction. This is a problem because some of the choices involved when building a stack are categorical. For example choosing the material of the layers or the kind of geometry.
+\\
+
+$\quad$
+Another recent development has produced a very general and powerful way of dealing with categorical decision problems. Neural Networks have found their way into many different areas and given enough data it should be possible to train a Neural Network to choose the discrete stack parameters to a given optical target. Again the analyticallity of SASA is useful and enables us to generate a lot of training stacks very quickly. We can now sketch out an algorithm which takes a transmission spectrum as a target and outputs a  metasurface stack to reproduce this target:
+\\
+
+\textbf{Preperation:}
+\begin{enumerate}
+    \item Simulate a database of metasurfaces with a simple geometry
+
+    \item Use SASA to generate training stacks of this database
+
+    \item Train a Neural Network on these stacks
+\end{enumerate}
+
+\textbf{Algorithm:}
+\begin{enumerate}
+    \item Input the transmission spectrum into a Neural Network and receive the discrete stack parameters
+
+    \item Use a conventional optimization method to choose additional continuous parameters
+
+    \item Use the database in conjunction with SASA to determine the optical behavior of the current stack.
+
+    \item Repeat 2. and 3. until the target is reached
+\end{enumerate}
