@@ -1,10 +1,10 @@
 % !TEX root = ../bachlor-arbeit.tex
-The $S$-matrix calculus enables us to calculate the optical behavior of a stack if we know the optical behavior of all its layers in the form of their $S$-matrices. In section \ref{sec:s_mats} we derived the $S$-matrices of propagation through and interfaces between homogeneous isotropic materials. This calculation is based on the Fresnel equations and is therefore analytic. We cannot however calculate the $S$-matrix of a meta surface analytically. This results in a "Semi Analytic" Stacking Algorithm where the $S$-matrices of the meta surfaces need to be provided but the remaining $S$-matrices can be calculated based on the stack parameters.
+The $S$-matrix calculus enables us to calculate the optical behavior of a stack if we know the optical behavior of all its layers in the form of their $S$-matrices. In section \ref{sec:s_mats} we derived the $S$-matrices of propagation through and interfaces between homogeneous isotropic materials. This calculation is based on the Fresnel equations and is therefore analytic. We cannot however calculate the $S$-matrix of a metasurface analytically. This results in a "Semi Analytic" Stacking Algorithm where the $S$-matrices of the metasurfaces need to be provided but the remaining $S$-matrices can be calculated based on the stack parameters.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.4\linewidth]{bg_two_layers}
-    \caption{An example for a two meta layer stack. The top layer consist of rectangular gold particles arranged on a square matrix of period $\Lambda$. The bottom layer consist of rectangular holes in a gold sheet which are rotated by an angle of $\varphi$ in respect to the top layer. The two meta layers are separated by a glass spacer of thickness $d$.}
+    \caption{An example for a two metalayer stack. The top layer consist of rectangular gold particles arranged on a square matrix of period $\Lambda$. The bottom layer consist of rectangular holes in a gold sheet which are rotated by an angle of $\varphi$ in respect to the top layer. The two metalayers are separated by a glass spacer of thickness $d$.}
     \label{fig:bg:two_layers}
 \end{figure}
 
@@ -46,7 +46,7 @@ Flipping and mirroring of $S$-matrices is done analogously. With all mathematica
     \KwOut{Stack $S$-matrix}
     $S$-mats = $[\ ]$ \\
     \For{$i = 0$;  $i < \s{len}(\s{Stack})$;  $i = i+1$;}{
-        \uIf{Stack$[i]$ \KwIs meta surface}{
+        \uIf{Stack$[i]$ \KwIs metasurface}{
             add layer $\hat S$ to $S$-mats
         } \Else {
             calculate propagation $S$-matrix $\hat S_{n_i,d_i}$ \\
@@ -67,20 +67,20 @@ Flipping and mirroring of $S$-matrices is done analogously. With all mathematica
     SASA pseudocode: &
     \begin{tabular}[t]{@{}l@{}}
         A Layer variable holds all the information of that layer, that is the $S$-matrix if \\
-        its a meta layer and the refractive index $n$ and thickness $d$ otherwise.
+        its a metalayer and the refractive index $n$ and thickness $d$ otherwise.
     \end{tabular}\\
 \end{tabular}
 \end{figure}
 
 
 \newlparagraph{Conditions} \label{par:conditions}
-For this algorithm to produce physical valid output some conditions need to be met. Equations that are boundary conditions to the algorithm will be marked bold. It has been shown \note{needs cite} that the $S$-matrix calculus can only be used when the meta materials in the stack interact with each other via the far field. That is only the zeroth diffraction order of a meta surface can be non evanescent and the higher orders need to have decayed enough when they reach the next meta surface.
+For this algorithm to produce physical valid output some conditions need to be met. Equations that are boundary conditions to the algorithm will be marked bold. It has been shown \note{needs cite} that the $S$-matrix calculus can only be used when the metamaterials in the stack interact with each other via the far field. That is only the zeroth diffraction order of a metasurface can be non evanescent and the higher orders need to have decayed enough when they reach the next metasurface.
 
 \begin{boldequation} \label{bg:eq:lamda}
     \lambda > \max(n^f, n^b) \cdot \Lambda
 \end{boldequation}
 
-\eqref{bg:eq:lamda} ensures that only the zeroth diffraction order is non evanescent but additionally the spacer between the meta surfaces as seen in figure \ref{fig:bg:two_layers} needs to be thick enough so that all higher order modes have decayed sufficiently. There is a calculation here \cite{Menzel2016} which concludes that if we require:
+\eqref{bg:eq:lamda} ensures that only the zeroth diffraction order is non evanescent but additionally the spacer between the metasurfaces as seen in figure \ref{fig:bg:two_layers} needs to be thick enough so that all higher order modes have decayed sufficiently. There is a calculation here \cite{Menzel2016} which concludes that if we require:
 
 \begin{boldequation}
     e^{\Im(k_z)d} < e^{-2} \approx 0.14 \qq{then}
@@ -90,7 +90,7 @@ For this algorithm to produce physical valid output some conditions need to be m
 The factor $e^{-2}$ is chosen arbitrarily. A smaller value increases the agreement of the $S$-matrix calculus and more rigoros methods which also  take into account the near field.
 
 \newlparagraph{Symmetries}
-We can use geometric transformations to examine the $S$-matrices of meta surfaces which satisfy certain symmetries. Lets start with mirror symmetry. The Jones matrix $\hat M'$ of a mirrored component $\hat M$ can be calculate by:
+We can use geometric transformations to examine the $S$-matrices of metasurfaces which satisfy certain symmetries. Lets start with mirror symmetry. The Jones matrix $\hat M'$ of a mirrored component $\hat M$ can be calculate by:
 
 \begin{equation}
     \hat M' = \hat F^{-1} \hat M \hat F \qq{where}
@@ -101,7 +101,7 @@ We can use geometric transformations to examine the $S$-matrices of meta surface
     \end{pmatrix}
 \end{equation}
 
-If a meta surface has mirror symmetry like the ones seen in figure \ref{fig:bg:two_layers} the $S$-matrix needs to satisfy
+If a metasurface has mirror symmetry like the ones seen in figure \ref{fig:bg:two_layers} the $S$-matrix needs to satisfy
 $\hat S = \hat S'$
 and that means all the contained Jones matrices need to satisfy the condition too:
 
@@ -142,7 +142,7 @@ and that means all the contained Jones matrices need to satisfy the condition to
 \end{aligned}
 \end{equation}
 
-We can also examine rotational symmetry with the rotation matrix $\hat \Theta(\varphi)$. A meta surface of a $C_4$ symmetry for example square shaped meta particles, is equivalent if rotated $90^\circ$ so the $S$-matrix should be the same too
+We can also examine rotational symmetry with the rotation matrix $\hat \Theta(\varphi)$. A metasurface of a $C_4$ symmetry for example square shaped metaparticles, is equivalent if rotated $90^\circ$ so the $S$-matrix should be the same too
 $\hat S \stackrel{!}{=} \hat S_{\pi/2}$:
 
 \begin{equation}
@@ -166,7 +166,7 @@ $\hat S \stackrel{!}{=} \hat S_{\pi/2}$:
 \end{aligned}
 \end{equation}
 
-So if a meta surface has both mirror and $C_4$ symmetry its $\hat T^f$ matrix is shaped:
+So if a metasurface has both mirror and $C_4$ symmetry its $\hat T^f$ matrix is shaped:
 
 \begin{equation}
     \hat T^f =
