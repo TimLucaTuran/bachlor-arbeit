@@ -41,10 +41,9 @@ However it is more convenient to stop considering every node individually and to
     \caption{sigmoid}
     \label{}
 \end{subfigure}
-\caption{Two examples of activation functions $\sigma$. Especially the relu function has a destinct on and off state similar to a biological neurons.}
+\caption{Two examples of activation functions $\sigma$. Especially the ReLu function has a destinct on and off state similar to a biological neurons.}
 \label{fig:al:act}
 \end{figure}
-\note{font is wrong}
 
 \paragraph{Training} \label{par:training}
 During training the network output $\s{NN}(\vb x) := \vb{y}' $ is calculated through repeated use of \eqref{eq:bg:activation} and is then compared with the known correct output $\vb y$ by a cost function $C = C(\vb y, \, \vb y')$. The goal of the training is to minimize this function $C$. The cost function might simply be the mean squared difference between $\vb y$ and $\vb y'$:
@@ -55,7 +54,7 @@ During training the network output $\s{NN}(\vb x) := \vb{y}' $ is calculated thr
 
 \noindent
 but there are different cost functions for different kind of outputs. For example a network which predicts continuous values needs a different loss than one predicting categories. More on this in section \ref{sec:NN}. Now we can quantify how well the NN is performing but how should the weights and biases be changed to improve this performance?
-Here the Algorithm \textit{Backpropagation} is used and allows an efficient calculation of $\grad{C}_{\vb{b}^l}$ and $\grad{C}_{\vu{w}^l}$ \note{explain backprop}. These are used to gradually change the weights and biases to minimize the cost function. A comprehensive explanation of Backpropagation can be found here: \cite{backprop}.
+Here the Algorithm \textit{Backpropagation} is used and allows an efficient approximation of the gradients for $\vb{b}^l$ and $\vu{w}^l$. These are used to gradually change the weights and biases to minimize the cost function. A comprehensive explanation of Backpropagation can be found here: \cite{backprop}.
 
 \paragraph{Convolutional Neural Networks}
 An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$ gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer (see figure \ref{fig:bg:flatten}). But now the number of weights to the next layer $\vu{w}^2$ is $n \cdot n \cdot \qty| \boldsymbol l^2|$

@@ -1,3 +1,4 @@
+% !TEX root = ../bachlor-arbeit.tex
 \begin{tabular}{ll}
     \toprule
     Input: &
@@ -26,7 +27,6 @@ $0 \rightarrow$ "The layer does not have this property".
 
 
 The different outputs also need different cost functions $C(y, y')$ during training where $y'$ is the networks output and $y$ is the known solution. For the continuous output one can simply use the mean squared error
-
 \begin{equation}
     C_\s{mse}(\vb y, \, \vb y') = \sum_i \qty(y_i - y_i')^2
 \end{equation}
@@ -39,9 +39,7 @@ as all outputs are equally important and the cost function should be indifferent
 \end{equation}
 
 \noindent
-Using this error if the network predicts $y'_i = 0$ for all categories then $C_\s{ce} \rightarrow \infty$. \note{why is this better?}
-
-The final architecture is similar to the example given in figure \ref{fig:bg:NN_example} while meeting the above-mentioned constraints:
+This error treats false positives and false negatives differently. A false positive does not increase the overall cost as $y_i = 0$ anyway but for a false negative ($y_i = 1, \, y_i' = 0$) $C_\s{ce} \rightarrow \infty$. This is wanted behavior because it does not matter if the network outputs some probability for a wrong class as long as it outputs a higher probability for the correct class. The final architecture is similar to the example given in figure \ref{fig:bg:NN_example} while meeting the above-mentioned constraints:
 
 \begin{figure}[H]
     \centering
@@ -53,36 +51,42 @@ The final architecture is similar to the example given in figure \ref{fig:bg:NN_
 
 \newpage
 \paragraph{Network Training}
-To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the database which are randomly combined into a stacks. Then this stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
-That means $(I_x, \, I_y) \in X$ are the networks input and the random parameters $(p_1, \, m_1, \, g_1, \, p_2, \, m_2, \, g_2) \in Y$ are the output.
+To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the database which are randomly combined into a stacks. The single layers are simulated with the Fourier Modal Method (FMM). Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
+That means $(I_x, \, I_y) \in X$ are the networks input and the random parameters $(p_1, \, m_1, \, g_1, \, p_2, \, m_2, \, g_2) \in Y$ are the output. For the first geometry we used squares and square holes of Aluminium and Gold as seen in figure
 Using this approach the following accuracy is reached:
 
 \begin{figure}[H]
+\centering
+\begin{subfigure}{.6\textwidth}
     \centering
-    \includegraphics[width=.6\linewidth]{al_random_plot}
-    \caption{Shown are the total loss and the training and validation accuracy for both the continuous and the discrete branch. After each epoch the network is validated on data not used in training to check for overfitting.}
+    \includegraphics[width=\linewidth]{al_training_squares}
+    \caption{}
     \label{}
+\end{subfigure}%
+\begin{subfigure}{.4\textwidth}
+    \centering
+    \includegraphics[width=.6\linewidth]{al_square}
+    \caption{}
+    \label{}
+\end{subfigure}
+\caption{Shown are the total loss and the training and validation accuracy for both the continuous and the discrete branch in figure (a). After each epoch the network is validated on data not used in training to check for overfitting. Figure (b) shows the used geometry of squares and square shaped holes of Aluminium and Gold. They have width $w$, length $l$ and thickness $t$. In the full layer these meta atoms are arranged periodically as seen in figure \ref{fig:bg:two_layers}.}
+\label{}
 \end{figure}
 
+
 Training and validation accuracy are very similar which indicates that there is no overfitting. The discrete accuracy quickly reaches a maximum of $\sim 80\%$
-which is less than expected for this classification problem. The issue here lies not in the networks arichtecture but in the data generation process. In \note{missing}
-we have shown that for a two layer stack the transmission spectrum is the same for both directions. That means the data generation can result in two different stacks which produce the same spectrum. Lets consider a stack where one layer is Aluminium and the other is Gold. As both of them produce the same spectrum one time the network is taught that the first layer is Gold and another time its taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only constellation it can get right.
+which is less than expected for this classification problem. The issue here lies not within the networks architecture but in the data generation process. In section \ref{sec:SASA} we have shown that for this geometry the transmission spectrum is the same for both directions. That means the data generation can result in two different stacks which produce the same spectrum. Lets consider a stack where one layer is Aluminium and the other is Gold. As both of them produce the same spectrum one time the network is taught that the first layer is Gold and another time its taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only setup it can get right.
 \\
 
 \begin{figure}[H]
     \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=8cm}}]{figure}[\FBwidth]
-    {\caption{A stack of one Gold and one Aluminium layer separated by a glass spacer. Both orientations produce the same spectrum which leads to issues when using completely random stacks to train the network.}
+    {\caption{A stack of one Gold and one Aluminium layer separated by a glass spacer. If the layers are made of meta atoms of the square geometry as seen in figure orientations produce the same spectrum which leads to issues when using completely random stacks to train the network.}
     \label{fig:test}}
-    {\includegraphics[width=.4\textwidth]{al_flipped_stack}}
+    {\includegraphics[width=.35\textwidth]{al_flipped_stack}}
 \end{figure}
 
 
 \newpage
-One can prevent this issue simply by allowing only one of the equivalent orientations into the training data. This does not limit the capabilities of the trained network as the variety of input spectra stays the same.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.6\linewidth]{al_final_training}
-    \caption{Network loss and accuracy after reducing equivalent stacks to one orientation. The discrete accuracy has improved and }
-    \label{}
-\end{figure}
+This is well known problem that arises when training a network on a problem where there are many solutions to one given input.
+\note{cite stuff}
+We can prevent this issue simply by allowing only one of the equivalent orientations into the training data. This does not limit the capabilities of the trained network as the variety of input spectra stays the same.

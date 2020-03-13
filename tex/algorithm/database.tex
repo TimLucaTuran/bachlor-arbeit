@@ -1,3 +1,4 @@
+% !TEX root = ../bachor-arbeit.tex
 \begin{tabular}{ll}
     \toprule
     Input: & layer parameters $p = (w, \, l, \, t, \, \Lambda)$, material $m$ geometry $g$ \\
@@ -6,7 +7,7 @@
 \end{tabular}
 \\
 \\
-The database consist of $\sim 5000$ $S$-matrices of single layers which were simulated with the Fourier Modal Method (FMM) on a compute cluster. Its main input are the layer parameters width, length, thickness and period, so $p = (w, \, l, \, t, \, \Lambda)$. This module first looks for the $n$ closest neighbors of $p$. To do that the input is scaled:
+The database consist of $\sim 5000$ $S$-matrices of single layers which were simulated with the Fourier Modal Method (FMM) on a compute cluster. Its input are the layer parameters width, length, thickness and period, so $p = (w, \, l, \, t, \, \Lambda)$. This module first looks for the $n$ closest neighbors of $p$. To do that first the input is scaled:
 
 \begin{equation}
     \tilde{p}_i = \frac{p_i - p_i^\s{min}}{p_i^\s{max} - p_i^\s{min}}
