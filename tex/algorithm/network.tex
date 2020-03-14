@@ -3,25 +3,19 @@
     \toprule
     Input: &
     \begin{tabular}[t]{@{}l@{}}
-        Spectrum $I=(I_\s{x}, \,I_\s{y})$ a $\lambda \times 2$ array\\
+        transmission spectrum $I=(I_\s{x}, \,I_\s{y})$ a $\lambda \times 2$ array\\
         $I_\s{x/y}$...X- and Y-transmission spectra,
         $\lambda$...number of wavelengths
     \end{tabular}\\
     Output: &
-    \begin{tabular}[t]{@{}l@{}l@{}}
-    two sets layer parameters $p=(w, \, l, \, t, \, \Lambda), \, m, \, g$ and stack parameters
-    $\varphi, \, h$ \\
-    $w$...width, $l$...length, $t$...thickness, $\Lambda$...Period,
-    $m$...material, $g$...geometry \\
-    $\varphi$...rotation angle, $h$...distance between layers
+    two sets layer parameters $\mc L_1$ and $\mc L_2$
     \end{tabular}\\
     \bottomrule
 \end{tabular}
 
 \paragraph{Network Architecture}
 This module is a 1D Convolutional Neural Network instead of the simple Multi Layer Perceptron. It was chosen to utilize the translational invariance of ConvNets. For example the concept "peak" should be learned independent of its position in the spectrum. As described in section \ref{sec:NN_bg} a ConvNet provides this functionality. Another constraint on the network architecture arises from the different kind of outputs.
-$p = (w, \, l, \, t, \, \Lambda), \, \varphi$ and $h$
-are continuous and $m, \, g$ are discrete/categorical.
+Most of the outputs are continuous but the choices about material $m$ and geometry $g$ are discrete/categorical.
 These need different activation functions $\sigma$ to reach the different value ranges. The continuous outputs are mostly bounded by physical constraints and $m, \, g \in [0, \, 1]$ as they are \textit{one hot encoded} meaning $1 \rightarrow$ "The layer has this property" and
 $0 \rightarrow$ "The layer does not have this property".
 

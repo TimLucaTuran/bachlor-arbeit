@@ -53,7 +53,18 @@ During training the network output $\s{NN}(\vb x) := \vb{y}' $ is calculated thr
 \end{equation}
 
 \noindent
-but there are different cost functions for different kind of outputs. For example a network which predicts continuous values needs a different loss than one predicting categories. More on this in section \ref{sec:NN}. Now we can quantify how well the NN is performing but how should the weights and biases be changed to improve this performance?
+but there are different cost functions for different kind of outputs. For example a network which predicts continuous values needs a different loss than one predicting categories. More on this in section \ref{sec:NN}. Now we can quantify how well the NN is performing but how do we use this information to train the network?
+\\
+
+$\quad$ As stated before the goal of the training is to minimize the cost function $C$ by changing the weights and biases. That means we are looking for the partial derivatives $\partial C / \partial \hat w^l_{j,k}$ and
+$\partial C / \partial b^l_j$. To find these we need the concept of the error of a neuron $\delta^l_j$.
+
+\begin{equation}
+    \delta^l_j := \pdv{C}{z^l_j}
+\end{equation}
+
+This property expresses how much the final cost is affected by a change to the input of neuron $j$ in layer $l$.
+
 Here the Algorithm \textit{Backpropagation} is used and allows an efficient approximation of the gradients for $\vb{b}^l$ and $\vu{w}^l$. These are used to gradually change the weights and biases to minimize the cost function. A comprehensive explanation of Backpropagation can be found here: \cite{backprop}.
 
 \paragraph{Convolutional Neural Networks}
