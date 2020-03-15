@@ -14,7 +14,7 @@ Artificial Neural Networks (ANN's or short NN's) are a kind of data structure in
 This kind of classic NN consist of single nodes or neurons which are organized into layers. The terms node and neuron can be used interchangeably. Every node is connected to all the nodes of the previous and the next layer. For this reason the network is called dense or densely connected. Each node holds a value called activation $a$ where the activation to the first layer is the input to the network, here:
 $(x_1, \, x_2, \, x_3)$.
 The nodes are connected by weights $w$ which specify how much one node should influence the next and every node has a bias $b$ to control at what total input activation the node itself should become active.
-To calculate the activation of a node one has to multiply all the activations of the previous layer with their respective weights $w$, add the bias $b$ and finally apply a non-linear activation function $\sigma$ as seen in Figure \ref{fig:al:act}. To describe this process mathematically we are going to use the usual index notation where superscripts specify the layer and subscripts the node. So $a^2_1$ is the activation of the first node in the second layer. To characterize a weight two subscripts are needed for the end and beginning of the connection. For the example in figure \ref{fig:bg:basic_nn} that means:
+To calculate the activation of a node one has to multiply all the activations of the previous layer with their respective weights $w$, add the bias $b$ and finally apply a non-linear activation function $\sigma$. To describe this process mathematically we are going to use the usual index notation where superscripts specify the layer and subscripts the node. So $a^2_1$ is the activation of the first node in the second layer. To characterize a weight two subscripts are needed for the end and beginning of the connection. For the example in figure \ref{fig:bg:basic_nn} that means:
 
 \begin{equation} \label{eq:bg:activation_example}
     a^2_1 = \sigma \qty(\sum_i w^2_{1i} \, x_i + b^2_1)
@@ -24,8 +24,15 @@ To calculate the activation of a node one has to multiply all the activations of
 However it is more convenient to stop considering every node individually and to view the involved quantities as vectors and matrices. So that \eqref{eq:bg:activation_example} can be written as:
 
 \begin{equation} \label{eq:bg:activation}
-    \vb{a}^l = \sigma \qty(\vu{w}^l \vb{a}^{l-1} + \vb{b}^l)
+    \vb{a}^l = \sigma \underbrace{
+    \qty(\vu{w}^l \vb{a}^{l-1} + \vb{b}^l)
+    }_{
+    \textstyle
+    := \vb z^l
+    }
 \end{equation}
+
+That means the activation function $\sigma$ maps the total input to a neuron $\vb z^l$ to the output/activation of that neuron $\vb a^l$. Two examples for activation functions can be seen in Figure \ref{fig:al:act}.
 
 \begin{figure}[H]
 \centering
@@ -53,19 +60,62 @@ During training the network output $\s{NN}(\vb x) := \vb{y}' $ is calculated thr
 \end{equation}
 
 \noindent
-but there are different cost functions for different kind of outputs. For example a network which predicts continuous values needs a different loss than one predicting categories. More on this in section \ref{sec:NN}. Now we can quantify how well the NN is performing but how do we use this information to train the network?
+but there are different cost functions for different kind of outputs. For example a network which predicts continuous values needs a different cost function than one predicting categories. More on this in section \ref{sec:NN}. Now we can quantify how well the NN is performing and are able to use this information to train the network.
 \\
 
 $\quad$ As stated before the goal of the training is to minimize the cost function $C$ by changing the weights and biases. That means we are looking for the partial derivatives $\partial C / \partial \hat w^l_{j,k}$ and
-$\partial C / \partial b^l_j$. To find these we need the concept of the error of a neuron $\delta^l_j$.
+$\partial C / \partial b^l_j$. To find these we need the concept of the \textit{error of a neuron} $\delta^l_j$.
 
 \begin{equation}
     \delta^l_j := \pdv{C}{z^l_j}
 \end{equation}
 
-This property expresses how much the final cost is affected by a change to the input of neuron $j$ in layer $l$.
+This property expresses how much the final cost is affected by a change to the input of neuron $j$ in layer $l$. For the last layer $L$ we can find a simple expression for this property by using the chain rule:
 
-Here the Algorithm \textit{Backpropagation} is used and allows an efficient approximation of the gradients for $\vb{b}^l$ and $\vu{w}^l$. These are used to gradually change the weights and biases to minimize the cost function. A comprehensive explanation of Backpropagation can be found here: \cite{backprop}.
+\begin{equation}
+    \delta^L_j = \pdv{C}{z^L_j} = \pdv{C}{a^L_j} \ \pdv{a^L_j}{z^L_j}
+    \stackrel{\eqref{eq:bg:activation}}{=}
+    \pdv{C}{a^L_j} \ \sigma'(z^L_j)
+\end{equation}
+
+Remember $z^l_j$ is the input to a neuron and $a^l_j$ is the output. That means $\delta^L_j$ is determined by a combination of how much the last output changes the cost function and how much the last input changes the last output. Notice how both these terms are easily accessible. $z^l_j$ was already calculated on the forward pass and the derivatives of the cost and activation functions can be found analytically. By using the gradient operator $\grad$ and the Hadamard product $\odot$ where:
+
+\begin{equation}
+    \vb a \odot \vb b :=
+    \begin{pmatrix}
+        a_1 \, b_1 \\
+        a_2 \, b_2 \\
+        \vdots
+    \end{pmatrix}
+\end{equation}
+
+we can return to the more convenient vector notation:
+
+\begin{equation} \label{eq:bg:back1}
+    \boldsymbol \delta^L = \grad_a C  \odot \sigma'(\vb z^L)
+\end{equation}
+
+Now we know $\boldsymbol \delta$ for the last layer but not for the rest of the network but we can express the error of an arbitrary layer $\boldsymbol \delta^l$ by the error in the next layer $\boldsymbol \delta^{l+1}$:
+
+\begin{equation} \label{eq:bg:back2}
+    \boldsymbol \delta^l =
+    \qty[(\hat w^{l+1})^\top \, \boldsymbol \delta^{l+1}]
+    \odot \sigma'(\vb z^l)
+\end{equation}
+
+This equation can be intuitively understood as moving the error
+$\boldsymbol \delta^{l+1}$ back one layer by applying $(\hat w^{l+1})^\top$ and then through the activation function of layer $l$ by applying $\sigma'$. In a sense its again "simply" a chain rule. With these two equations \eqref{eq:bg:back1} and \eqref{eq:bg:back2} all the errors $\boldsymbol \delta$ in the network are known. Just start with the last layer and work your way backwards. This idea of moving the error backwards is the reason why the algorithm is called \textit{Backpropagation}. \\
+
+
+$\quad$ The last thing to do is to relate $\boldsymbol \delta$ back to the original derivatives $\partial C / \partial \hat w^l_{j,k}$ and $\partial C / \partial b^l_j$. Using equation \eqref{eq:bg:activation} gives:
+
+\begin{align}
+    \partial C / \partial b^l_j &= \delta^l_j \qq{and} \\[5pt]
+    \partial C / \partial \hat w^l_{j,k} &= a^{l-1}_k \, \delta^l_j
+\end{align}
+
+
+An excellent comprehensive explanation of Backpropagation can be found here: \cite{backprop}.
 
 \paragraph{Convolutional Neural Networks}
 An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$ gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer (see figure \ref{fig:bg:flatten}). But now the number of weights to the next layer $\vu{w}^2$ is $n \cdot n \cdot \qty| \boldsymbol l^2|$
