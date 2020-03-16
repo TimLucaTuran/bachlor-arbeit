@@ -53,7 +53,7 @@ That means the activation function $\sigma$ maps the total input to a neuron $\v
 \end{figure}
 
 \paragraph{Training} \label{par:training}
-During training the network output $\s{NN}(\vb x) := \vb{y}' $ is calculated through repeated use of \eqref{eq:bg:activation} and is then compared with the known correct output $\vb y$ by a cost function $C = C(\vb y, \, \vb y')$. The goal of the training is to minimize this function $C$. The cost function might simply be the mean squared difference between $\vb y$ and $\vb y'$:
+During training the networks output $\s{NN}(\vb x) := \vb{y}' $ is calculated through repeated use of \eqref{eq:bg:activation} and is then compared with the known correct output $\vb y$ by a cost function $C = C(\vb y, \, \vb y')$. The goal of the training is to minimize this function $C$. The cost function might simply be the mean squared difference between $\vb y$ and $\vb y'$:
 
 \begin{equation}
     C_\s{mse}(\vb y, \, \vb y') = \sum_i \qty(y_i - y_i')^2
@@ -106,7 +106,6 @@ Now we know $\boldsymbol \delta$ for the last layer but not for the rest of the 
 This equation can be intuitively understood as moving the error
 $\boldsymbol \delta^{l+1}$ back one layer by applying $(\hat w^{l+1})^\top$ and then through the activation function of layer $l$ by applying $\sigma'$. In a sense its again "simply" a chain rule. With these two equations \eqref{eq:bg:back1} and \eqref{eq:bg:back2} all the errors $\boldsymbol \delta$ in the network are known. Just start with the last layer and work your way backwards. This idea of moving the error backwards is the reason why the algorithm is called \textit{Backpropagation}. \\
 
-
 $\quad$ The last thing to do is to relate $\boldsymbol \delta$ back to the original derivatives $\partial C / \partial \hat w^l_{j,k}$ and $\partial C / \partial b^l_j$. Using equation \eqref{eq:bg:activation} gives:
 
 \begin{align}
@@ -114,12 +113,17 @@ $\quad$ The last thing to do is to relate $\boldsymbol \delta$ back to the origi
     \partial C / \partial \hat w^l_{j,k} &= a^{l-1}_k \, \delta^l_j
 \end{align}
 
+Now we could modify the weights and biases after every forward pass by :
 
-An excellent comprehensive explanation of Backpropagation can be found here: \cite{backprop}.
+\begin{equation}
+    \dots
+\end{equation}
+
+But it is more efficient to average the changes and apply them at once after a small batch of training samples. This concludes the training of a Multilayer Perceptron but other Networks are trained in a similar manner. The excellent comprehensive explanation which was the basis for this section can be found here: \cite{backprop}.
 
 \paragraph{Convolutional Neural Networks}
-An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$ gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer (see figure \ref{fig:bg:flatten}). But now the number of weights to the next layer $\vu{w}^2$ is $n \cdot n \cdot \qty| \boldsymbol l^2|$
-which soon becomes unfeasible. As described in the section on \hyperref[sec:notation]{notation} $\boldsymbol l^2$ is here the activation vector of the second layer and not $\boldsymbol l$ squared.
+An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$ gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer as seen in figure \ref{fig:bg:flatten}. But now the number of weights to the next layer $\vu{w}^2$ is $n \cdot n \cdot \qty| \boldsymbol l^2|$
+which soon becomes unfeasible. As described in the section on \hyperref[sec:notation]{Notation} $\boldsymbol l^2$ is here the vector of the second layer and not $\boldsymbol l$ squared.
 
 \begin{figure}[H]
     \centering
@@ -128,7 +132,7 @@ which soon becomes unfeasible. As described in the section on \hyperref[sec:nota
     \label{fig:bg:flatten}
 \end{figure}
 
-Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position as in figure \ref{fig:bg:convnet_T} the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture. Also the information about the distance between pixels is lost.
+Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position as in figure \ref{fig:bg:convnet_T} the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture. The information about the distance between pixels is lost.
 
 \begin{figure}[H]
     \centering
@@ -147,17 +151,17 @@ These problems led to the development of a new kind of layer called \textit{Conv
 \end{figure}
 
 
- The result of this operation called feature map of that kernel (see figure \ref{fig:bg:convolution}). Notice how the greatest value of the feature map is at the position of the letter T. So with only a small number of weights the convolution is able to detect the T independent of its position in the image.
- This is still slightly misleading because this "T kernel" was intentionally constructed to find the "T". In a real convolutional layer the kernel values are trained via Backpropagation similar to the weights of a Multilayer Perceptron as described in the paragraph \hyperref[par:training]{Training}.
+ The result of this operation called feature map of that kernel is shown in figure \ref{fig:bg:convolution}. Notice how the greatest value of the feature map is at the position of the letter T. So with only a small number of weights the convolution is able to detect the T independent of its position in the image.
+ This is still slightly misleading because this "T kernel" was intentionally constructed to find the T. In a real convolutional layer the kernel values are trained via Backpropagation similar to the weights of a Multilayer Perceptron as described in the paragraph \hyperref[par:training]{Training}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_convolution}
-    \caption{Example of a convolution where white pixel are 0 and red pixel are 1. The $3 \times 3$ Kernel is shifted over the image and when its directly over the  The "T kernels" feature map is greatest at the position of the original letter. }
+    \caption{Example of a convolution where white pixel are 0 and red pixel are 1. The $3 \times 3$ kernel is shifted over the image and the point wise product between kernel and image is calculated at every step as described in figure \ref{fig:bg:convolution}. The result is the greatest when the kernel is directly over the letter T.}
     \label{fig:bg:convolution}
 \end{figure}
 
-One convolutional layer contains not only one but a number of different kernels $k$. The resulting $k$ feature maps are stacked in the "$z$ direction" so that the shape of the $n \times n$ matrix transforms to $(n-2) \times (n-2) \times k$. In a Convolutional Network (ConvNet) multiple of these layers are used so that it can find "patterns in patterns". For the letter detection example one could imagine the first layer to detect various edges and the next layer to detect letters in the position of these edges.
+One convolutional layer contains not only one but a number of different kernels $k$. The resulting $k$ feature maps are stacked in the "$z$ direction" so that the shape of the $n \times n$ matrix transforms to $(n-2) \times (n-2) \times k$ when convolved with a $3 \times 3$ kernel. In a Convolutional Network (ConvNet) multiple of these layers are used so that it can find "patterns in patterns". For the letter detection example one could imagine the first layer to detect various edges and the next layer to detect letters in the position of these edges.
 
 \paragraph{Pooling Layers}
 For a big image and a large number of kernels the output shape of a convolutional layers is still $\order{(n)^2 \cdot k}$, so quite large. Also notice how in figure \ref{fig:bg:convolution} the "T kernel's" feature map is not only active at the exact position of the T but in the general region. The solution to this is to downsample the output with a \textit{Pooling Layer}. Here a smaller kernel, usually $2 \times 2$ is shifted over the matrix two steps at a time and at every position an operation is performed to reduce the number of values to one. This could be taking the maximum or the average of that $2 \times 2$ region. This operation reduces the matrix in the x and y dimension by a factor of 2 as shown in figure \ref{fig:bg:pooling}:
@@ -181,7 +185,7 @@ Now all the building blocks for a complete ConvNet are available. Repeatedly alt
 
 
 \paragraph{1D ConvNets}
-The input to the desired algorithm is a target spectrum to which the Network should output some parameters (more on this in the section \ref{sec:NN}). This input data is a function $I(\lambda)$ so only one dimensional but all the same ideas apply. Convolutional kernels are sized $1 \times 3 \times z$ and pooling kernels are $1 \times 2 \times z$. Both are  only shifted in one direction as see in figure \ref{fig:bg:1D_conv}. These 1D convolutions might detect features like rising and falling edges and the later layers might combine these features into concepts like peaks and troughs but as always in machine learning what the network actually does to reach its objective is not controlled by the programmer.
+The input to the desired algorithm is a target spectrum to which the Network should output some parameters (more on this in the section \ref{sec:NN}). This input data is a function $I(\lambda)$ so only one dimensional in contrast to an image wich is a function $f(x, \, y)$ but all the same ideas apply. Convolutional kernels are sized $1 \times 3 \times z$ and pooling kernels are $1 \times 2 \times z$. Both are  only shifted in one direction as see in figure \ref{fig:bg:1D_conv}. These 1D convolutions might detect features like rising and falling edges and the later layers might combine these features into concepts like peaks and troughs but as always in machine learning what the network actually does to reach its objective is not controlled by the programmer.
 
 \begin{figure}[H]
     \centering
@@ -207,6 +211,6 @@ In 2014 Srivastava et al.\cite{Srivastava2014} presented a method to prevent ove
     \caption{with dropout}
     \label{}
 \end{subfigure}
-\caption{Example of a dropout applied to the bottom layer. Only two of the neurons remain active and only their weights and biases are modified during this training step. Figure found in \cite{Srivastava2014} (modified)}
+\caption{Example of a dropout applied to the bottom layer. Only two of the neurons remain active and only their weights and biases are modified during this training step. \cite{Srivastava2014} (modified)}
 \label{fig:bg:dropout}
 \end{figure}

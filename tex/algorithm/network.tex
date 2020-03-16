@@ -8,7 +8,7 @@
         $\lambda$...number of wavelengths
     \end{tabular}\\
     Output: &
-    two sets layer parameters $\mc L_1$ and $\mc L_2$ \\
+    two sets layer parameters $\mc L_1$ and $\mc L_2$, stack parameters  \\
     \bottomrule
 \end{tabular}
 
@@ -44,12 +44,12 @@ This error treats false positives and false negatives differently. A false posit
 
 \newpage
 \paragraph{Network Training}
-To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the database which are randomly combined into a stacks. The single layers are simulated with the Fourier Modal Method (FMM). Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
-That means $(I_x, \, I_y) \in X$ are the networks input and the random parameters $(p_1, \, m_1, \, g_1, \, p_2, \, m_2, \, g_2) \in Y$ are the output. For the first geometry we used squares and square holes of Aluminium and Gold as seen in figure
-Using this approach the following accuracy is reached:
+To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the database which are randomly combined into a stacks. Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
+That means $(I_x, \, I_y) \in X$ are the networks input and the random design parameters ${\mc D = (\mc S, \mc L_1, \mc L_2) \in Y}$ are the output. For the first test we used squares and square holes of Aluminium and Gold as seen in figure \ref{fig:al:square}. Using this approach the following accuracy is reached:
 
 \begin{figure}[H]
 \centering
+\captionsetup[subfigure]{position=b}
 \begin{subfigure}{.6\textwidth}
     \centering
     \includegraphics[width=\linewidth]{al_training_squares}
@@ -60,7 +60,7 @@ Using this approach the following accuracy is reached:
     \centering
     \includegraphics[width=.6\linewidth]{al_square}
     \caption{}
-    \label{}
+    \label{fig:al:square}
 \end{subfigure}
 \caption{Shown are the total loss and the training and validation accuracy for both the continuous and the discrete branch in figure (a). After each epoch the network is validated on data not used in training to check for overfitting. Figure (b) shows the used geometry of squares and square shaped holes of Aluminium and Gold. They have width $w$, length $l$ and thickness $t$. In the full layer these meta atoms are arranged periodically as seen in figure \ref{fig:bg:two_layers}.}
 \label{}
