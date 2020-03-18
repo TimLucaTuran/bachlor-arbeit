@@ -8,7 +8,8 @@
         $\lambda$...number of wavelengths
     \end{tabular}\\
     Output: &
-    two sets layer parameters $\mc L_1$ and $\mc L_2$, stack parameters  \\
+    two sets layer parameters $\mc L_1$ and $\mc L_2$,
+    stack parameters $\mc S$ \\
     \bottomrule
 \end{tabular}
 
@@ -44,42 +45,60 @@ This error treats false positives and false negatives differently. A false posit
 
 \newpage
 \paragraph{Network Training}
-To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the database which are randomly combined into a stacks. Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
-That means $(I_x, \, I_y) \in X$ are the networks input and the random design parameters ${\mc D = (\mc S, \mc L_1, \mc L_2) \in Y}$ are the output. For the first test we used squares and square holes of Aluminium and Gold as seen in figure \ref{fig:al:square}. Using this approach the following accuracy is reached:
+To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the database which are randomly combined into stacks. Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
+That means $I = (I_x, \, I_y) \in X$ are the networks input and the random design parameters ${\mc D = (\mc S, \mc L_1, \mc L_2) \in Y}$ are the output. For the first test we used squares and square holes of Aluminium and Gold. One epoch represents one loop over all training samples. After every epoch the network is validated on a dataset $(X_\s v, \, Y_\s v)$ of samples it has not seen before. This is done to check weither the network actually learns something rather than just memorizing the input data.  The results of this first training on the square geometry can be seen in figure \ref{fig:al:square_results}:
 
 \begin{figure}[H]
 \centering
 \captionsetup[subfigure]{position=b}
-\begin{subfigure}{.6\textwidth}
+\begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{al_training_squares}
+    \includegraphics[width=\linewidth]{al_square_dis}
     \caption{}
     \label{}
 \end{subfigure}%
-\begin{subfigure}{.4\textwidth}
+\begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=.6\linewidth]{al_square}
+    \includegraphics[width=\linewidth]{al_square_cont}
     \caption{}
-    \label{fig:al:square}
+    \label{}
 \end{subfigure}
-\caption{Shown are the total loss and the training and validation accuracy for both the continuous and the discrete branch in figure (a). After each epoch the network is validated on data not used in training to check for overfitting. Figure (b) shows the used geometry of squares and square shaped holes of Aluminium and Gold. They have width $w$, length $l$ and thickness $t$. In the full layer these meta atoms are arranged periodically as seen in figure \ref{fig:bg:two_layers}.}
-\label{}
+
+\caption{Training only with squares. (a) shows the accuracy of the discrete output that is what percentage of choices for material and geometry were correct. The performance of the continuous branch is evaluated directly through its cost/loss function $C_\s{mse}$.}
+\label{fig:al:square_results}
 \end{figure}
 
 
-Training and validation accuracy are very similar which indicates that there is no overfitting. The discrete accuracy quickly reaches a maximum of $\sim 80\%$
-which is less than expected for this classification problem. The issue here lies not within the networks architecture but in the data generation process. In section \ref{sec:SASA} we have shown that for this geometry the transmission spectrum is the same for both directions. That means the data generation can result in two different stacks which produce the same spectrum. Lets consider a stack where one layer is Aluminium and the other is Gold. As both of them produce the same spectrum one time the network is taught that the first layer is Gold and another time its taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only setup it can get right.
+Training and validation results are very similar which indicates that there is no overfitting/memorization. The discrete accuracy quickly reaches a maximum of $\sim 76\%$ but the speed at which this value is reached is suspicious. The network does not improve much after the fourth epoch and this does not change by tuning the network architecture. That is because the issue lies not within the architecture but in the training data. In section \ref{sec:SASA} we have shown that for the used two layer stacks the transmission spectrum is the same for both directions. That means the data generation can result in two different stacks which produce the same spectrum. Consider a stack where one layer is Aluminium and the other is Gold as seen in figure \ref{fig:al:same_spec} . As both of them produce the same spectrum one time the network is taught that the first layer is Gold and another time its taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only setup it can get right.
 \\
 
 \begin{figure}[H]
     \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=8cm}}]{figure}[\FBwidth]
-    {\caption{A stack of one Gold and one Aluminium layer separated by a glass spacer. If the layers are made of meta atoms of the square geometry as seen in figure orientations produce the same spectrum which leads to issues when using completely random stacks to train the network.}
-    \label{fig:test}}
-    {\includegraphics[width=.35\textwidth]{al_flipped_stack}}
+    {\caption{A stack of one Gold and one Aluminium layer separated by a glass spacer. Both stacks produce the same spectrum which leads to issues when using completely random stacks to train the network.}
+    \label{fig:al:same_spec}}
+    {\includegraphics[width=.4\textwidth]{al_flipped_stack}}
 \end{figure}
 
 
 \newpage
-This is well known problem that arises when training a network on a problem where there are many solutions to one given input.
-\note{cite stuff}
-We can prevent this issue simply by allowing only one of the equivalent orientations into the training data. This does not limit the capabilities of the trained network as the variety of input spectra stays the same.
+This is a well known problem when trying to solve an inverse problem. In this case the function $\mc D \rightarrow I$ is well defined as one stack can only produce one spectrum but for the inverse problem we are trying to solve $I \rightarrow \mc D$ and there might be multiple designs which produce the same spectrum. We can solve the issue described in figure \ref{fig:al:same_spec} simply by allowing only one of the orientations into the training data. By doing this the training  results change as seen in figure \ref{fig:al:squares_fix}:
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{square_fix_dis}
+    \caption{}
+    \label{}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{al_square_fix_cont}
+    \caption{}
+    \label{}
+\end{subfigure}
+\caption{Training on the square geometry after only allowing one of the equivalent stacks shown in figure \ref{fig:al:same_spec} into the training data.}
+\label{fig:al:squares_fix}
+\end{figure}
+
+The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}.

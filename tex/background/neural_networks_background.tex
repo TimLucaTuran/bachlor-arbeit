@@ -185,7 +185,7 @@ Now all the building blocks for a complete ConvNet are available. Repeatedly alt
 
 
 \paragraph{1D ConvNets}
-The input to the desired algorithm is a target spectrum to which the Network should output some parameters (more on this in the section \ref{sec:NN}). This input data is a function $I(\lambda)$ so only one dimensional in contrast to an image wich is a function $f(x, \, y)$ but all the same ideas apply. Convolutional kernels are sized $1 \times 3 \times z$ and pooling kernels are $1 \times 2 \times z$. Both are  only shifted in one direction as see in figure \ref{fig:bg:1D_conv}. These 1D convolutions might detect features like rising and falling edges and the later layers might combine these features into concepts like peaks and troughs but as always in machine learning what the network actually does to reach its objective is not controlled by the programmer.
+The input to the desired algorithm is a target spectrum to which the Network should output some parameters (more on this in the section \ref{sec:NN}). This input data is a function $I(\lambda)$ so only one dimensional in contrast to an image which is a function $f(x, \, y)$ but all the same ideas apply. Convolutional kernels are sized $1 \times 3 \times z$ and pooling kernels are $1 \times 2 \times z$. Both are  only shifted in one direction as see in figure \ref{fig:bg:1D_conv}. These 1D convolutions might detect features like rising and falling edges and the later layers might combine these features into concepts like peaks and troughs but as always in machine learning what the network actually does to reach its objective is not controlled by the programmer.
 
 \begin{figure}[H]
     \centering
