@@ -1,35 +1,48 @@
 % !TEX root = ../bachor-arbeit.tex
 \begin{tabular}{ll}
     \toprule
-    Input: & layer parameters $p = (w, \, l, \, t, \, \Lambda)$, material $m$ geometry $g$ \\
-    Output: & approximation of the $S$-matrix of this layer $\hat{S} = \hat{S}(p, \, m, \, g)$\\
+    Input: & layer parameters 
+    $\mc L = (w, \, l, \, t, \, \Lambda, \, m, \, g)$\\
+    Output: & Interpolation of the $S$-matrix for this layer \
+    $\hat{S} = \hat{S}(\mc L)$\\
     \bottomrule
 \end{tabular}
 \\
-\\
-The database consist of $\sim 5000$ $S$-matrices of single layers which were simulated with the Fourier Modal Method (FMM) on a compute cluster. Its input are the layer parameters width, length, thickness and period, so $p = (w, \, l, \, t, \, \Lambda)$. This module first looks for the $n$ closest neighbors of $p$. To do that first the input is scaled:
+
+\paragraph{Fourier Modal Method} ~\\
+The database consist of $\sim 5000$ $S$-matrices of single layers which were simulated with the Fourier Modal Method (FMM) on a compute cluster. This method is applicable to all surface structures which are periodic in $x$ and $y$ direction and constant in $z$ direction. It works by expanding the involved fields into their diffraction orders for example for the reflected electric field:
+
+\begin{equation} \label{eq:al:fmm}
+    \vb E_\s r = \sum_{m,n} \vb R_{mn} e^{i \vb k_{mn} \vb r}
+\end{equation}
+
+and then applying the maxwell equations and continuity conditions described in section \ref{sec:bg:s_mats}. This results in an eigenvalue problem which can be reformulated into a linear set of equations. The unknown properties like $R_{mn}$ are found by solving this set of equations. As \eqref{eq:al:fmm} represents an infinite series the equation has to be truncated at some order. This order determines the accuracy of the FMM and the matrix which represents the set of linear equations is sized order $\times$ order. Thats why the computational complexity of this method increases rapidly with the order. The method was first introduced here \cite{Noponen1994}.
+
+\paragraph{Interpolation} ~\\
+To find the $S$-matrix to layer parameters $\mc L$ which are not already stored in the database this module has to interpolate between pre simulated $S$-matrices. First it looks for the $n$ closest neighbors of $\mc L$. To do that the continuous input is scaled:
 
 \begin{equation}
-    \tilde{p}_i = \frac{p_i - p_i^\s{min}}{p_i^\s{max} - p_i^\s{min}}
-    \qq{so that} \tilde{p}_i \in [0, \, 1]
+    \bar{\mc L}_i = \frac{\mc L_i - \mc L_i^\s{min}}{\mc L_i^\s{max} - \mc L_i^\s{min}}
+    , \  i \in 1 ... 4
+    \qq{so that} \bar{\mc L}_i \in [0, \, 1]
 \end{equation}
 
 \noindent
-Now the distance $d$ to every entry in the database satisfying the material geometry combination is calculated and the $n$ entries with the smallest distance are selected:
+Now the distance $d$ to every entry in the database satisfying the material geometry combination is calculated and the $n$ entries with the smallest distance are selected where:
 
 \begin{equation}
-    d(p, \,q) = \sum_i \ \qty|p_i - q_i|
+    d(\mc L^1, \, \mc L^2) := \sum_i \ \qty|\mc L^1_i - \mc L^2_i|
 \end{equation}
 
 \noindent
-The output $\hat{S}(p)$ is calculated via Inverse Distance Weighting \cite{Shepard1968} so that more distant entries have a smaller effect. Let
-$(q_1, \, ... \, , \, q_n)$ be the $n$ closest neighbors to $p$ with stored $S$-matrices
+The output $\hat{S}(\mc L)$ is calculated via Inverse Distance Weighting \cite{Shepard1968} so that more distant entries have a smaller effect on the result. Let
+$(\mc L^1, \, ... \, , \, \mc L^n)$ be the $n$ closest neighbors to $\mc L$ with stored $S$-matrices
 $(\hat{S}_1, \, ... \, , \, \hat{S}_n)$
 then:
 
 \begin{equation}
 \begin{aligned}
-    \hat{S}(p) = \sum_{j=1}^n \ w_j \, \hat{S}_j
+    \hat{S}(\mc L) = \sum_{j=1}^n \ w_j \, \hat{S}_j
     \qq{where}& w_j = \frac{1 / d_j^2}{\sum_i \ 1 / d^2_i} \\
     \qq*{so that} &\sum_j \ w_j = 1
 \end{aligned}
