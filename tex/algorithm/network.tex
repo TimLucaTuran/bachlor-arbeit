@@ -14,7 +14,7 @@
 \end{tabular}
 
 \paragraph{Network Architecture}
-This module is a 1D Convolutional Neural Network instead of the simple Multi Layer Perceptron. It was chosen to utilize the translational invariance of ConvNets. For example the concept "peak" should be learned independent of its position in the spectrum. As described in section \ref{sec:NN_bg} a ConvNet provides this functionality. Another constraint on the network architecture arises from the different kind of outputs.
+This module is a 1D Convolutional Neural Network instead of the basic Multi Layer Perceptron. It was chosen to utilize the translational invariance of ConvNets. For example the concept "peak" should be learned independent of its position in the spectrum. As described in section \ref{sec:NN_bg} a ConvNet provides this functionality. Another constraint on the network architecture arises from the different kind of outputs.
 Most of the outputs are continuous but the choices about material $m$ and geometry $g$ are discrete/categorical.
 These need different activation functions $\sigma$ to reach the different value ranges. The continuous outputs are mostly bounded by physical constraints and $m, \, g \in [0, \, 1]$ as they are \textit{one hot encoded} meaning $1 \rightarrow$ "The layer has this property" and
 $0 \rightarrow$ "The layer does not have this property".
@@ -44,7 +44,7 @@ This error treats false positives and false negatives differently. A false posit
 \end{figure}
 
 \newpage
-\paragraph{Network Training}
+\paragraph{Network Training}~\\
 To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre simulated single layers in the database which are randomly combined into stacks. Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
 That means $I = (I_x, \, I_y) \in X$ are the networks input and the random design parameters ${\mc D = (\mc S, \mc L_1, \mc L_2) \in Y}$ are the output. For the first test we used squares and square holes of Aluminium and Gold. One epoch represents one loop over all training samples. After every epoch the network is validated on a dataset $(X_\s v, \, Y_\s v)$ of samples it has not seen before. This is done to check weither the network actually learns something rather than just memorizing the input data.  The results of this first training on the square geometry can be seen in figure \ref{fig:al:square_results}:
 
@@ -64,7 +64,7 @@ That means $I = (I_x, \, I_y) \in X$ are the networks input and the random desig
     \label{}
 \end{subfigure}
 
-\caption{Training only with squares. (a) shows the accuracy of the discrete output that is what percentage of choices for material and geometry were correct. The performance of the continuous branch is evaluated directly through its cost/loss function $C_\s{mse}$.}
+\caption{Training only with squares. (a) shows the accuracy of the discrete output that is what percentage of choices for material and geometry were correct. The performance of the continuous branch is evaluated directly through its cost function $C_\s{mse}$.}
 \label{fig:al:square_results}
 \end{figure}
 
@@ -76,7 +76,7 @@ Training and validation results are very similar which indicates that there is n
     \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=8cm}}]{figure}[\FBwidth]
     {\caption{A stack of one Gold and one Aluminium layer separated by a glass spacer. Both stacks produce the same spectrum which leads to issues when using completely random stacks to train the network.}
     \label{fig:al:same_spec}}
-    {\includegraphics[width=.4\textwidth]{al_flipped_stack}}
+    {\includegraphics[width=.38\textwidth]{al_flipped_stack}}
 \end{figure}
 
 

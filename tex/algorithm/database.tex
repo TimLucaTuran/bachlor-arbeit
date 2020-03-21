@@ -1,7 +1,7 @@
 % !TEX root = ../bachor-arbeit.tex
 \begin{tabular}{ll}
     \toprule
-    Input: & layer parameters 
+    Input: & Layer parameters 
     $\mc L = (w, \, l, \, t, \, \Lambda, \, m, \, g)$\\
     Output: & Interpolation of the $S$-matrix for this layer \
     $\hat{S} = \hat{S}(\mc L)$\\
@@ -16,7 +16,7 @@ The database consist of $\sim 5000$ $S$-matrices of single layers which were sim
     \vb E_\s r = \sum_{m,n} \vb R_{mn} e^{i \vb k_{mn} \vb r}
 \end{equation}
 
-and then applying the maxwell equations and continuity conditions described in section \ref{sec:bg:s_mats}. This results in an eigenvalue problem which can be reformulated into a linear set of equations. The unknown properties like $R_{mn}$ are found by solving this set of equations. As \eqref{eq:al:fmm} represents an infinite series the equation has to be truncated at some order. This order determines the accuracy of the FMM and the matrix which represents the set of linear equations is sized order $\times$ order. Thats why the computational complexity of this method increases rapidly with the order. The method was first introduced here \cite{Noponen1994}.
+and then applying the maxwell equations and continuity conditions described in section \ref{sec:s_mats}. This results in an eigenvalue problem which can be reformulated into a linear set of equations. The unknown properties like $R_{mn}$ are found by solving this set of equations. As \eqref{eq:al:fmm} represents an infinite series the equation has to be truncated at some order. This order determines the accuracy of the FMM and the matrix which represents the set of linear equations is sized order $\times$ order. Thats why the computational complexity of this method increases rapidly with the order. The method was first introduced here \cite{Noponen1994}.
 
 \paragraph{Interpolation} ~\\
 To find the $S$-matrix to layer parameters $\mc L$ which are not already stored in the database this module has to interpolate between pre simulated $S$-matrices. First it looks for the $n$ closest neighbors of $\mc L$. To do that the continuous input is scaled:
