@@ -37,50 +37,32 @@ In this way one can penalize the simplex for stepping over the set boundaries by
     }_{\text{stay within bounds}}}\\
 \end{equation}
 
-The choice of power depends on how much the simplex should be penalized for stepping over a boundary. All our conditions are requirements for physical approximations and these approximations do no break completely when a boundary is only slightly violated. That justifies this approach where the simplex might step over a boundary but is then "pushed back" in the right direction. 
+The choice of power depends on how much the simplex should be penalized for stepping over a boundary. All our conditions are requirements for physical approximations and these approximations do no break completely when a boundary is only slightly violated. That justifies this approach where the simplex might step over a boundary but is then "pushed back" in the right direction. In figure \ref{fig:al:x_trans} we can see the optimizer in operation:
 
 \begin{figure}[H]
-    \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=6.5cm}}]{figure}[\FBwidth]
-    {\caption*{
-    Step 0: \\
-    This is the userinterface of the algorithm. In blue we can see the target spectrum $I_\s t$ which is in this case a random stack of the validation data and the current spectrum $I_\s c$ is shown in orange. In the right window all the current stack parameters are shown and at the very bottom we can see the current loss. This is the situation right after the network has made its prediction and the optimizer has not changed any parameters.}
-    \label{fig:al:same_spec}}
-    {\includegraphics[width=.6\textwidth]{al_step_0}}
+    \centering
+    \includegraphics[width=.9\linewidth]{al_x_trans}
+    \caption{The fraction of transmitted light polarized in the $x$ direction over the wavelength in $\mu m$ at optimization steps 
+    $(0, 50, 100, 250)$ left to right. Blue is the target spectrum $I_\s t$ and orange is the current spectrum $I_\s c$. }
+    \label{fig:al:x_trans}
 \end{figure}
 
-\begin{figure}[H]
-    \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=6cm}}]{figure}[\FBwidth]
-    {\caption*{
-    Step 50: \\
-    After 50 steps we can see the optimizer has tuned the continuous parameters and left the material and geometry unchanged. The loss has halved and the target and current spectrum look visually more similar.}
-    \label{fig:al:same_spec}}
-    {\includegraphics[width=.6\textwidth]{al_step_50}}
-\end{figure}
+In the very left graph of figure \ref{fig:al:x_trans} at step 0 the 
+optimizer has not jet tuned any parameters and the current and target spectrum are quite different. The blue target spectrum is in this case produced by a random stack from the validation data. That means there is a set of parameters which could reproduce this spectrum perfectly. By step 250 the optimizer has found a design which comes close to the original.
 
 \begin{figure}[H]
-    \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=6cm}}]{figure}[\FBwidth]
-    {\caption*{
-    Step 150:\\
-    As the target spectrum is in this cased produced by a know stack the optimizer should be able to reproduce it perfectly.
-    }
-    \label{fig:al:same_spec}}
-    {\includegraphics[width=.6\textwidth]{al_step_150}}
+    \centering
+    \includegraphics[width=.9\linewidth]{al_y_trans}
+    \caption{Simultaneous to the optimization of the $x$ polarization shown in figure \ref{fig:al:x_trans} the optimizer also tunes the $y$ polarization.}
+    \label{fig:al:y_trans}
 \end{figure}
 
-\begin{figure}[H]
-    \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=6cm}}]{figure}[\FBwidth]
-    {\caption*{
-    Step 250:\\
-    This is the final result. The optimizer has gotten close to the target but there are still some slight differences. We can compare the result to the true parameters used for the generation of this spectrum seen in the figure below.
-    }
-    \label{fig:al:same_spec}}
-    {\includegraphics[width=.6\textwidth]{al_step_250}}
-\end{figure}
+Lastly we can consider how the parameters changed during the optimization seen in figure \ref{fig:al:true_params}. As designed, the optimizer did not change the material and geometry parameters and they were chosen correctly by the Neural Network. This is in accordance with the high discrete accuracy seen in section \ref{sec:NN}. Some of the continuous parameters are close to the original but others like the rotation angle $\varphi$ are completely different. This shows that even though we have removed the equivalent stacks described in figure \ref{fig:al:same_spec} there are still pairs of designs $\mc D_1, \mc D_2$ with different continuous parameters which produce very similar spectra $I \qty(\mc D_1) \simeq I \qty(\mc D_2)$ and these make it impossible for a network of this architecture to learn about the continuous parameters with a good accuracy.
 
 \begin{figure}[H]
-    \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=6cm}}]{figure}[\FBwidth]
-    {\caption*{
-    }
-    \label{fig:al:same_spec}}
-    {\includegraphics[width=.6\textwidth]{al_true_params}}
+    \centering
+    \includegraphics[width=.7\linewidth]{al_true_params}
+    \caption{The design parameters $\mc D$ to the optimization shown in figure \ref{fig:al:x_trans} and \ref{fig:al:y_trans} at the beginning and end compared to the true parameters which produced the target spectrum.}
+    \label{fig:al:true_params}
 \end{figure}
+
