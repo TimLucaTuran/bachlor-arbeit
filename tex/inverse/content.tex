@@ -1,0 +1,10 @@
+\section{The Inverse Problem}
+In section \ref{sec:algorithm} we have seen that it is very difficult or even impossible to solve the inverse problem $I \rightarrow \mc D$ directly with a neural network because of multiple designs mapping to a single spectrum. For the algorithm we solved this by adding a conventional optimization method after the network to tune the parameters the network was not able to set correctly. This had some success in the sense that it was able to reproduce know stacks and even some more general functions \note{add this in Appendix?} but this approach is also a big concession because we loose many of the advantages neural networks bring. Conventional optimization methods are way more computationally expensive than a single forward pass in a neural network and more importantly they are very prone to getting stuck in local minima. Having one network being able to solve $I \rightarrow \mc D$ directly would be the best solution.
+\\
+
+$\quad$ As this is a well known problem numerous solutions have been proposed. A very interesting route was taken by Liu et al. \cite{Liu2018} they approach the inverse problem by first solving the forward problem in our case $\mc D \rightarrow I$ and then building a combined network in a kind of tandem structure 
+$I \rightarrow \mc D \rightarrow I'$
+where the cost function is 
+$C = C \qty(I, \, I')$.
+That means during training the network is given a target spectrum $I$ and predicts the corresponding design parameters $\mc D$ this design is then fed into the forward model and produces a spectrum $I'$ and the cost function depends on the difference in $I$ and $I'$. We can already solve the forward problem via the DB and SASA modules as seen in figure :
+

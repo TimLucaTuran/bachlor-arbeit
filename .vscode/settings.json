@@ -6,5 +6,20 @@
         "markdown",
         "latex",
         "plaintext"
-    ]
+    ],
+    "files.exclude": {
+        "**/*.log": true,
+        "**/*.fdb*": true,
+        "**/*.fls": true,
+        "**/*.bak": true,
+        "**/*.gz": true,
+        "**/*.dvi": true,
+        "**/*.aux": true,
+        "**/*.toc": true,
+        "**/*.bbl": true,
+        "**/*.blg": true,
+        "**/*.lod": true,
+        "**/*.out": true,
+        "**/Literatur/": true
+    }
 }

@@ -3,7 +3,7 @@
     \toprule
     Input: &
     Current spectrum $I_\s c$, 
-    current design parameters $\mc D$\\
+    Current design parameters $\mc D$\\
     Output: & 
     Improved design parameters $\mc D'$\\
     \bottomrule
@@ -12,7 +12,7 @@
 \\
 The optimizer is at the core a Downhill-Simplex \cite{Nelder1965} tuning the continuous design parameters to minimize the mean-squared-difference between the current spectrum $I_\s{c}$ and target spectrum $I_\s{t}$ we defined as 
 $C_\s{mse}\qty(I_\s{c}, \, I_\s{t})$.
-The standard method is however unable to follow the physical constraints discussed in section \ref{sec:SASA} and has to be modified in that regard. To achieve this one can introduce a distance to the boundary $D$. Let $p$ be a single continuous parameter with lower bound $p^l$ and upper bound $p^u$, then:
+The standard method is however unable to follow the physical constraints discussed in section \ref{sec:SASA} and has to be modified in that regard. To achieve this we can introduce a distance to the boundary $D$. Let $p$ be a single continuous parameter with lower bound $p^l$ and upper bound $p^u$, then:
 
 \begin{equation}
     D\qty(p, \, p^l, \, p^u) =
@@ -33,7 +33,7 @@ In this way one can penalize the simplex for stepping over the set boundaries by
     C_\s{mse}(I_\s{c}, \, I_\s{t})}_{\text{find target}}}
     +
     {\underbrace{%
-    \qty[\sum_i D\qty(p_i, \, p_i^l, \, p_i^u)]^2
+    \qty[\sum_i D\qty(p_i, \, p_i^l, \, p_i^u)]^3
     }_{\text{stay within bounds}}}\\
 \end{equation}
 
@@ -57,7 +57,7 @@ optimizer has not jet tuned any parameters and the current and target spectrum a
     \label{fig:al:y_trans}
 \end{figure}
 
-Lastly we can consider how the parameters changed during the optimization seen in figure \ref{fig:al:true_params}. As designed, the optimizer did not change the material and geometry parameters and they were chosen correctly by the Neural Network. This is in accordance with the high discrete accuracy seen in section \ref{sec:NN}. Some of the continuous parameters are close to the original but others like the rotation angle $\varphi$ are completely different. This shows that even though we have removed the equivalent stacks described in figure \ref{fig:al:same_spec} there are still pairs of designs $\mc D_1, \mc D_2$ with different continuous parameters which produce very similar spectra $I \qty(\mc D_1) \simeq I \qty(\mc D_2)$ and these make it impossible for a network of this architecture to learn about the continuous parameters with a good accuracy.
+To gain more insight we can consider how the parameters changed during the optimization as seen in figure \ref{fig:al:true_params}. As designed, the optimizer did not change the material and geometry parameters and they were chosen correctly by the Neural Network. This is in accordance with the high discrete accuracy seen in section \ref{sec:NN}. Some of the continuous parameters are close to the original but others like the rotation angle $\varphi$ are completely different. This shows that even though we have removed the equivalent stacks described in figure \ref{fig:al:same_spec} there are still pairs of designs $\mc D_1, \mc D_2$ with different continuous parameters which produce very similar spectra $I \qty(\mc D_1) \simeq I \qty(\mc D_2)$ and these make it impossible for a network of this architecture to learn about the continuous parameters with a good accuracy.
 
 \begin{figure}[H]
     \centering
