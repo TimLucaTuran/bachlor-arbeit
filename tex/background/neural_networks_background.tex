@@ -66,13 +66,13 @@ but there are different cost functions for different kind of outputs. For exampl
 $\quad$ As stated before the goal of the training is to minimize the cost function $C$ by changing the weights and biases. That means we are looking for the partial derivatives $\partial C / \partial \hat w^l_{j,k}$ and
 $\partial C / \partial b^l_j$. To find these we need the concept of the \textit{error of a neuron} $\delta^l_j$.
 
-\begin{equation}
+\begin{equation} 
     \delta^l_j := \pdv{C}{z^l_j}
 \end{equation}
 
 This property expresses how much the final cost is affected by a change to the input of neuron $j$ in layer $l$. For the last layer $L$ we can find a simple expression for this property by using the chain rule:
 
-\begin{equation}
+\begin{equation} \label{eq:bg:back_prop}
     \delta^L_j = \pdv{C}{z^L_j} = \pdv{C}{a^L_j} \ \pdv{a^L_j}{z^L_j}
     \stackrel{\eqref{eq:bg:activation}}{=}
     \pdv{C}{a^L_j} \ \sigma'(z^L_j)
@@ -119,7 +119,7 @@ Now we could modify the weights and biases after every forward pass by :
     \dots
 \end{equation}
 
-But it is more efficient to average the changes and apply them at once after a small batch of training samples. This concludes the training of a Multilayer Perceptron but other Networks are trained in a similar manner. The excellent comprehensive explanation which was the basis for this section can be found here: \cite{backprop}.
+But it is more efficient to average the changes and apply them at once after a small batch of training samples. This concludes the training of a Multilayer Perceptron but other Networks are trained in a similar manner. An excellent comprehensive explanation was published by Nielsen \cite{backprop}.
 
 \paragraph{Convolutional Neural Networks}
 An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$ gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer as seen in figure \ref{fig:bg:flatten}. But now the number of weights to the next layer $\vu{w}^2$ is $n \cdot n \cdot \qty| \boldsymbol l^2|$

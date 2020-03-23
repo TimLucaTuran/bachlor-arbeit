@@ -10,8 +10,8 @@
 \end{tabular}
 \\
 \\
-The optimizer is at the core a Downhill-Simplex \cite{Nelder1965} tuning the continuous design parameters to minimize the mean-squared-difference between the current spectrum $I_\s{c}$ and target spectrum $I_\s{t}$ we defined as 
-$C_\s{mse}\qty(I_\s{c}, \, I_\s{t})$.
+The optimizer is at the core a Downhill-Simplex \cite{Nelder1965} tuning the continuous design parameters to minimize the mean-squared-difference between the current spectrum $I'$ and target spectrum $I$ we defined as 
+$C_\s{mse}\qty(I, \, I')$.
 The standard method is however unable to follow the physical constraints discussed in section \ref{sec:SASA} and has to be modified in that regard. To achieve this we can introduce a distance to the boundary $D$. Let $p$ be a single continuous parameter with lower bound $p^l$ and upper bound $p^u$, then:
 
 \begin{equation}
@@ -43,7 +43,7 @@ The choice of power depends on how much the simplex should be penalized for step
     \centering
     \includegraphics[width=.9\linewidth]{al_x_trans}
     \caption{The fraction of transmitted light polarized in the $x$ direction over the wavelength in $\mu m$ at optimization steps 
-    $(0, 50, 100, 250)$ left to right. Blue is the target spectrum $I_\s t$ and orange is the current spectrum $I_\s c$. }
+    $(0, 50, 100, 250)$ left to right. Blue is the target spectrum $I$ and orange is the current spectrum $I'$. }
     \label{fig:al:x_trans}
 \end{figure}
 
