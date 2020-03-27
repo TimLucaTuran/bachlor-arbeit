@@ -179,15 +179,18 @@ $\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
     \begin{pmatrix}
         \sin \varphi_\s{t}\\ 0\\ \cos \varphi_\s{t}
     \end{pmatrix}
-\end{equation}
+\end{equation} 
 
-Now we can decompose the electric field into two orthogonal polarizations. One component were $\vb E = E \, \va{e_y}$ called transverse electric (TE) as shown in figure \ref{fig:bg:fresnel} and its orthogonal component where $\vb H = H \, \va{e_y}$ called transverse magnetic (TM). If we apply the continuity condition from before to the TE component we get $\vb E_1 = \vb E_2$ at $z = 0$:
+For the derivation it is useful to decompose the fields into orthogonal polarization components. Here we are going to use the transversal electric (TE) and transversal magnetic (TM) polarizations. The TE component can be seen in figure \ref{fig:bg:fresnel} and in TM polarization $\vb E$ and $\vb H$ fields are simply interchanged.
+If we apply the continuity condition from before to the TE component we get $\vb E_1 = \vb E_2$ at $z = 0$:
 
 \begin{equation}
 \begin{aligned}
-    \vb E^\s{i} + \vb E^\s{r} &= \vb E^\s{t} \\
-    E^\s{i} e^{i(k^\s{i}_x x)} + E^\s{r} e^{i(k^\s{r}_x x)}
-    &= E^\s{t} e^{i(k^\s{t}_x x)}
+    &\vb E^\s{i} + \vb E^\s{r} = \vb E^\s{t} \\
+    \Longleftrightarrow \quad
+    &E^\s{i} e^{i(k^\s{i}_x x)} \, \va e_y +
+    E^\s{r} e^{i(k^\s{r}_x x)} \, \va e_y = 
+    E^\s{t} e^{i(k^\s{t}_x x)} \, \va e_y
 \end{aligned}
 \end{equation}
 
@@ -211,19 +214,21 @@ Two basic laws of optics lie in this relation: The law of reflection
 and the Snells law of refraction
 
 \begin{equation}
-    k^\s{i}_x = k^\s{t}_x
+    k^\s{i}_x = k^\s{t}_x, \
+    \varphi_t := \varphi_2
     \quad \Rightarrow \quad
-    k_0 n_1 \sin \varphi_i =  k_0 n_2 \sin \varphi_t
+    k_0 n_1 \sin \varphi_1 =  k_0 n_2 \sin \varphi_2
     \quad \Rightarrow \quad
-    n_1 \sin \varphi_i = n_2 \sin \varphi_t
+    n_1 \sin \varphi_1 = n_2 \sin \varphi_2
 \end{equation}
 
 \newlparagraph{Fresnel Equations}
-To fully describe an interface we also need know the fraction of the transmitted
-$t := E^t / E^i$
-and the reflected
-$r := E^r / E^i$ fields.
-Again using the TE polarization we have an orientation of fields were $\vb E = E \, \va e_y$ and $\vb H$ is contained perpendicular to $\vb E$ in the $x$-$z$ plane:
+To fully describe an interface we also need to know the transmitted and the reflected field amplitudes,  
+$t := E^t / E^i$ 
+and 
+$r := E^r / E^i$, 
+respectively.
+Again using the TE polarization shown in figure \ref{fig:bg:fresnel} we see:
 
 \begin{equation} \label{eq:bg:H}
     \vb H^\s{i} = H^\s{i}
@@ -241,7 +246,9 @@ Again using the TE polarization we have an orientation of fields were $\vb E = E
         -\cos \varphi_\s{t}\\ 0\\ \sin \varphi_\s{t}
     \end{pmatrix}
 \end{equation}
-
+\\
+\\
+\\
 
 The $H_x$ component is tangent to the interface so it also needs to be continuous across the boundary:
 
@@ -254,7 +261,7 @@ The $H_x$ component is tangent to the interface so it also needs to be continuou
 \end{aligned}
 \end{equation}
 
-Maxwells first equation \eqref{eq:bg:M1} allows us connect the magnitudes of $\vb H$ and $\vb E$ via the refractive index $H \sim n \, E$. This changes \eqref{eq:bg:Hx} to:
+Maxwell's first equation \eqref{eq:bg:M1} allows us to connect the magnitudes of $\vb H$ and $\vb E$ via the refractive index $H \sim n \, E$. This changes \eqref{eq:bg:Hx} to:
 
 \begin{equation}
     n_1 \, E^\s i \cos \varphi_1 - n_1 \, E^\s r \cos \varphi_1 =
@@ -270,7 +277,7 @@ Substituting $E^\s r$ or $E^\s i$ with \eqref{eq:bg:x} and rearranging we get:
     n_1 \cos \varphi_1 + n_2 \cos \varphi_2}
 \end{equation}
 
-These are called the Fresnel equations for the TE component. The TM component can be treated analogous which yields:
+These are called the Fresnel equations for the TE component. The TM component can be treated analog which yields:
 
 \begin{equation}
     t = \frac{2 n_1 \cos \varphi_1}{n_2 \cos \varphi_1 + n_1 \cos \varphi_2}
@@ -324,7 +331,7 @@ This can concisely be expressed using matrices and vectors:
 \end{pmatrix}
 \end{equation}
 
-We call these matrices mapping field-in to field-out $S$-matrices. They can be used to describe more than just interfaces. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$ where $d$ is the distance traveled and $\vb k_0$ the wave vector in vacuum. We can express this by allowing complex valued $t$ and $r$:
+We call these matrices mapping field-in to field-out scattering matrices or short $S$-matrices. They can be used to describe more than just interfaces. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$ where $d$ is the distance traveled and $\vb k_0$ the wave vector in vacuum. We can express this by allowing complex valued $t$ and $r$:
 
 \begin{equation}
     \hat S_{n, d} =
@@ -334,7 +341,7 @@ We call these matrices mapping field-in to field-out $S$-matrices. They can be u
     \end{pmatrix}
 \end{equation}
 
-Analogue the $S$-matrix for an interface from $n_1$ to $n_2$ is:
+Analog the $S$-matrix for an interface from $n_1$ to $n_2$ is:
 
 \begin{equation}
     \hat S_{n_1, n_2} =
@@ -347,14 +354,15 @@ Analogue the $S$-matrix for an interface from $n_1$ to $n_2$ is:
         \end{pmatrix}
     \endgroup
 \end{equation}
+\\
 
 
-Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is every interface and every propagation between interfaces as seen in figure \ref{fig:bg:star_prod}, but we cannot predict the behavior of the stack as a whole.
+Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is for every interface and every propagation between interfaces as seen in figure \ref{fig:bg:star_prod}, but we cannot predict the behavior of the stack as a whole.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_starprod}
-    \caption{A slab of one homogeneous isotropic material with thickness $d$ in air $(n_0)$. This setup is described by two interface and one propergation $S$-matrices.}
+    \caption{A slab of one homogeneous isotropic material with thickness $d$ in air $(n_0)$. This setup is described by two interface and one propagation $S$-matrices.}
     \label{fig:bg:star_prod}
 \end{figure}
 
@@ -375,7 +383,7 @@ The combined $S$-matrix $\hat S$ consisting of $\hat S_1$ and $\hat S_2$ cannot 
     \hat S
 \end{equation}
 
-and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. Redheffer \cite{Redheffer1960} studied these kind of systems in the 60s and gave an operator $\star$ which yields the combined $S$-matrix:
+and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. In the 60s Redheffer \cite{Redheffer1960} developed a linear transformation called star product $\star$ which yields the combined $S$-matrix:
 
 \begin{equation}\label{eq:bg:star}
     \hat S_1 \star \hat S_2 :=
@@ -386,9 +394,10 @@ and this would imply that the transmission from the front $t^f$ increases when t
         t^b_1 (1 - r^f_2 r^b_1)^{-1} t^b_2
     \end{pmatrix}
 \end{equation}
+\\
 
-For this operation to produce physically valid results certain condition have to be met. We will discuss these in detail in the paragraph \hyperref[par:conditions]{Conditions} of section \ref{sec:SASA}.
-Applied to the example of figure \ref{fig:bg:star_prod} that gives:
+For this operation to produce physically valid results certain conditions have to be met. We will discuss these in detail in the paragraph \hyperref[par:conditions]{Conditions} of section \ref{sec:SASA}.
+Applied to the example of figure \ref{fig:bg:star_prod} the star product gives:
 
 \begin{equation}
     \hat S = \hat S_{n_0, n} \star \hat S_{n, d} \star \hat S_{n, n_0}
