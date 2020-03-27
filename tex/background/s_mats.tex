@@ -1,5 +1,5 @@
 % !TEX root = ../bachlor-arbeit.tex
-To implement the desired algorithm we need to be able to calculate the optical behavior of stacked metasurfaces. The mathematical framework we will use is called Scatter Matrix Calculus and this section will give some insight into its physical origin and how to use it. We will start with the Maxwell Equations in matter.
+To implement the desired algorithm we need to be able to calculate the optical behavior of stacked metasurfaces. The mathematical framework we will use is called scatter matrix calculus and this section will give some insight into its physical origin and how to use it. We will start with the Maxwell Equations in matter.
 \newlparagraph{Maxwell Equations}
 
 \begin{tabular*}{\textwidth}{ll}
@@ -21,7 +21,7 @@ To implement the desired algorithm we need to be able to calculate the optical b
 
 
 The four involved fields are:
-$\vb E$...electric field, $\vb B$...magnetic flux density, $\vb D$...electric flux density and $\vb H$...magnetic field and the sources are the external charges $\rho_\s{ext}$ and the macroscopic currents $\vb j$. All the material properties are captured by the $\vb D$ and $\vb H$ fields which are defined as:
+$\vb E$ electric field, $\vb B$ magnetic flux density, $\vb D$ electric flux density and $\vb H$ magnetic field and the sources are the external charges $\rho_\s{ext}$ and the macroscopic currents $\vb j$. All the material properties are captured by the $\vb D$ and $\vb H$ fields which are defined as:
 
 
 \begin{equation}\label{eq:bg:D}
@@ -33,8 +33,8 @@ $\vb E$...electric field, $\vb B$...magnetic flux density, $\vb D$...electric fl
 
 
 Where $\vb P$ is the dielectric polarization and $\vb M$ is the magnetic polarization. One can read equation \eqref{eq:bg:D} in the following way:
-When the electric field $\vb E$ interacts with matter it exerts a force on all its charges and displaces them by a small amount. This separation of charges results in a counter field $\vb P$ and the total field $\vb D$ is now a superposition of $\vb E$ and $\vb P$.
-This set of equations describes the whole electromagnetic spectrum, in this work however we are only interested in visible (VIS) and near infrared (NIR) light where we can make some simplifications. Generally in optics materials are non-magnetizable so $\vb M = 0$ and there are no free charges $\rho_\s{ext}$ = 0. Inserting these assumptions into the maxwell equation gives:
+when the electric field $\vb E$ interacts with matter it exerts a force on all its charges and displaces them by a small amount. This separation of charges results in a counter field $\vb P$ and the total field $\vb D$ is now a superposition of $\vb E$ and $\vb P$.
+This set of equations describes the whole electromagnetic spectrum. However in this work we are only interested in visible (VIS) and near infrared (NIR) light where we can make some simplifications. Generally in optics materials are non-magnetizable so $\vb M = 0$ and there are no free charges $\rho_\s{ext}$ = 0. Inserting these assumptions into maxwell's equation gives:
 \\
 
 
@@ -57,7 +57,7 @@ This set of equations describes the whole electromagnetic spectrum, in this work
 
 
 \newlparagraph{Light in Vacuum}
-Now we can derive the famous wave equation by considering $\curl$ \eqref{eq:bg:M1}:
+Now we can derive the wave equation by applying $\curl$ to \eqref{eq:bg:M1}:
 
 
 \begin{equation}
@@ -80,7 +80,6 @@ Now we can derive the famous wave equation by considering $\curl$ \eqref{eq:bg:M
 
 In vacuum ($\vb P = 0$ and $\vb j = 0$) the right side of this equation vanishes and we are left with\\
 $\frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0$ which is solved by the plane wave $\vb E = \vb E_0 e^{i(\vb k \vb r - \omega t)}$ where $\frac{\omega}{k} = c$. This describes the propagation of light through empty space: a sinusoidal oscillation in time and space along the $\vb k$ direction where $\vb E, \, \vb B$ and $\vb k$ are all perpendicular to each other.
-\note{this needs details} \note{show figure?}
 
 \newlparagraph{Light in homogeneous, isotropic materials}\label{par:light_in_materials}
 The next question we can answer is how light propagates through a homogeneous and isotropic material. For us, the dielectric polarization is some linear function of the electric field so $\vb P(\vb r, t) = \hat{\chi}(\omega, \vb r) \vb E(\vb r, t)$. An isotropic material behaves the same for all orientations of $\vb E$ that means $\hat{\chi}(\omega, \vb r)$ becomes a scalar function $\chi(\omega, \vb r)$. If the material is additionally homogeneous, that is the same everywhere independent of $\vb r$, then $\grad \chi(\omega, \vb r) = 0$. With equation \eqref{eq:bg:M2} this gives us $\div \vb P = 0$
@@ -94,13 +93,14 @@ and the wave equation simplifies to:
 \end{equation}
 
 That means light behaves in these materials exactly as it would in vacuum we only have to account for a decreased speed of light
-$c' = \frac{c}{\sqrt{\varepsilon}} =: \frac{c}{n}$
+$c = {c_0} / {\sqrt{\varepsilon}} =: {c_0} / {n}$
 with the refractive index $n$.
 This is equivalent to a decreased wavelength
-$\lambda' =: \frac{\lambda}{n}$
-or an increased wave vector
-$k' = \frac{2 \pi}{\lambda'} = n \, k$.
-A complex valued $n := \eta + i \kappa$ even captures the possibility of an exponentially decaying field:
+$\lambda =: {\lambda_0} / {n}$
+or an increased wave number
+$k = {2 \pi} / {\lambda} = n \, k_0$
+where $c_0$, $\lambda_0$ and $k_0$ are the quantities in vacuum.
+The wave equation is also solved by a complex valued $n := \eta + i \kappa$ describes the behavior of the exponentially decaying field commonly found in metals:
 
 \begin{equation}
     \vb E = \vb E_0 e^{i(n \vb k \vb r - \omega t)}
@@ -134,7 +134,7 @@ Let us consider a closed contour $C$ around an interface as seen in Figure \ref{
 \end{aligned}
 \end{equation}
 
-But now we can bring the contour infinitely close to the interface and thus reduce the right hand side of the equation, the total magnetic flux, through the surface, to zero. That leaves us with:
+But now we can bring the contour infinitesimally close to the interface and thus reduce the right hand side of the equation, the total magnetic flux, through the surface, to zero. That leaves us with:
 
 \begin{equation}
 \begin{aligned}
@@ -153,7 +153,11 @@ can be shown by starting with the third maxwell equation \eqref{eq:bg:M3} instea
 \begin{figure}[H]
     \centering
     \includegraphics[width=.7\linewidth]{bg_fresnel}
-    \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$. The incident light has a wave vector $\vb k^\s{i}$ and is partially transmitted and partially reflected. The fields are shown in transverse electric (TE) polarization where $\vb H$ is in the $x$-$z$ plane and $\vb E$ occilates in the $y$ direction.}
+    \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$. The incident light has a wave vector $\vb k^\s{i}$ and is partially transmitted and partially reflected. The fields are shown in transverse electric (TE) polarization where $\vb H$ is in the $x$-$z$ plane and $\vb E$ oscillates in the $y$ direction.
+    In this polarization state the $\vb E$ field is fully tangential to the interface that means 
+    $\vb E = \vb E^\parallel$ and $\vb E^\bot = 0$.
+    For the $\vb H$ field only the $x$ component is tangential to the interface and the $z$ component is orthogonal to it, so 
+    $\vb H_x = \vb H^\parallel$ and $\vb H_z = \vb H^\bot$.}
     \label{fig:bg:fresnel}
 \end{figure}
 
