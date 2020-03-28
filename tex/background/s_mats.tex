@@ -118,7 +118,8 @@ The metasurface stacks we want to understand are obviously not one homogeneous m
 \begin{figure}[H]
     \centering
     \includegraphics[width=.7\linewidth]{bg_interface}
-    \caption{An interface of two materials with different refractive indices $n_1$ and $n_2$ and a closed contour $C$ which is tangent to the interface between the points $a$ and $b$.}
+    \caption{An interface of two materials with different refractive indices $n_1$ and $n_2$ and a closed contour $C$ which is tangent to the interface between the points $a$ and $b$. A field vector within the depicted plane can be decomposed into a tangential and a orthogonal component to the interface, 
+    $\vb E^\parallel$ and $\vb E^\bot$, respectively.}
     \label{fig:bg:interface}
 \end{figure}
 
@@ -180,6 +181,7 @@ $\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
         \sin \varphi_\s{t}\\ 0\\ \cos \varphi_\s{t}
     \end{pmatrix}
 \end{equation} 
+\\
 
 For the derivation it is useful to decompose the fields into orthogonal polarization components. Here we are going to use the transversal electric (TE) and transversal magnetic (TM) polarizations. The TE component can be seen in figure \ref{fig:bg:fresnel} and in TM polarization $\vb E$ and $\vb H$ fields are simply interchanged.
 If we apply the continuity condition from before to the TE component we get $\vb E_1 = \vb E_2$ at $z = 0$:
@@ -194,7 +196,7 @@ If we apply the continuity condition from before to the TE component we get $\vb
 \end{aligned}
 \end{equation}
 
-This is only possible for all $x$ if:
+Where $E^\s i, E^\s r, E^\s t \in \mathbb R$ are the measurable real field magnitudes. This is only possible for all $x$ if:
 
 \begin{equation} \label{eq:bg:x}
     E^\s{i} + E^\s{r} = E^\s{t} \qq{and}
@@ -404,14 +406,14 @@ Applied to the example of figure \ref{fig:bg:star_prod} the star product gives:
 \end{equation}
 
 \newlparagraph{Polarization}
-Up to this point we are dealing with vectors of the form
+Up to this point the $S$-matrix is made of the four complex numbers $t^f$, $r^b$, $r^f$ and $t^b$. That means when a $S$-matrix is applied to the input vector containing the total incoming light  
 $
 \begin{pmatrix}
     E^f_\s{in} \\
     E^b_\s{in}
 \end{pmatrix}
 $
-where $E^f_\s{in}$ and $E^b_\s{in}$ are scalar properties. That means we can only describe linear polarized light in one direction. The last generalization we want to make is to extend this formalism to all polarizations. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} a planar light wave propagating along the $z$ axis through a homogeneous isotropic material can be described as:
+$E^f_\s{in}$ and $E^b_\s{in}$ are also restricted the complex numbers and can only describe linear polarized light in one direction. The last generalization we want to make is to extend the scatter matrix calculus to all polarizations. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} a planar light wave propagating along the $z$ axis through a homogeneous isotropic material can be described as:
 
 \begin{equation}
    \vb E =
@@ -428,7 +430,7 @@ where $E^f_\s{in}$ and $E^b_\s{in}$ are scalar properties. That means we can onl
 \\
 
 \noindent
-the waves polarization is determined by the scaling factors of $\va{e_x}$ and $\va{e_y}$ and can be expressed as a \textit{Jones Vector} $\vb j \in \mathbb{C}^2$.
+the waves polarization is determined by the scaling factors of $\va{e_x}$ and $\va{e_y}$ and can be expressed as a \textit{Jones Vector} $\vb j \in \mathbb{C}^2$
 
 \begin{equation}
    \vb j = \frac{1}{\sqrt{E_x^2 + E_y^2}}
@@ -441,12 +443,12 @@ the waves polarization is determined by the scaling factors of $\va{e_x}$ and $\
 \end{equation}
 
 \noindent
-Now all linear operations on the polarization are matrices $\hat{M} \in \mathbb{C}^{2 \times 2}$. That means all passive components have a corresponding matrix. A couple examples for components in horizontal position:
+Now all linear operations on the polarization are matrices $\hat{M} \in \mathbb{C}^{2 \times 2}$. That means all passive components have a corresponding matrix. Examples for components aligned with the $x$ axis are:
 
 
 \begin{equation}
 \begin{split}
-   \qq*{polarizer:} \hat{M} &=
+   \qq*{linear polarizer:} \hat{M} &=
    \begin{pmatrix}
        1 & 0\\
        0 & 0
@@ -465,7 +467,7 @@ Now all linear operations on the polarization are matrices $\hat{M} \in \mathbb{
 \end{split}
 \end{equation}
 
-We can now generalize the $S$-matrix calculus simply by allowing Jones matrices in place of the Fresnel factors: $t \rightarrow \hat T$ and $r \rightarrow \hat R$. The star product of two $S$-matrices becomes:
+We can now generalize the $S$-matrix calculus simply by allowing Jones matrices in place of the Fresnel coefficients: $t \rightarrow \hat T$ and $r \rightarrow \hat R$. The star product of two $S$-matrices becomes:
 
 \begin{equation}\label{eq:bg:star}
     \hat S_1 \star \hat S_2 =
@@ -487,14 +489,11 @@ We can now generalize the $S$-matrix calculus simply by allowing Jones matrices 
     \end{pmatrix}
 \end{equation}
 
-So the general $S$-matrix is $\hat S \in \mathbb C^{4 \times 4}$ and consist of four separate Jones matrices and the general input vector
+So the generalized $S$-matrix is a $2 \times 2$ block matrix of four Jones matrices and the input vector $\quad $
 $
-\begingroup
-\renewcommand*{\arraystretch}{1.2}
 \begin{pmatrix}
     \vb E^f_\s{in} \\
     \vb E^b_\s{in}
 \end{pmatrix}
-\endgroup
 $
-consists of two separate Jones vectors.
+is a $2 \times 1$ block vector of two Jones vectors.
