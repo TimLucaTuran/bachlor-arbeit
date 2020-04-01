@@ -141,7 +141,7 @@ Computational limits aside there is another problem. Imagine an image with the l
     \label{fig:bg:convnet_T}
 \end{figure}
 
-These problems led to the development of a new kind of layer called \textit{Convolution}. A fixed size squared matrix called \textit{kernel} is shifted over the matrix and at every position the the point wise product between kernel and matrix is calculated and summed as shown in figure \ref{fig:bg:conv_examp}:
+These problems led to the development of a new kind of layer called \textit{Convolution}. A fixed size squared matrix called \textit{kernel} is shifted over the matrix and at every position the point wise product between kernel and matrix is calculated and summed as shown in figure \ref{fig:bg:conv_examp}:
 
 \begin{figure}[H]
     \centering
@@ -161,7 +161,7 @@ These problems led to the development of a new kind of layer called \textit{Conv
     \label{fig:bg:convolution}
 \end{figure}
 
-One convolutional layer contains not only one but a number of different kernels $k$. The resulting $k$ feature maps are stacked in the "$z$ direction" so that the shape of the $n \times n$ matrix transforms to $(n-2) \times (n-2) \times k$ when convolved with a $3 \times 3$ kernel. In a Convolutional Network (ConvNet) multiple of these layers are used so that it can find "patterns in patterns". For the letter detection example one could imagine the first layer to detect various edges and the next layer to detect letters in the position of these edges.
+One convolutional layer contains not only one but a number of different kernels $k$. The resulting $k$ feature maps are stacked in the "$z$ direction" so that the shape of the $n \times n$ matrix transforms to $(n-2) \times (n-2) \times k$ when convolved with a $3 \times 3$ kernel. In a convolutional network (ConvNet) multiple of these layers are used so that it can find "patterns in patterns". For the letter detection example one could imagine the first layer to detect various edges and the next layer to detect letters in the position of these edges.
 
 \paragraph{Pooling Layers}
 For a big image and a large number of kernels the output shape of a convolutional layers is still $\order{(n)^2 \cdot k}$, so quite large. Also notice how in figure \ref{fig:bg:convolution} the "T kernel's" feature map is not only active at the exact position of the T but in the general region. The solution to this is to downsample the output with a \textit{Pooling Layer}. Here a smaller kernel, usually $2 \times 2$ is shifted over the matrix two steps at a time and at every position an operation is performed to reduce the number of values to one. This could be taking the maximum or the average of that $2 \times 2$ region. This operation reduces the matrix in the x and y dimension by a factor of 2 as shown in figure \ref{fig:bg:pooling}:
@@ -172,16 +172,18 @@ For a big image and a large number of kernels the output shape of a convolutiona
     \caption{Example of a Max Pooling Layer. For every 2 by 2 field the maximum is calculated. After applying first the convolution and then the pooling layer the information "T in the top right corner" is still there and size of the resulting matrix is very manageable.}
     \label{fig:bg:pooling}
 \end{figure}
+\vspace{1cm}
 
-\paragraph{Example Network Architecture}
-Now all the building blocks for a complete ConvNet are available. Repeatedly alternating convolution and pooling layers changes the input from wide in x and y dimension and narrow in z to a long z-strip. At the very end this strip is fed into one densely connected layer which is in turn connected to the output neurons. An example architecture of this kind is shown in figure \ref{fig:bg:NN_example}:
-
+\paragraph{Example Network Architecture}~\\
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{conv_net_example}
-    \caption{Example for a complete ConvNet. Note the input is in this case an RGB image so there are three layers in the z dimension corresponding to the different colors. In this case the first layer has 64 kernels of size $3 \times 3 \times 3$. The next convolution then has 128 kernels of size $3 \times 3 \times 64$. [citation needed]}
+    \caption{Example for a complete ConvNet. Note the input is in this case an RGB image so there are three layers in the $z$ dimension corresponding to the different colors. In this case the first layer has 64 kernels of size $3 \times 3 \times 3$. The next convolution then has 128 kernels of size $3 \times 3 \times 64$. The final softmax activation rescales the output so that its sum is 1. [citation needed]}
     \label{fig:bg:NN_example}
 \end{figure}
+
+Now all the building blocks for a complete ConvNet are available. Repeatedly alternating convolution and pooling layers changes the input from wide in x and y dimension and narrow in z to a long z-strip. At the very end this strip is fed into one densely connected layer which is in turn connected to the output neurons. An example architecture of this kind is shown in figure \ref{fig:bg:NN_example}.
+
 
 
 \paragraph{1D ConvNets}
@@ -190,12 +192,13 @@ The input to the desired algorithm is a target spectrum to which the Network sho
 \begin{figure}[H]
     \centering
     \includegraphics[width=.4\linewidth]{bg_1D_conv}
-    \caption{Example of a 1D convolution. A $1 \times 3$ kernel is shifted over a spectrum $I$ discretized at 9 wavelengths}
+    \caption{Example of a 1D convolution. A $1 \times 3$ kernel is shifted over a spectrum $I$ discretized at 7 wavelengths}
     \label{fig:bg:1D_conv}
 \end{figure}
+\vspace{1.5cm}
 
-\paragraph{Dropout Layer}
-In 2014 Srivastava et al.\cite{Srivastava2014} presented a method to prevent overfitting and speed up the training process of large Neural Networks. During training they randomly drop a number of neurons in a layer along with all connections to and from these neurons. This prevents the neurons from co-adapting \note{explain co-adapting} and because there are less weights and biases to tune for each step the training becomes overall faster. The process of dropping some neurons is shown in figure \ref{fig:bg:dropout}:
+\paragraph{Dropout Layer} ~\\
+In 2014 Srivastava et al.\cite{Srivastava2014} presented a method to prevent overfitting and speed up the training process of large Neural Networks. During training they randomly drop a number of neurons in a layer along with all connections to and from these neurons. This prevents the neurons from co-adapting \note{explain co-adapting} and because there are less weights and biases to tune for each step the training becomes overall faster. The process of dropping some neurons is shown in figure \ref{fig:bg:dropout}.
 
 \begin{figure}[H]
 \centering

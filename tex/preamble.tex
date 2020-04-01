@@ -12,7 +12,7 @@
 
 \usepackage{array}
 \usepackage{amsmath, amssymb, amsthm}
-%\usepackage{bbold}
+\usepackage{dsfont}
 \usepackage{physics}
 \usepackage[boxed]{algorithm2e}
 \SetKw{KwLoopIn}{in}
@@ -25,7 +25,7 @@
 \usepackage{multicol}
 \usepackage{wrapfig}
 \usepackage{makecell}
-%\usepackage{epstopdf}		%converts every .eps-file to a .pdf-file, which can then be included
+
 \usepackage{booktabs}		%table_package
 \usepackage{url}
 %\usepackage[numbers,square,sort&compress]{natbib}
@@ -38,6 +38,7 @@
 \newcommand{\bs}[1]{\boldsymbol{#1}}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \newcommand{\comment}[1]{}
+\renewcommand{\indent}{\hspace{0.8cm}}
 
 \renewcommand\theequation{\thesection.\arabic{equation}}
 \newenvironment{boldequation}{

@@ -10,13 +10,13 @@
 \\
 
 \paragraph{Fourier Modal Method} ~\\ \label{sec:FMM}
-The database consist of $\sim 5000$ $S$-matrices of single layers which were simulated with the Fourier Modal Method (FMM) on a compute cluster. This method is applicable to all surface structures which are periodic in $x$ and $y$ direction and constant in $z$ direction. It works by expanding the involved fields into their diffraction orders for example for the reflected electric field:
+The database consist of $\sim 5000$ $S$-matrices of single layers which were simulated with the Fourier Modal Method (FMM) on a compute cluster. This method is applicable to all surface structures which are periodic in $x$ and $y$ direction and constant in $z$ direction. It works by expanding the involved fields into their diffraction orders via a Fourier expansion. For example for the reflected electric field is:
 
 \begin{equation} \label{eq:al:fmm}
     \vb E_\s r = \sum_{m,n} \vb R_{mn} e^{i \vb k_{mn} \vb r}
 \end{equation}
 
-and then applying the maxwell equations and continuity conditions described in section \ref{sec:s_mats}. This results in an eigenvalue problem which can be reformulated into a linear set of equations. The unknown properties like $R_{mn}$ are found by solving this set of equations. As \eqref{eq:al:fmm} represents an infinite series the equation has to be truncated at some order. This order determines the accuracy of the FMM and the matrix which represents the set of linear equations is sized order $\times$ order. Thats why the computational complexity of this method increases rapidly with the order. The method was first introduced by Noponen and Turunen \cite{Noponen1994}.
+Applying Maxwell's equations and the continuity conditions described in section \ref{sec:s_mats} results in an eigenvalue problem which can be reformulated into a linear set of equations. The unknown properties like $R_{mn}$ are found by solving this set of equations. Computationally a Fourier series like \eqref{eq:al:fmm} has to be truncated at some order. This order determines the accuracy of the FMM and the matrix which represents the set of linear equations is sized order $\times$ order. Because of that the computational complexity of this method increases rapidly with the order. The method was first introduced by Noponen and Turunen \cite{Noponen1994}.
 
 \paragraph{Interpolation} ~\\
 To find the $S$-matrix to layer parameters $\mc L$ which are not already stored in the database this module has to interpolate between pre simulated $S$-matrices. First it looks for the $n$ closest neighbors of $\mc L$. To do that the continuous input is normalized:
