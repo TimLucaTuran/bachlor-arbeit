@@ -1,8 +1,4 @@
 % !TEX root = ../bachlor-arbeit.tex
-Artificial Neural Networks (ANN's or short NN's) are a kind of data structure inspired by the biological neurons found in nature. They can be used to find a wide range of input output relations. One classic example is mapping pictures of hand written digits to the actual digits. Rather than explicitly programmed, NN's are trained on a dataset $(X, \, Y)$ of correct input output pairs.
-\\
-
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_basic_nn}
@@ -10,18 +6,21 @@ Artificial Neural Networks (ANN's or short NN's) are a kind of data structure in
     \label{fig:bg:basic_nn}
 \end{figure}
 
+Artificial Neural Networks (ANN's or short NN's) are a kind of data structure inspired by the biological neurons found in nature. They can be used to find a wide range of input output relations. One classic example is mapping pictures of hand written digits to the actual digits. Rather than explicitly programmed, NN's are trained on a dataset $(X, \, Y)$ of correct input output pairs.
+
+
 \paragraph{Multilayer Perceptron}
 This kind of classic NN consist of single nodes or neurons which are organized into layers. The terms node and neuron can be used interchangeably. Every node is connected to all the nodes of the previous and the next layer. For this reason the network is called dense or densely connected. Each node holds a value called activation $a$ where the activation to the first layer is the input to the network, here:
 $(x_1, \, x_2, \, x_3)$.
 The nodes are connected by weights $w$ which specify how much one node should influence the next and every node has a bias $b$ to control at what total input activation the node itself should become active.
-To calculate the activation of a node one has to multiply all the activations of the previous layer with their respective weights $w$, add the bias $b$ and finally apply a non-linear activation function $\sigma$. To describe this process mathematically we are going to use the usual index notation where superscripts specify the layer and subscripts the node. So $a^2_1$ is the activation of the first node in the second layer. To characterize a weight two subscripts are needed for the end and beginning of the connection. For the example in figure \ref{fig:bg:basic_nn} that means:
+To calculate the activation of a node one has to multiply all the activations of the previous layer with their respective weights $w$, add the bias $b$ and finally apply a non-linear activation function $\sigma$. To describe this process mathematically we are going to use the usual index notation where superscripts specify the layer and subscripts the node. So $a^2_1$ is the activation of the first node in the second layer. To characterize a weight two subscripts are needed for the end and beginning of the connection. For the example in figure \ref{fig:bg:basic_nn} that means
 
 \begin{equation} \label{eq:bg:activation_example}
     a^2_1 = \sigma \qty(\sum_i w^2_{1i} \, x_i + b^2_1)
 \end{equation}
 
 \noindent
-However it is more convenient to stop considering every node individually and to view the involved quantities as vectors and matrices. So that \eqref{eq:bg:activation_example} can be written as:
+However it is more convenient to stop considering every node individually and to view the involved quantities as vectors and matrices. So that \eqref{eq:bg:activation_example} can be written as
 
 \begin{equation} \label{eq:bg:activation}
     \vb{a}^l = \sigma \underbrace{
@@ -52,8 +51,8 @@ That means the activation function $\sigma$ maps the total input to a neuron $\v
 \label{fig:al:act}
 \end{figure}
 
-\paragraph{Training} \label{par:training}
-During training the networks output $\s{NN}(\vb x) := \vb{y}' $ is calculated through repeated use of \eqref{eq:bg:activation} and is then compared with the known correct output $\vb y$ by a cost function $C = C(\vb y, \, \vb y')$. The goal of the training is to minimize this function $C$. The cost function might simply be the mean squared difference between $\vb y$ and $\vb y'$:
+\paragraph{Training}~\\ \label{par:training}
+During training the networks output $\s{NN}(\vb x) := \vb{y}' $ is calculated through repeated use of \eqref{eq:bg:activation} and is then compared with the known correct output $\vb y$ by a cost function $C = C(\vb y, \, \vb y')$. The goal of the training is to minimize this function $C$. The cost function might simply be the mean squared difference between $\vb y$ and $\vb y'$
 
 \begin{equation}
     C_\s{mse}(\vb y, \, \vb y') = \sum_i \qty(y_i - y_i')^2
@@ -64,13 +63,13 @@ but there are different cost functions for different kind of outputs. For exampl
 \\
 
 $\quad$ As stated before the goal of the training is to minimize the cost function $C$ by changing the weights and biases. That means we are looking for the partial derivatives $\partial C / \partial \hat w^l_{j,k}$ and
-$\partial C / \partial b^l_j$. To find these we need the concept of the \textit{error of a neuron} $\delta^l_j$.
+$\partial C / \partial b^l_j$. To find these we need the concept of the \textit{error of a single neuron} $\delta^l_j$
 
 \begin{equation} 
     \delta^l_j := \pdv{C}{z^l_j}
 \end{equation}
 
-This property expresses how much the final cost is affected by a change to the input of neuron $j$ in layer $l$. For the last layer $L$ we can find a simple expression for this property by using the chain rule:
+This property expresses how much the final cost is affected by a change to the input of neuron $j$ in layer $l$. For the last layer $L$ we can find a simple expression for this property by using the chain rule
 
 \begin{equation} \label{eq:bg:back_prop}
     \delta^L_j = \pdv{C}{z^L_j} = \pdv{C}{a^L_j} \ \pdv{a^L_j}{z^L_j}
@@ -78,7 +77,7 @@ This property expresses how much the final cost is affected by a change to the i
     \pdv{C}{a^L_j} \ \sigma'(z^L_j)
 \end{equation}
 
-Remember $z^l_j$ is the input to a neuron and $a^l_j$ is the output. That means $\delta^L_j$ is determined by a combination of how much the last output changes the cost function and how much the last input changes the last output. Notice how both these terms are easily accessible. $z^l_j$ was already calculated on the forward pass and the derivatives of the cost and activation functions can be found analytically. By using the gradient operator $\grad$ and the Hadamard product $\odot$ where:
+Remember $z^l_j$ is the input to a neuron and $a^l_j$ is the output. That means $\delta^L_j$ is determined by a combination of how much the last output changes the cost function and how much the last input changes the last output. Notice how both these terms are easily accessible. $z^l_j$ was already calculated on the forward pass and the derivatives of the cost and activation functions can be found analytically. By using the gradient operator $\grad$ and the Hadamard product $\odot$ where
 
 \begin{equation}
     \vb a \odot \vb b :=
@@ -89,13 +88,13 @@ Remember $z^l_j$ is the input to a neuron and $a^l_j$ is the output. That means 
     \end{pmatrix}
 \end{equation}
 
-we can return to the more convenient vector notation:
+we can return to the more convenient vector notation
 
 \begin{equation} \label{eq:bg:back1}
     \boldsymbol \delta^L = \grad_a C  \odot \sigma'(\vb z^L)
 \end{equation}
 
-Now we know $\boldsymbol \delta$ for the last layer but not for the rest of the network but we can express the error of an arbitrary layer $\boldsymbol \delta^l$ by the error in the next layer $\boldsymbol \delta^{l+1}$:
+Now we know $\boldsymbol \delta$ for the last layer but not for the rest of the network but we can express the error of an arbitrary layer $\boldsymbol \delta^l$ by the error in the next layer $\boldsymbol \delta^{l+1}$
 
 \begin{equation} \label{eq:bg:back2}
     \boldsymbol \delta^l =
@@ -106,24 +105,30 @@ Now we know $\boldsymbol \delta$ for the last layer but not for the rest of the 
 This equation can be intuitively understood as moving the error
 $\boldsymbol \delta^{l+1}$ back one layer by applying $(\hat w^{l+1})^\top$ and then through the activation function of layer $l$ by applying $\sigma'$. In a sense its again "simply" a chain rule. With these two equations \eqref{eq:bg:back1} and \eqref{eq:bg:back2} all the errors $\boldsymbol \delta$ in the network are known. Just start with the last layer and work your way backwards. This idea of moving the error backwards is the reason why the algorithm is called \textit{Backpropagation}. \\
 
-$\quad$ The last thing to do is to relate $\boldsymbol \delta$ back to the original derivatives $\partial C / \partial \hat w^l_{j,k}$ and $\partial C / \partial b^l_j$. Using equation \eqref{eq:bg:activation} gives:
+\indent
+The last thing to do is to relate $\boldsymbol \delta$ back to the original derivatives $\partial C / \partial \hat w^l_{j,k}$ and $\partial C / \partial b^l_j$. Using equation \eqref{eq:bg:activation} gives
 
 \begin{align}
     \partial C / \partial b^l_j &= \delta^l_j \qq{and} \\[5pt]
     \partial C / \partial \hat w^l_{j,k} &= a^{l-1}_k \, \delta^l_j
 \end{align}
 
-Now we could modify the weights and biases after every forward pass by :
+Now we could modify the weights and biases after every forward pass by
 
 \begin{equation}
     \dots
 \end{equation}
+\note{add forumla to update weights based on gradient}
 
 But it is more efficient to average the changes and apply them at once after a small batch of training samples. This concludes the training of a Multilayer Perceptron but other Networks are trained in a similar manner. An excellent comprehensive explanation was published by Nielsen \cite{backprop}.
 
-\paragraph{Convolutional Neural Networks}
+\paragraph{Convolutional Neural Networks}~\\
 An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$ gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer as seen in figure \ref{fig:bg:flatten}. But now the number of weights to the next layer $\vu{w}^2$ is $n \cdot n \cdot \qty| \boldsymbol l^2|$
 which soon becomes unfeasible. As described in the section on \hyperref[sec:notation]{Notation} $\boldsymbol l^2$ is here the vector of the second layer and not $\boldsymbol l$ squared.
+\\
+
+\indent
+Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position as in figure \ref{fig:bg:convnet_T} the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture. The information about the distance between pixels is lost.
 
 \begin{figure}[H]
     \centering
@@ -132,8 +137,6 @@ which soon becomes unfeasible. As described in the section on \hyperref[sec:nota
     \label{fig:bg:flatten}
 \end{figure}
 
-Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position as in figure \ref{fig:bg:convnet_T} the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture. The information about the distance between pixels is lost.
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_convnet_T}
@@ -141,7 +144,14 @@ Computational limits aside there is another problem. Imagine an image with the l
     \label{fig:bg:convnet_T}
 \end{figure}
 
-These problems led to the development of a new kind of layer called \textit{Convolution}. A fixed size squared matrix called \textit{kernel} is shifted over the matrix and at every position the point wise product between kernel and matrix is calculated and summed as shown in figure \ref{fig:bg:conv_examp}:
+
+These problems led to the development of a new kind of layer called \textit{Convolution}. A fixed size squared matrix called \textit{kernel} is shifted over the matrix and at every position the point wise product between kernel and matrix is calculated and summed as shown in figure \ref{fig:bg:conv_examp}
+\\
+
+\indent
+The result of this operation called feature map of that kernel is shown in figure \ref{fig:bg:convolution}. Notice how the greatest value of the feature map is at the position of the letter T. So with only a small number of weights the convolution is able to detect the T independent of its position in the image.
+This is still slightly misleading because this "T kernel" was intentionally constructed to find the T. In a real convolutional layer the kernel values are trained via Backpropagation similar to the weights of a Multilayer Perceptron as described in the paragraph \hyperref[par:training]{Training}.
+\\
 
 \begin{figure}[H]
     \centering
@@ -151,8 +161,7 @@ These problems led to the development of a new kind of layer called \textit{Conv
 \end{figure}
 
 
- The result of this operation called feature map of that kernel is shown in figure \ref{fig:bg:convolution}. Notice how the greatest value of the feature map is at the position of the letter T. So with only a small number of weights the convolution is able to detect the T independent of its position in the image.
- This is still slightly misleading because this "T kernel" was intentionally constructed to find the T. In a real convolutional layer the kernel values are trained via Backpropagation similar to the weights of a Multilayer Perceptron as described in the paragraph \hyperref[par:training]{Training}.
+ 
 
 \begin{figure}[H]
     \centering
@@ -163,8 +172,8 @@ These problems led to the development of a new kind of layer called \textit{Conv
 
 One convolutional layer contains not only one but a number of different kernels $k$. The resulting $k$ feature maps are stacked in the "$z$ direction" so that the shape of the $n \times n$ matrix transforms to $(n-2) \times (n-2) \times k$ when convolved with a $3 \times 3$ kernel. In a convolutional network (ConvNet) multiple of these layers are used so that it can find "patterns in patterns". For the letter detection example one could imagine the first layer to detect various edges and the next layer to detect letters in the position of these edges.
 
-\paragraph{Pooling Layers}
-For a big image and a large number of kernels the output shape of a convolutional layers is still $\order{(n)^2 \cdot k}$, so quite large. Also notice how in figure \ref{fig:bg:convolution} the "T kernel's" feature map is not only active at the exact position of the T but in the general region. The solution to this is to downsample the output with a \textit{Pooling Layer}. Here a smaller kernel, usually $2 \times 2$ is shifted over the matrix two steps at a time and at every position an operation is performed to reduce the number of values to one. This could be taking the maximum or the average of that $2 \times 2$ region. This operation reduces the matrix in the x and y dimension by a factor of 2 as shown in figure \ref{fig:bg:pooling}:
+\paragraph{Pooling Layers}~\\
+For a big image and a large number of kernels the output shape of a convolutional layers is still $\order{(n)^2 \cdot k}$, so quite large. Also notice how in figure \ref{fig:bg:convolution} the "T kernel's" feature map is not only active at the exact position of the T but in the general region. The solution to this is to downsample the output with a \textit{Pooling Layer}. Here a smaller kernel, usually $2 \times 2$ is shifted over the matrix two steps at a time and at every position an operation is performed to reduce the number of values to one. This could be taking the maximum or the average of that $2 \times 2$ region. This operation reduces the matrix in the x and y dimension by a factor of 2 as shown in figure \ref{fig:bg:pooling}.
 
 \begin{figure}[H]
     \centering
@@ -186,7 +195,7 @@ Now all the building blocks for a complete ConvNet are available. Repeatedly alt
 
 
 
-\paragraph{1D ConvNets}
+\paragraph{1D ConvNets}~\\
 The input to the desired algorithm is a target spectrum to which the Network should output some parameters (more on this in the section \ref{sec:NN}). This input data is a function $I(\lambda)$ so only one dimensional in contrast to an image which is a function $f(x, \, y)$ but all the same ideas apply. Convolutional kernels are sized $1 \times 3 \times z$ and pooling kernels are $1 \times 2 \times z$. Both are  only shifted in one direction as see in figure \ref{fig:bg:1D_conv}. These 1D convolutions might detect features like rising and falling edges and the later layers might combine these features into concepts like peaks and troughs but as always in machine learning what the network actually does to reach its objective is not controlled by the programmer.
 
 \begin{figure}[H]
