@@ -46,19 +46,69 @@ and this results in a $\vb D$ field
 \indent
 $f = \rho e^2 / \epsilon_0 m$ oscillator strength
 
-In a real material there are always multiple resonance frequencies $\omega_m$ but in a good approximation these do not influence each other and the total dielectric function can be obtained simply by summing over all $\omega_m$
+In a real material there are always multiple resonance frequencies $\omega_m$ but in a good approximation these do not influence each other and the total dielectric function can be obtained simply by summing over all $m$
 
 \begin{equation}
-    \epsilon(\omega) = 
+    \epsilon(\omega) := 
+    \epsilon'(\omega) + i \epsilon''(\omega) = 
     1 + \sum_m \frac{f_m}{\omega_m^2 - \omega_0^2 - i \gamma \omega}
 \end{equation}
 
 \begin{figure}[H]
     \floatbox[{
     \capbeside
-    \thisfloatsetup{capbesideposition={right,top},capbesidewidth=7cm}}]{figure}[\FBwidth]
+    \thisfloatsetup{capbesideposition={right,top}}}]{figure}[\FBwidth]
     {\caption{
-        }
-    \label{fig:al:same_spec}}
+        Example plots for the real and imaginary part of the refractive index 
+        $n = \eta + i\kappa$
+        as calculated by the multiple resonance Lorentz model.
+        [cite FOMO]
+    }
+    \label{fig:bg:lorentz}}
     {\includegraphics[width=0.55\textwidth]{bg_lorentz}}
+\end{figure}
+
+In section \ref{sec:s_mats} we have already discussed how the dielectric function is related to the complex refractive index by 
+
+\begin{equation}
+    \epsilon = n^2 = (\eta + i \kappa)^2
+\end{equation}
+
+and this relationship is used to generate figure \ref{fig:bg:lorentz}. We observe high $\kappa$, so high absorption, at the resonance frequencies in the from of Lorentz peaks. Between resonance frequencies generally 
+$\partial \eta / \partial \omega > 0$.
+This is called normal dispersion and explains, for example, why red light is diffracted stronger than blue light.
+Figure \ref{fig:bg:lorentz} is just a general example, to understand metasurfaces we need to discuss how the resonance frequencies are distributed in real materials in a little more detail.
+\\
+
+\indent
+Dielectrics in the visible spectrum are well described by two resonance frequencies. One in the IR and one in the UV range. That means we have a vanishing imaginary part of the dielectric function $\epsilon'$ and normal dispersion as seen in figure \ref{fig:bg:dielectric}. 
+Metals on the other hand are characterized by their high density in free charges. That means there is no restoring force so 
+$\omega_0$ = 0 and 
+
+\begin{equation}
+    \epsilon(\omega) = 1 - \frac{\omega_\s p}{\omega^2 + i \gamma \omega}
+\end{equation}
+
+with the plasma frequency 
+$\omega_\s p^2 = f = \rho e^2 / \epsilon_0 m$.
+This results in a large negative $\epsilon'$ and a positive $\epsilon''$ as seen in figure \ref{fig:bg:metal}. The negative $\epsilon'$ is responsible for the reflection of visible light at metallic surfaces.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{bg_dielectric}
+    \caption{}
+    \label{fig:bg:dielectric}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{bg_metal}
+    \caption{}
+    \label{fig:bg:metal}
+\end{subfigure}
+\caption{Imaginary and real part of the dielectric function 
+$\epsilon = \epsilon' + i \epsilon''$
+for dielectrics (a) and metals (b) in the visible spectrum.
+[cite FOMO]}
 \end{figure}
