@@ -58,13 +58,12 @@ Flipping and mirroring of $S$-matrices is done analogously. With all mathematica
         calculate interface $S$-matrix $\hat S_{n_i,n_{i+1}}$ \\
         add $\hat S_{n_i,n_{i+1}}$ to $S$-mats
     }
-    $\hat S = \mathbb 1$ \\
+    $\hat S = \mathds 1$ \\
     \For{$i = 0$;  $i < \s{len}(\text{S-mats})$;  $i = i+1$;}{
         $\hat S = \hat S \star S$-mats$[i]$
     }
     \KwRet{$\hat S$}
 \end{algorithm}
-\note{fix cursive?}
 \begin{tabular}{ll}
     SASA pseudo code: &
     \begin{tabular}[t]{@{}l@{}}
@@ -75,8 +74,8 @@ Flipping and mirroring of $S$-matrices is done analogously. With all mathematica
 \end{figure}
 
 
-\paragraph{Conditions} ~\\ \label{par:conditions}
-For this algorithm to produce physical valid output some conditions need to be met. Equations that are boundary conditions to the algorithm will be marked bold. It has been shown \note{needs cite} that the $S$-matrix calculus can only be used when the meta materials in the stack do not interact with each other via the near field. That is, only the zeroth diffraction order of a metasurface can be non-evanescent and higher orders need to have decayed enough when they reach the next metasurface.
+\paragraph{Conditions}~\\
+\label{par:conditions}For this algorithm to produce physical valid output some conditions need to be met. Equations that are boundary conditions to the algorithm will be marked bold. It has been shown \note{needs cite} that the $S$-matrix calculus can only be used when the meta materials in the stack do not interact with each other via the near field. That is, only the zeroth diffraction order of a metasurface can be non-evanescent and higher orders need to have decayed enough when they reach the next metasurface.
 
 
 First we need to ensure that only the zeroth diffraction order is non evanescent by requiring
@@ -94,8 +93,8 @@ Additionally the distance between metasurfaces needs to be large enough so that 
 
 The factor $e^{-2}$ was chosen arbitrarily. A smaller value increases the agreement of the $S$-matrix calculus and more rigorous numerical methods which also take into account the near field. One of these, the \hyperref[sec:FMM]{Fourier Modal Method} will be described in more detail in section \ref{sec:opt}.
 
-\newlparagraph{Symmetries} \label{sec:symmetries}
-We can use geometric transformations to examine the $S$-matrices of metasurfaces which satisfy certain symmetries. Lets start with mirror symmetry. The Jones matrix $\hat M'$ of a mirrored component $\hat M$ can be calculated as
+\paragraph{Symmetries}~\\
+\label{sec:symmetries}We can use geometric transformations to examine the $S$-matrices of metasurfaces which satisfy certain symmetries. Lets start with mirror symmetry. The Jones matrix $\hat M'$ of a mirrored component $\hat M$ can be calculated as
 
 \begin{equation}
     \hat M' = \hat F^{-1} \hat M \hat F \qq{where}

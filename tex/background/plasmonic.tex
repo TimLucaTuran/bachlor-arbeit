@@ -1,5 +1,7 @@
-With the $S$-matrix calculus and SASA we can fully describe stacks of homogeneous isotropic materials but we still have no understanding of what happens when we add a metasurface to a stack. To build some intuition for how a specific metasurface will affect the transmission spectrum of a stack we will need a little more theory on optics in materials. All optical properties of a material a captured by the $\vb D$ and $\vb H$ fields and in our context
+As stated in the introduction metasurfaces are 2D materials with some sub-wavelength structure. Their properties are determined by the geometry of this structure which is usually a simple shape, like a rectangle or oval, on a periodic grid. The shape is called metaatom and in the case of plasmonic metasurfaces it is made of metal.
 
+\indent
+With the $S$-matrix calculus and SASA we can fully describe stacks of homogeneous isotropic materials but we still have no understanding of what happens when we add a metasurface to a stack. To build some intuition for how a specific metasurface will affect the transmission spectrum of a stack we will need a little more theory on optics in materials. As stated before all optical properties of a material a captured by the $\vb D$ and $\vb H$ fields and in our context
 \begin{equation}
     \vb D = 
     \epsilon_0 \, \vb E + \vb P =
@@ -7,8 +9,7 @@ With the $S$-matrix calculus and SASA we can fully describe stacks of homogeneou
          := \epsilon
     }\, \vb E
 \end{equation}
-
-so the $\vb D$ field is determined by the $\vb E$ field and dielectric function $\epsilon$. In the following sections we will discuss which materials have which kind of dielectric function and how we can use these to gain some intuition for the optical mechanisms in a metasurface.
+so the $\vb D$ field is determined by the $\vb E$ field and dielectric function $\epsilon$. In the following sections we will discuss which materials have which kind of dielectric functions and how we can use these to gain some understanding for the optical mechanisms in a metasurface.
 
 \paragraph{Dielectric Function}~\\
 In the simplest model we can describe electrons in a material as an ensemble of harmonic oscillators
@@ -33,7 +34,6 @@ If we assume a harmonic time dependency $\vb E(t) = \vb E_0 e^{i \omega t}$ equa
 \end{equation}
 
 and this results in a $\vb D$ field
-
 \begin{equation}
     \vb D = 
     \epsilon_0 \underbrace{ 
@@ -46,8 +46,7 @@ and this results in a $\vb D$ field
 \indent
 $f = \rho e^2 / \epsilon_0 m$ oscillator strength
 
-In a real material there are always multiple resonance frequencies $\omega_m$ but in a good approximation these do not influence each other and the total dielectric function can be obtained simply by summing over all $m$
-
+In a real material there are always multiple resonance frequencies $\omega_m$ but in a good approximation these do not influence each other and the total dielectric function can be obtained simply by summing over all $m$ \cite{FOMO}
 \begin{equation}
     \epsilon(\omega) := 
     \epsilon'(\omega) + i \epsilon''(\omega) = 
@@ -62,14 +61,34 @@ In a real material there are always multiple resonance frequencies $\omega_m$ bu
         Example plots for the real and imaginary part of the refractive index 
         $n = \eta + i\kappa$
         as calculated by the multiple resonance Lorentz model.
-        [cite FOMO]
+        \cite{FOMO} modified
     }
     \label{fig:bg:lorentz}}
-    {\includegraphics[width=0.55\textwidth]{bg_lorentz}}
+    {\includegraphics[width=0.5\textwidth]{bg_lorentz}}
 \end{figure}
 
-In section \ref{sec:s_mats} we have already discussed how the dielectric function is related to the complex refractive index by 
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.8\linewidth]{bg_dielectric}
+        \caption{}
+        \label{fig:bg:dielectric}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.8\linewidth]{bg_metal}
+        \caption{}
+        \label{fig:bg:metal}
+    \end{subfigure}
+    \caption{Imaginary and real part of the dielectric function 
+    $\epsilon = \epsilon' + i \epsilon''$
+    for dielectrics (a) and metals (b) in the visible spectrum.
+    \cite{FOMO} modified}
+    \label{fig:bg:dm}
+    \end{figure}
 
+In section \ref{sec:s_mats} we have already discussed how the dielectric function is related to the complex refractive index by
 \begin{equation}
     \epsilon = n^2 = (\eta + i \kappa)^2
 \end{equation}
@@ -77,38 +96,74 @@ In section \ref{sec:s_mats} we have already discussed how the dielectric functio
 and this relationship is used to generate figure \ref{fig:bg:lorentz}. We observe high $\kappa$, so high absorption, at the resonance frequencies in the from of Lorentz peaks. Between resonance frequencies generally 
 $\partial \eta / \partial \omega > 0$.
 This is called normal dispersion and explains, for example, why red light is diffracted stronger than blue light.
-Figure \ref{fig:bg:lorentz} is just a general example, to understand metasurfaces we need to discuss how the resonance frequencies are distributed in real materials in a little more detail.
+Figure \ref{fig:bg:lorentz} is just a general example, to understand metasurfaces we need to discuss how the resonance frequencies are distributed in real materials.
 \\
 
 \indent
-Dielectrics in the visible spectrum are well described by two resonance frequencies. One in the IR and one in the UV range. That means we have a vanishing imaginary part of the dielectric function $\epsilon'$ and normal dispersion as seen in figure \ref{fig:bg:dielectric}. 
+Dielectrics in the visible spectrum are well described by two resonance frequencies. One in the IR and one in the UV range. That means in the visible spectrum we have a vanishing imaginary part $\epsilon''$ of the dielectric function and normal dispersion as seen in figure \ref{fig:bg:dielectric}. 
 Metals on the other hand are characterized by their high density in free charges. That means there is no restoring force so 
-$\omega_0$ = 0 and 
-
+$\omega_0$ = 0 and
 \begin{equation}
-    \epsilon(\omega) = 1 - \frac{\omega_\s p}{\omega^2 + i \gamma \omega}
+    \epsilon(\omega) = 1 - \frac{\omega_\s p^2}{\omega^2 + i \gamma \omega}
 \end{equation}
 
 with the plasma frequency 
 $\omega_\s p^2 = f = \rho e^2 / \epsilon_0 m$.
 This results in a large negative $\epsilon'$ and a positive $\epsilon''$ as seen in figure \ref{fig:bg:metal}. The negative $\epsilon'$ is responsible for the reflection of visible light at metallic surfaces.
 
+\paragraph{Surface Plasmon Polaritons}~\\
+Finally we can discuss the mechanism behind the optical properties of plasmonic metasurfaces. These work by allowing the excitation of a special electromagnetic wave at metal dielectric interface called Surface Plasmon Polariton (SPP). This wave is confined to the interface and travels along it until its energy is lost via absorption or scattering. That means it allows some photons to be absorbed by coupling into the interface. At which wavelengths this conversion is possible depends on the metasurface geometry and can thus be tailored for a specific optical target.
+
 \begin{figure}[H]
-\centering
-\begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=.8\linewidth]{bg_dielectric}
-    \caption{}
-    \label{fig:bg:dielectric}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=.8\linewidth]{bg_metal}
-    \caption{}
-    \label{fig:bg:metal}
-\end{subfigure}
-\caption{Imaginary and real part of the dielectric function 
-$\epsilon = \epsilon' + i \epsilon''$
-for dielectrics (a) and metals (b) in the visible spectrum.
-[cite FOMO]}
+    \includegraphics[width=.6\linewidth]{bg_md_interface}
+    \caption{Metal dielectric interface with light in a TM mode.}
+    \label{fig:bg:md_inderface}
+\end{figure}
+
+Suppose the described wave exists as a TM mode and has the form 
+
+\begin{equation}
+\begin{aligned}
+    E_x &= E_0 e^{i k_x x - k_z z} \\
+    E_z &= E_0 \frac{k_x}{k_z} e^{i k_x x - k_z z}\\
+    H_y &= H_0 e^{i k_x x - k_z z}
+\end{aligned}
+\end{equation}
+
+that is, propagating along the $x$ axis and evanescently decaying along the $z$ axis. This wave does indeed satisfy Maxwell's equation and the continuity conditions discussed in section \ref{sec:s_mats} if and only if \cite{Maier2007}
+
+\begin{equation} \label{eq:bg:con1}
+    \frac{\epsilon_1}{k_{z1}} = - \frac{\epsilon_2}{k_{z2}} 
+\end{equation}
+
+and
+
+\begin{equation} \label{eq:bg:con2}
+    k_x^2 + k_{zn}^2 = \epsilon_n \frac{\omega^2}{c^2}
+    \qq{for}
+    n = 1,2
+\end{equation}
+
+Equation \eqref{eq:bg:con1} explains why SPP's are only possible at metal dielectric interfaces because $\epsilon'_1$ and $\epsilon'_2$ need to have different signs and this is fulfilled precisely for metals and dielectrics as can be seen in figure \ref{fig:bg:dm}. If we solve equation \eqref{eq:bg:con1} and \eqref{eq:bg:con2} we can obtain the dispersion relation for SPP's
+
+\begin{equation}
+    k_x = \frac{\omega}{c}
+    \qty(\frac{\epsilon_1 \epsilon_2}{\epsilon_1 + \epsilon_2})^{1/2}
+\end{equation}
+
+This dispersion relation is shown in figure \ref{fig:bg:dispersion}. For small wave vectors SPP's behave like light but then they start to have increasingly lower energy $E = \hbar \omega$ compared to a free photon at the same momentum $\vb p = \hbar \vb k$. However, for a conversion photon $\rightarrow$ SPP both energy and momentum have to be conserved. That means the excitation of SPP's is not possible at a simple smooth metallic surface rather the wave vector of an incident photon has to be matched to that of an SPP of the same energy by the surface geometry. 
+
+\indent
+To summarize, photons can couple into a plasmonic metasurface by exiting a special electromagnetic wave called Surface Plasmon Polariton confined to the interface. The exact wavelength at which this conversion is possible depends on the metasurface geometry and can thus be easily tuned to create different optical behaviors.
+
+\begin{figure}[H]
+    \floatbox[{
+    \capbeside
+    \thisfloatsetup{capbesideposition={right,top}}}]{figure}[\FBwidth]
+    {\caption{
+        Dispersion relation for light and Surface Plasmon Polaritons in air (grey) and silica (black). Frequency and wave vector are normalized to the plasma frequency $\omega_\s p$. \cite{Maier2007} modified
+    }
+    \label{fig:bg:dispersion}}
+    {\includegraphics[width=0.55\textwidth]{bg_dispersion}}
 \end{figure}
