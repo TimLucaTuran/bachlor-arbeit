@@ -198,7 +198,7 @@
   keywords    = {cs.CV, cs.AI, cs.LG, cs.RO},
 }
 
-@Misc{youtube,
+@Misc{y,
   author       = {Paul Covington, Jay Adams, Emre Sargin},
   title        = {Deep Neural Networks for YouTube Recommendations},
   howpublished = {Google Research},

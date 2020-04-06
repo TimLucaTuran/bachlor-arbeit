@@ -62,12 +62,12 @@ That means $I = (I_x, \, I_y) \in X$ are the networks input and the random desig
     \caption{}
 \end{subfigure}
 
-\caption{Training only with squares. (a) shows the accuracy of the discrete branch that is what percentage of choices for material and geometry were correct. In (b) we can see the performance of the continuous branch evaluated directly through its cost function $C_\s{mse}$.}
+\caption{Training only with squares. (a) shows the accuracy of the discrete branch.That is, what percentage of choices for material and geometry were correct. In (b) we can see the performance of the continuous branch evaluated directly through its cost function $C_\s{mse}$.}
 \label{fig:al:square_results}
 \end{figure}
 
 
-Training and validation results are very similar which indicates that there is no overfitting or memorization. The discrete accuracy quickly reaches a maximum of $\sim 76\%$ but the speed at which this value is reached is suspicious. The network does not improve much after the fourth epoch and this does not change by tuning the network architecture. That is because the issue lies not within the architecture but in the training data. In section \ref{sec:SASA} we have shown that for the used two layer stacks the transmission spectrum is reciprocal that is the same for both directions. That means the data generation can result in two different stacks which produce the same spectrum. Consider a stack where one layer is Aluminum and the other is Gold as seen in figure \ref{fig:al:same_spec} . As both of them produce the same spectrum one time the network is taught that the first layer is Gold and another time its taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only setup it can get right.
+Training and validation results are very similar which indicates that there is no overfitting or memorization. The discrete accuracy quickly reaches a maximum of $\sim 76\%$ which is less than expected and also the speed at which this value is reached is suspicious. The network does not improve much after the fourth epoch and this does not change by tuning the network architecture. That is because the issue lies not within the architecture but in the training data. In section \ref{sec:SASA} we have shown that for the used two layer stacks the transmission spectrum is reciprocal that is the same for both directions. That means the data generation can result in two different stacks which produce the same spectrum. Consider a stack where one layer is Aluminum and the other is Gold as seen in figure \ref{fig:al:same_spec} . As both of them produce the same spectrum one time the network is taught that the first layer is Gold and another time its taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only setup it can get right.
 
 
 \begin{figure}[H]
@@ -79,7 +79,11 @@ Training and validation results are very similar which indicates that there is n
 
 
 \newpage
-This is a well known problem when trying to solve an inverse problem. In this case the function $\mc D \rightarrow I$ is well defined as one stack can only produce one spectrum but for the inverse problem we are trying to solve $I \rightarrow \mc D$ and there might be multiple designs which produce the same spectrum. We can solve the issue described in figure \ref{fig:al:same_spec} simply by allowing only one of the orientations into the training data. By doing this the training  results change as seen in figure \ref{fig:al:squares_fix}:
+This is a well known problem when trying to solve an inverse problem. In this case the function $\mc D \rightarrow I$ is well defined as one stack can only produce one spectrum but for the inverse problem we are trying to solve $I \rightarrow \mc D$ and there might be multiple designs which produce the same spectrum. We can solve the issue described in figure \ref{fig:al:same_spec} simply by allowing only one of the orientations into the training data. By doing this the training  results change as seen in figure \ref{fig:al:squares_fix}.
+\\
+
+\indent
+The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}. However, the performance of the continuous branch could not be improved in this manner and we will discuss the reason for this in chapter \ref{sec:inverse}.
 
 \begin{figure}[H]
 \centering
@@ -100,4 +104,3 @@ Again, (a) shows the accuracy of the discrete branch and (b) the average cost of
 \label{fig:al:squares_fix}
 \end{figure}
 
-The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}. However, the performance of the continuous branch could not be improved in this manner and we will discuss the reason for this in chapter \ref{sec:inverse}.
