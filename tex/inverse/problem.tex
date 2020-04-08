@@ -5,7 +5,7 @@ In section \ref{sec:algorithm} we have seen that it is very difficult or even im
 $I \rightarrow \mc D \rightarrow I'$
 where the cost function is 
 $C = C \qty(I, \, I')$.
-That means during training the network is given a target spectrum $I$ and predicts the corresponding design parameters $\mc D$ this design is then fed into the forward model and produces a spectrum $I'$ and the cost function depends on the difference in $I$ and $I'$. This approach completely circumvents the issue of multiple designs mapping to a single spectrum because it only depends on the differences between the target and the produced spectrum. We can already solve the forward problem via the DB and SASA modules as seen in figure \ref{fig:al:combined}.
+This means during training the network is given a target spectrum $I$ and predicts the corresponding design parameters $\mc D$ this design is then fed into the forward model and produces a spectrum $I'$ and the cost function depends on the difference in $I$ and $I'$. This approach completely circumvents the issue of multiple designs mapping to a single spectrum because it only depends on the differences between the target and the produced spectrum. We can already solve the forward problem via the DB and SASA modules as seen in figure \ref{fig:al:combined}.
 \\
 
 
