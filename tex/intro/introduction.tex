@@ -1,13 +1,22 @@
 % !TEX root = ../bachlor-arbeit.tex
 Metamaterials are materials with sub-wavelength structure whose physical properties are determined by their internal geometry. They can be engineered to exhibit properties not found in nature like negative refractive indices \cite{Shelby2001}.
-Usually metamaterials are organized into periodic unit cells called metaatoms and a metasurface is just a single 2D layer of these metaatoms.
-Normal optical devices like lenses or phase plates rely on distances much larger than one wavelength to change the light's properties in contrast metasurfaces with their sub-wavelength thickness enable thin components not possible before \cite{Yu2014}.
-These metasurfaces promise custom optical components which can be tailored to a wide range of applications just by changing the surface geometry
-but because they need to have sub-wavelength structure optical metasurfaces with complex geometries are quite hard to manufacture. Also predicting the optical behavior of metasurfaces cannot be done analytically and involves computationally intensive simulations which slows the design process. 
+For optics the most common architecture are 2D metamaterials called metasurfaces.
+Normal optical devices like lenses or phase plates leverage chemical material properties and optical effects such as diffraction, refraction or phase differences accumulated over variable propagation lengths.
+All these effects rely on distances much larger than one wavelength to change the light's properties.
+In contrast metasurfaces rely on artificial sub-wavelength structures and nano optical effects.
+Because of their sub-wavelength thickness they enable thin components not possible before \cite{Yu2014}.
+These metasurfaces promise custom optical components which can be tailored to a wide range of applications just by changing geometry of the artificial structures. 
+However, because of the sub-wavelength scale optical metasurfaces with complex geometries are quite hard to manufacture.
+Also the optical behavior of metasurfaces is very challenging to model analytically and usually involves computationally intensive simulations which slow the design process. 
 \\
 
 \indent
-2016 Menzel and Sperrhake \cite{Menzel2016} presented an algorithm called SASA to analytically calculate the optical behavior of metasurface stacks if one knows how the surfaces behave individually. This allows for a different approach when designing an optical component. The idea here is to create a target behavior not by using complex geometry but by using simple metasurfaces and stacking them on top of each other. Designing a component becomes an optimization problem of choosing the right surfaces and then tuning stack parameters like the distance between layers and their rotation angle. This approach is possible because SASA is analytical in nature and many different stacks can be considered very quickly but it also poses some new challenges when trying to automate the process. Conventional optimization methods rely on the continuity of the underlying process so that if a parameter is tuned slightly it is possible to calculate a gradient and tell wether that was a step in the right direction. This is a problem because some of the choices involved when building a stack are categorical. For example, choosing the material of the layers or the kind of geometry.
+2016 Menzel and Sperrhake \cite{Menzel2016} presented a \textit{Semi Analytic Stacking Algorithm}, short SASA, to analytically calculate the optical behavior of metasurface stacks if one knows how the surfaces behave individually.
+This allows for a different approach when designing novel optical properties.
+The idea here is to create a target behavior not by using complex geometry but by using simple metasurfaces and stacking them on top of each other.
+The design process becomes an optimization problem of choosing the right surfaces and then tuning stack parameters like the distance between layers and their rotation angle.
+This approach is possible because SASA is analytical in nature and many different stacks can be considered very quickly.
+However, it also poses some new challenges when trying to automate the process. Conventional optimization methods rely on the continuity of the underlying process so that if a parameter is tuned slightly it is possible to calculate a gradient and tell wether that was a step in the right direction. This is a problem because some of the choices involved when building a stack are categorical. For example, choosing the material of the layers or the kind of geometry.
 \\
 
 \indent
