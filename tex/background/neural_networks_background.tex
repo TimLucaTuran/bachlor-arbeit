@@ -107,28 +107,25 @@ $\boldsymbol \delta^{l+1}$ back one layer by applying $(\hat w^{l+1})^\top$ and 
 
 \indent
 The last thing to do is to relate $\boldsymbol \delta$ back to the original derivatives $\partial C / \partial \hat w^l_{j,k}$ and $\partial C / \partial b^l_j$. Using equation \eqref{eq:bg:activation} gives
-
 \begin{align}
     \partial C / \partial b^l_j &= \delta^l_j \qq{and} \\[5pt]
     \partial C / \partial \hat w^l_{j,k} &= a^{l-1}_k \, \delta^l_j
 \end{align}
 
-Now we could modify the weights and biases after every forward pass by
+Now we could modify the weights after every forward pass by
 
 \begin{equation}
-    \dots
+    \hat w^l_{j,k} \leftarrow 
+    \hat w^l_{j,k} - \eta \  \partial C / \partial \hat w^l_{j,k} \,,
 \end{equation}
-\note{add forumla to update weights based on gradient}
 
-But it is more efficient to average the changes and apply them at once after a small batch of training samples. This concludes the training of a Multilayer Perceptron but other Networks are trained in a similar manner. An excellent comprehensive explanation was published by Nielsen \cite{backprop}.
+with the learning rate $\eta$.
+This method is called \textit{stochastic gradient descent} and because the weights and biases are updated on every training sample the cost function can oscillate strongly. 
+This is why in practice updates are performed on small \textit{mini-batches}\label{hyp:minibatch} of training samples. This concludes the training of a Multilayer Perceptron but other Networks are trained in a similar manner. An excellent comprehensive explanation was published by Nielsen \cite{backprop}.
 
 \paragraph{Convolutional Neural Networks}~\\
 An area where NNs have been very successful is image recognition or more general computer vision but the described multilayer perceptron has a number of weaknesses for this kind of task. Let's say our input is a $n$ by $n$ gray scale image. This can be expressed as a $n \cp n$ matrix, flattened and fed into the input layer as seen in figure \ref{fig:bg:flatten}. But now the number of weights to the next layer $\vu{w}^2$ is $n \cdot n \cdot \qty| \boldsymbol l^2|$
 which soon becomes unfeasible. As described in the section on \hyperref[sec:notation]{Notation} $\boldsymbol l^2$ is here the vector of the second layer and not $\boldsymbol l$ squared.
-\\
-
-\indent
-Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position as in figure \ref{fig:bg:convnet_T} the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture. The information about the distance between pixels is lost.
 
 \begin{figure}[H]
     \centering
@@ -144,8 +141,9 @@ Computational limits aside there is another problem. Imagine an image with the l
     \label{fig:bg:convnet_T}
 \end{figure}
 
-
-These problems led to the development of a new kind of layer called \textit{Convolution}. A fixed size squared matrix called \textit{kernel} is shifted over the matrix and at every position the point wise product between kernel and matrix is calculated and summed as shown in figure \ref{fig:bg:conv_examp}
+\indent
+Computational limits aside there is another problem. Imagine an image with the letter T in the top right corner. If this letter moves to a different position as in figure \ref{fig:bg:convnet_T} the networks reaction will be completely different because the weights and biases involved are completely different. So the NN cannot learn the concept "letter T" independent of its position in the picture. The information about the distance between pixels is lost.
+These problems led to the development of a new kind of layer called \textit{Convolution}. A fixed size squared matrix called \textit{kernel} is shifted over the matrix and at every position the point wise product between kernel and matrix is calculated and summed as shown in figure \ref{fig:bg:conv_examp}.
 \\
 
 \indent
