@@ -1,5 +1,5 @@
 % !TEX root = ../bachlor-arbeit.tex
-To implement the desired algorithm we need to be able to calculate the optical behavior of stacked metasurfaces. The mathematical framework we will use is called scatter matrix calculus and this section will give some insight into its physical origin and how to use it. We will start with the Maxwell Equations in matter.
+To implement the desired algorithm we need to be able to calculate the optical behavior of stacked metasurfaces. The mathematical framework we will use is called scatter matrix calculus and this section will give some insight into its physical origin and how to use it. We will start with Maxwell's equations in matter.
 \newlparagraph{Maxwell Equations}
 
 \begin{tabular*}{\textwidth}{ll}
@@ -26,15 +26,16 @@ $\vb E$ electric field, $\vb B$ magnetic flux density, $\vb D$ electric flux den
 
 \begin{equation}\label{eq:bg:D}
 \begin{aligned}
-    \vb D(\vb r, t) &= \varepsilon_0 \vb E (\vb r, t) + \vb P (\vb r, t)\\
-    \vb H(\vb r, t) &= \frac{1}{\mu_0} \qty[\vb B(\vb r, t) - \vb M(\vb r, t)]
+    \vb D(\vb r, t) &= \varepsilon_0 \vb E (\vb r, t) + \vb P (\vb r, t) 
+    \qq{and}\\
+    \vb H(\vb r, t) &= \frac{1}{\mu_0} \qty[\vb B(\vb r, t) - \vb M(\vb r, t)],
 \end{aligned}
 \end{equation}
 
 
 where $\vb P$ is the dielectric polarization and $\vb M$ is the magnetic polarization. One can read equation \eqref{eq:bg:D} in the following way:
-when the electric field $\vb E$ interacts with matter it exerts a force on all its charges and displaces them by a small amount. This separation of charges results in a counter field $\vb P$ and the total field $\vb D$ is now a superposition of $\vb E$ and $\vb P$.
-This set of equations describes the whole electromagnetic spectrum. However in this work we are only interested in visible (VIS) and near infrared (NIR) light where we can make some simplifications. Generally in optics materials are non-magnetizable so $\vb M = 0$ and there are no free charges $\rho_\s{ext}$ = 0. Inserting these assumptions into maxwell's equation gives
+when the electric field $\vb E$ interacts with matter, it exerts a force on all its charges and displaces them by a small amount. This separation of charges results in a counter field $\vb P$ and the total field $\vb D$ is now a superposition of $\vb E$ and $\vb P$.
+This set of equations describes the whole electromagnetic spectrum. However, in this work we are only interested in visible (VIS) and near infrared (NIR) light where we can make some simplifications. Generally in optics, materials are non-magnetizable so $\vb M = 0$ and there are no free charges $\rho_\s{ext}$ = 0. Inserting these assumptions into maxwell's equation gives
 \\
 
 
@@ -78,27 +79,26 @@ Now we can derive the wave equation by applying $\curl$ to \eqref{eq:bg:M1} whic
 \end{aligned}
 \end{equation}
 
-In vacuum ($\vb P = 0$ and $\vb j = 0$) the right side of this equation vanishes and we are left with\\
+In vacuum ($\vb P = 0$ and $\vb j = 0$), the right side of this equation vanishes and we are left with\\
 $\frac{1}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0$ which is solved by the plane wave $\vb E = \vb E_0 e^{i(\vb k \vb r - \omega t)}$ where $\frac{\omega}{k} = c$. This describes the propagation of light through empty space: a sinusoidal oscillation in time and space along the $\vb k$ direction where $\vb E, \, \vb B$ and $\vb k$ are all perpendicular to each other.
 
 \paragraph{Light in homogeneous isotropic materials}~\\
-\label{par:light_in_materials}The next question we can answer is how light propagates through a homogeneous and isotropic material. For us, the dielectric polarization is some linear function of the electric field so $\vb P(\vb r, t) = \hat{\chi}(\omega, \vb r) \vb E(\vb r, t)$. An isotropic material behaves the same for all orientations of $\vb E$ that means $\hat{\chi}(\omega, \vb r)$ becomes a scalar function $\chi(\omega, \vb r)$. If the material is additionally homogeneous, that is the same everywhere independent of $\vb r$, then $\grad \chi(\omega, \vb r) = 0$. With equation \eqref{eq:bg:M2} this gives us $\div \vb P = 0$
+\label{par:light_in_materials}The next question we can answer is how light propagates through a homogeneous and isotropic material. For us, the dielectric polarization is some linear function of the electric field so $\vb P(\vb r, t) = \hat{\chi}(\omega, \vb r) \vb E(\vb r, t)$. An isotropic material behaves the same for all orientations of $\vb E$ therefor $\hat{\chi}(\omega, \vb r)$ becomes a scalar function $\chi(\omega, \vb r)$. If the material is additionally homogeneous, that is the same everywhere independent of $\vb r$, then $\grad \chi(\omega, \vb r) = 0$. With equation \eqref{eq:bg:M2} this gives us $\div \vb P = 0$
 and the wave equation simplifies to
-
 \begin{equation}
 \begin{aligned}
-    &\frac{\varepsilon}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0\\
-    \qq*{where} &\varepsilon \, \vb E := \qty(1 + \chi) \vb E = \vb E + \vb P
+    &\frac{\varepsilon}{c^2} \pdv[2] t \vb E - \Delta \vb E = 0,\\
+    \qq*{where} &\varepsilon \, \vb E := \qty(1 + \chi) \vb E = \vb E + \vb P.
 \end{aligned}
 \end{equation}
 
-That means light behaves in these materials exactly as it would in vacuum we only have to account for a decreased speed of light
+This implies that light behaves in these materials exactly as it would in vacuum, we only have to account for a decreased speed of light
 $c = {c_0} / {\sqrt{\varepsilon}} =: {c_0} / {n}$
 with the refractive index $n$.
 This is equivalent to a decreased wavelength
 $\lambda =: {\lambda_0} / {n}$
 or an increased wave number
-$k = {2 \pi} / {\lambda} = n \, k_0$
+$k = {2 \pi} / {\lambda} = n \, k_0$,
 where $c_0$, $\lambda_0$ and $k_0$ are the quantities in vacuum.
 The wave equation is also solved by a complex valued $n := \eta + i \kappa$ which describes the behavior of the exponentially decaying field commonly found in metals 
 
@@ -112,7 +112,7 @@ The wave equation is also solved by a complex valued $n := \eta + i \kappa$ whic
 \end{equation}
 
 \newlparagraph{Interfaces}
-The metasurface stacks we want to understand are obviously not one homogeneous material. Rather they contain many interfaces between different materials and we can again use the maxwell equations to predict how light will behave at such an interface.
+The metasurface stacks we want to understand are obviously not one homogeneous material. Rather, they contain many interfaces between different materials and we can again use the maxwell equations to predict how light will behave at such an interface.
 \\
 
 \begin{figure}[H]
@@ -129,13 +129,13 @@ Let us consider a closed contour $C$ around an interface as seen in Figure \ref{
 \begin{aligned}
     \int_A \curl \vb E(\vb r, t) \, \dd \vb A
     &= - \mu_0 \pdv t \int_A \vb H(\vb r, t) \dd \vb A\\
-    \overset{\s{stokes}}{\Longleftrightarrow} \hspace{3em}
+    \overset{\s{Stokes}}{\Longleftrightarrow} \hspace{3em}
     \int_{C = \partial A} \vb E(\vb r, t) \dd \vb r
     &= - \mu_0 \pdv t \int_A \vb H(\vb r, t) \dd \vb A\\
 \end{aligned}
 \end{equation}
 
-But now we can bring the contour infinitesimally close to the interface and thus reduce the right hand side of the equation, the total magnetic flux, through the surface, to zero. That leaves us with:
+But now we can bring the contour infinitesimally close to the interface and thus reduce the right hand side of the equation, the total magnetic flux through the surface, to zero. That leaves us with
 
 \begin{equation}
 \begin{aligned}
@@ -145,7 +145,7 @@ But now we can bring the contour infinitesimally close to the interface and thus
 \end{aligned}
 \end{equation}
 
-Because $a$ and $b$ were chosen arbitrarily that means that the transverse field components along the path need to be continuous so
+Because $a$ and $b$ were chosen arbitrarily, that means that the transverse field components along the path need to be continuous so
 $\vb E_1^{\parallel} = \vb E_2^{\parallel}$.
 The analog expression
 $\vb H_1^{\parallel} = \vb H_2^{\parallel}$
@@ -155,7 +155,7 @@ can be shown by starting with the third maxwell equation \eqref{eq:bg:M3} instea
     \centering
     \includegraphics[width=.7\linewidth]{bg_fresnel}
     \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$. The incident light has a wave vector $\vb k^\s{i}$ and is partially transmitted and partially reflected. The fields are shown in transverse electric (TE) polarization where $\vb H$ is in the $x$-$z$ plane and $\vb E$ oscillates in the $y$ direction.
-    In this polarization state the $\vb E$ field is fully tangential to the interface that means 
+    In this polarization state the $\vb E$ field is fully tangential to the interface and therefor 
     $\vb E = \vb E^\parallel$ and $\vb E^\bot = 0$.
     For the $\vb H$ field only the $x$ component is tangential to the interface and the $z$ component is orthogonal to it, so 
     $\vb H_x = \vb H^\parallel$ and $\vb H_z = \vb H^\bot$.}
@@ -163,7 +163,7 @@ can be shown by starting with the third maxwell equation \eqref{eq:bg:M3} instea
 \end{figure}
 
 Let us consider the same interface from before and have an incident field
-$\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
+$\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see
 
 \begin{equation} \label{eq:bg:k}
     \vb k^\s{i} = k_0 n_1
@@ -175,16 +175,16 @@ $\vb E^\s{i}$ interact with it. From figure \ref{fig:bg:fresnel} we can see:
     \begin{pmatrix}
         \phantom{-} \sin \varphi_\s{r} \\ 0\\ -\cos \varphi_\s{r}
     \end{pmatrix}
-    , \
+    \qq{and}
     \vb k^\s{t} = k_0 n_2
     \begin{pmatrix}
         \sin \varphi_\s{t}\\ 0\\ \cos \varphi_\s{t}
-    \end{pmatrix}
+    \end{pmatrix}.
 \end{equation} 
 \\
 
 For the derivation it is useful to decompose the fields into orthogonal polarization components. Here we are going to use the transversal electric (TE) and transversal magnetic (TM) polarizations. The TE component can be seen in figure \ref{fig:bg:fresnel} and in TM polarization $\vb E$ and $\vb H$ fields are simply interchanged.
-If we apply the continuity condition from before to the TE component we get that $\vb E_1 = \vb E_2$ at $z = 0$
+If we apply the continuity condition from before to the TE component, we get that $\vb E_1 = \vb E_2$ at $z = 0$ therefor
 
 \begin{equation}
 \begin{aligned}
@@ -192,15 +192,15 @@ If we apply the continuity condition from before to the TE component we get that
     \Longleftrightarrow \quad
     &E^\s{i} e^{i(k^\s{i}_x x)} \, \va e_y +
     E^\s{r} e^{i(k^\s{r}_x x)} \, \va e_y = 
-    E^\s{t} e^{i(k^\s{t}_x x)} \, \va e_y
+    E^\s{t} e^{i(k^\s{t}_x x)} \, \va e_y,
 \end{aligned}
 \end{equation}
 
-Where $E^\s i, E^\s r, E^\s t \in \mathds R$ are the measurable real field magnitudes. This is only possible for all $x$ if
+where $E^\s i, E^\s r, E^\s t \in \mathds R$ are the measurable real field magnitudes. This is only possible for all $x$ if
 
 \begin{equation} \label{eq:bg:x}
     E^\s{i} + E^\s{r} = E^\s{t} \qq{and}
-    k^\s{i}_x = k^\s{r}_x = k^\s{t}_x
+    k^\s{i}_x = k^\s{r}_x = k^\s{t}_x.
 \end{equation}
 
 Two basic laws of optics lie in this relation: The law of reflection
@@ -221,7 +221,7 @@ and the Snells law of refraction
     \quad \Rightarrow \quad
     k_0 n_1 \sin \varphi_1 =  k_0 n_2 \sin \varphi_2
     \quad \Rightarrow \quad
-    n_1 \sin \varphi_1 = n_2 \sin \varphi_2
+    n_1 \sin \varphi_1 = n_2 \sin \varphi_2.
 \end{equation}
 
 \newlparagraph{Fresnel Equations}
@@ -242,17 +242,14 @@ Again using the TE polarization shown in figure \ref{fig:bg:fresnel} we see
     \begin{pmatrix}
         \cos \varphi_\s{r} \\ 0\\ \sin \varphi_\s{r}
     \end{pmatrix}
-    , \
+    \qq{and}
     \vb H^\s{t} = H^\s{t}
     \begin{pmatrix}
         -\cos \varphi_\s{t}\\ 0\\ \sin \varphi_\s{t}
-    \end{pmatrix}
+    \end{pmatrix}.
 \end{equation}
-\\
-\\
-\\
 
-The $H_x$ component is tangent to the interface so it also needs to be continuous across the boundary
+The $H_x$ component is tangent to the interface, so it also needs to be continuous across the boundary
 
 \begin{equation}\label{eq:bg:Hx}
 \begin{aligned}
@@ -263,15 +260,14 @@ The $H_x$ component is tangent to the interface so it also needs to be continuou
 \end{aligned}
 \end{equation}
 
-If we assume the described plane waves 
+If we assume the described plane waves to be
 $\vb E = \vb E_0 e^{i(n \vb k \vb r - \omega t)}$
 and 
-$\vb H = \vb H_0 e^{i(n \vb k \vb r - \omega t)}$
+$\vb H = \vb H_0 e^{i(n \vb k \vb r - \omega t)}$,
 Maxwell's first equation \eqref{eq:bg:M1} allows us to connect the magnitudes of $\vb H$ and $\vb E$ via the refractive index $H \sim n \, E$. This changes \eqref{eq:bg:Hx} to
-
 \begin{equation}
     n_1 \, E^\s i \cos \varphi_1 - n_1 \, E^\s r \cos \varphi_1 =
-    n_2 \, E^\s t \cos \varphi_2
+    n_2 \, E^\s t \cos \varphi_2.
 \end{equation}
 
 Substituting $E^\s r$ or $E^\s i$ with \eqref{eq:bg:x} and rearranging we get
@@ -280,22 +276,22 @@ Substituting $E^\s r$ or $E^\s i$ with \eqref{eq:bg:x} and rearranging we get
     t = \frac{2 n_1 \cos \varphi_1}{n_1 \cos \varphi_1 + n_2 \cos \varphi_2}
     \qq{and}
     r = \frac{n_1 \cos \varphi_1 - n_2 \cos \varphi_2}{
-    n_1 \cos \varphi_1 + n_2 \cos \varphi_2}
+    n_1 \cos \varphi_1 + n_2 \cos \varphi_2}.
 \end{equation}
 
-These are called the Fresnel equations for the TE component. The TM component can be treated analog which yields
+These are called the Fresnel coefficients for the TE component. The TM component can be treated analog which yields
 
 \begin{equation}
     t = \frac{2 n_1 \cos \varphi_1}{n_2 \cos \varphi_1 + n_1 \cos \varphi_2}
     \qq{and}
     r = \frac{n_2 \cos \varphi_1 - n_1 \cos \varphi_2}{
-    n_2 \cos \varphi_1 + n_1 \cos \varphi_2}
+    n_2 \cos \varphi_1 + n_1 \cos \varphi_2}.
 \end{equation}
 
-For perpendicular incident light at $\varphi = 90^\circ$ these should describe the same situation as we can no longer differentiate between TE and TM components and indeed for this angle they are equivalent if we consider that the TE factors describe the electric field and the TM factors describe the magnetic field. The TE factors become
+For perpendicular incident light at $\varphi = 90^\circ$ these should describe the same situation as we can no longer differentiate between TE and TM components and indeed for this angle they are equivalent if we consider that the TE coefficients describe the electric field and the TM coefficients describe the magnetic field. The TE coefficients become
 
 \begin{equation}
-    t = \frac{2 n_1}{n_1 + n_2} \qq{and} r = \frac{n_1 - n_2}{n_1 + n_2}
+    t = \frac{2 n_1}{n_1 + n_2} \qq{and} r = \frac{n_1 - n_2}{n_1 + n_2}.
 \end{equation}
 
 \newlparagraph{Stacking}
@@ -326,17 +322,17 @@ and this can be expressed more concisely using matrices and vectors
 \begin{pmatrix}
     E^f_\s{in} \\
     E^b_\s{in}
-\end{pmatrix}
+\end{pmatrix}.
 \end{equation}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{bg_both_directions}
-    \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$ were incident light is coming from the front and the back.}
+    \caption{Interface between two materials of different refractive indices $n_1$ and $n_2$ where incident light is coming from the front and the back.}
     \label{fig:bg:both}
 \end{figure}
 
-We call these matrices mapping field-in to field-out scattering matrices or short $S$-matrices. They can be used to describe more than just interfaces. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$ where $d$ is the distance traveled and $\vb k_0$ the wave vector in vacuum. We can express this propagation by allowing complex valued $t$ and $r$
+We call these matrices, that map field-in to field-out, scattering matrices or short $S$-matrices. They can be used to describe more than just interfaces. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} when light propagates through homogeneous isotropic material just the phase changes by a factor of $e^{i k_0 n d}$, where $d$ is the distance traveled and $\vb k_0$ the wave vector in vacuum. We can express this propagation by allowing complex valued $t$ and $r$
 
 \begin{equation}
     \hat S_{n, d} =
@@ -357,12 +353,13 @@ and analog the $S$-matrix for an interface from $n_1$ to $n_2$ is
             \frac{2 n_1}{n_1 + n_2} & \frac{n_2 - n_1}{n_1 + n_2} \\
             \frac{n_1 - n_2}{n_1 + n_2} & \frac{2 n_1}{n_1 + n_2}
         \end{pmatrix}
-    \endgroup
+    \endgroup.
 \end{equation}
 \\
 
 
-Say we have a stack of different homogeneous isotropic materials. We are now are now able to write down an $S$-matrix for every part of the stack that is for every interface and every propagation between interfaces as seen in figure \ref{fig:bg:star_prod}, but we cannot predict the behavior of the stack as a whole.
+Say we have a stack of different homogeneous isotropic materials. We are now able to write down an $S$-matrix for every part of the stack, that is for every interface and every propagation between interfaces as seen in figure \ref{fig:bg:star_prod}, but we cannot predict the behavior of the stack as a whole.
+\\
 
 \indent
 The combined $S$-matrix $\hat S$ consisting of $\hat S_1$ and $\hat S_2$ cannot be obtained by simply using the matrix product. The result would be
@@ -380,7 +377,7 @@ The combined $S$-matrix $\hat S$ consisting of $\hat S_1$ and $\hat S_2$ cannot 
     \hat S
 \end{equation}
 
-and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. In the 60s Redheffer \cite{Redheffer1960} developed a linear transformation called star product $\star$ which yields the correct combined $S$-matrix
+and this would imply that the transmission from the front $t^f$ increases when the internal reflections of the system $r^b_1$ and $r^f_2$ increase which is the opposite of the behavior we expect. In the 1960s Redheffer \cite{Redheffer1960} developed a linear transformation called \textit{star product} $\star$ which yields the correct combined $S$-matrix
 
 \begin{equation}\label{eq:bg:star}
     \hat S_1 \star \hat S_2 :=
@@ -389,7 +386,7 @@ and this would imply that the transmission from the front $t^f$ increases when t
         r^b_2 + t^f_2 r^b_1 (1 - r^f_2 r^b_1)^{-1} t^b_2\\
         r^f_1 + t^b_1 r^f_2 (1 - r^b_1 r^f_2)^{-1} t^f_1 &
         t^b_1 (1 - r^f_2 r^b_1)^{-1} t^b_2
-    \end{pmatrix}
+    \end{pmatrix}.
 \end{equation}
 \\
 
@@ -403,22 +400,22 @@ and this would imply that the transmission from the front $t^f$ increases when t
     \label{fig:bg:star_prod}
 \end{figure}
 
-For this operation to produce physically valid results certain conditions have to be met. We will discuss these in detail in the paragraph \hyperref[par:conditions]{Conditions} of section \ref{sec:SASA}.
-Applied to the example of figure \ref{fig:bg:star_prod} the star product gives
+For this operation to produce physically valid results, certain conditions have to be met. We will discuss these in detail in the paragraph \hyperref[par:conditions]{Conditions} of section \ref{sec:SASA}.
+Applied to the example of figure \ref{fig:bg:star_prod}, the star product gives
 
 \begin{equation}
-    \hat S = \hat S_{n_0, n} \star \hat S_{n, d} \star \hat S_{n, n_0}
+    \hat S = \hat S_{n_0, n} \star \hat S_{n, d} \star \hat S_{n, n_0}.
 \end{equation}
 
 \newlparagraph{Polarization}
-Up to this point the $S$-matrix is made of the four complex numbers $t^f$, $r^b$, $r^f$ and $t^b$. That means when a $S$-matrix is applied to the input vector containing the total incoming light  
+Up to this point the $S$-matrix is made of the four complex numbers $t^f$, $r^b$, $r^f$ and $t^b$. This means, when a $S$-matrix is applied to the input vector containing the total incoming light  
 $
 \begin{pmatrix}
     E^f_\s{in} \\
     E^b_\s{in}
 \end{pmatrix}
-$
-$E^f_\s{in}$ and $E^b_\s{in}$ are also restricted the complex numbers and can only describe linear polarized light in one direction. The last generalization we want to make is to extend the scatter matrix calculus to all polarizations. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} a planar light wave propagating along the $z$ axis through a homogeneous isotropic material can be described as
+$,
+$E^f_\s{in}$ and $E^b_\s{in}$ are also restricted to the complex plane and can only describe linear polarized light in one direction. The last generalization we want to make is to extend the scatter matrix calculus to all polarizations. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} a planar light wave propagating along the $z$ axis through a homogeneous isotropic material can be described as
 
 \begin{equation}
    \vb E =
@@ -430,25 +427,25 @@ $E^f_\s{in}$ and $E^b_\s{in}$ are also restricted the complex numbers and can on
    =
    \qty(E_x \, e^{i \varphi_x} \, \va{e_x} +
         E_y \, e^{i \varphi_y} \, \va{e_y})
-       e^{i(kz - \omega t)}
+       e^{i(kz - \omega t)}.
 \end{equation}
 \\
 
 \noindent
-the waves polarization is determined by the scaling factors of $\va{e_x}$ and $\va{e_y}$ and can be expressed as a \textit{Jones Vector} $\vb j \in \mathds{C}^2$
+The waves polarization is determined by the scaling factors of $\va{e_x}$ and $\va{e_y}$ and can be expressed as a \textit{Jones Vector} $\vb j \in \mathds{C}^2$
 
 \begin{equation}
    \vb j = \frac{1}{\sqrt{E_x^2 + E_y^2}}
    \begin{pmatrix}
        E_x\\
        E_y \, e^{i \delta}
-   \end{pmatrix}
+   \end{pmatrix},
    \qq{with}
-   \delta := \varphi_y - \varphi_x
+   \delta := \varphi_y - \varphi_x.
 \end{equation}
 
 \noindent
-Now all linear operations on the polarization are matrices $\hat{M} \in \mathds{C}^{2 \times 2}$. That means all passive components have a corresponding matrix. Examples for components aligned with the $x$ axis are
+Now all linear operations on the polarization are matrices $\hat{M} \in \mathds{C}^{2 \times 2}$. This means, all passive components have a corresponding matrix. Examples for components aligned with the $x$ axis are
 
 
 \begin{equation}
@@ -457,18 +454,19 @@ Now all linear operations on the polarization are matrices $\hat{M} \in \mathds{
    \begin{pmatrix}
        1 & 0\\
        0 & 0
-   \end{pmatrix}\\
+   \end{pmatrix},\\
    \qq*{$\lambda / 4$ plate:} \hat{M} &=
    \begin{pmatrix}
        1 & 0\\
        0 & i
    \end{pmatrix}
-   e^{-\frac{i \pi}{4}}\\
+   e^{-\frac{i \pi}{4}}
+   \qq{and}\\
    \qq*{$\lambda / 2$ plate:} \hat{M} &=
    \begin{pmatrix}
        -i & 0\\
        0 & i
-   \end{pmatrix}\\
+   \end{pmatrix}.\\
 \end{split}
 \end{equation}
 
@@ -490,7 +488,7 @@ We can now generalize the $S$-matrix calculus simply by allowing Jones matrices 
         \hat T^f_2 (\mathds 1 - \hat R^b_1 \hat R^f_2)^{-1} \hat T^f_1 &
         \hat R^b_2 + \hat T^f_2 \hat R^b_1 (\mathds 1 - \hat R^f_2 \hat R^b_1)^{-1} \hat T^b_2\\
         \hat R^f_1 + \hat T^b_1 \hat R^f_2 (\mathds 1 - \hat R^b_1 \hat R^f_2)^{-1} \hat T^f_1 &
-        \hat T^b_1 (\mathds 1 - \hat R^f_2 \hat R^b_1)^{-1} \hat T^b_2
+        \hat T^b_1 (\mathds 1 - \hat R^f_2 \hat R^b_1)^{-1} \hat T^b_2.
     \end{pmatrix}
 \end{equation}
 
