@@ -1,12 +1,9 @@
-As discussed we need to solve the forward problem $\mc D \rightarrow I$ with a Neural Network. This means the Network has to generate the right spectrum to an input Design. Once again we will use convolutional layers, as the output neurons of this Network are spatially related. Another indicative to try a convolutional architecture is that the NN's used to generate photorealistic Images, like Nvidea's StyleGan \cite{Karras2018}, also rely on convolutional layers and we can think of a transmission spectrum as a 1D image.
-
-
 \paragraph{Network Architecture}~\\
 The network architecture we used for the inverse problem contained pooling layers to gradually reduce the many parameters of a spectrum $I$ to a few design parameters $\mc D$. Here we have to go the opposite way and upsample $\mc D$ to $I$. For this we will use upsampling layers which double the size of their input, e.g. $(1,3) \rightarrow (1,1,3,3)$. The convolution is then applied to this upsampled output to "fill in the details" \note{needs cite}. This combination of upsampling and convolution is called \textit{transposed convolution} in literature \note{needs cite}. The full Network architecture is shown in figure \ref{fig:in:NN} and contains two more new layers. Batch Normalization (BN) and a running average filter (Avg).
 \\
 
 \indent
-Batch Normalization was introduced by Ioffe and Szegedy in 2015 \cite{Ioffe2015}. This layer calculates the mean $\mu_\mc B$ and variance $\sigma_\mc B$ over every mini-batch $\mc B$. Then it normalizes the output of the previous layer $\vb x$ to 
+Batch Normalization was introduced by Ioffe and Szegedy in 2015 \cite{Ioffe2015}. This layer calculates the mean $\mu_\mc B$ and variance $\sigma_\mc B$ over every \hyperref[hyp:minibatch]{mini-batch} $\mc B$. Then it normalizes the output of the previous layer $\vb x$ to 
 \begin{equation}
     \bar x_i = \frac{x_i - \mu_\mc B}{\sigma_\mc B}
     \qq{and rescales it to}
@@ -14,7 +11,8 @@ Batch Normalization was introduced by Ioffe and Szegedy in 2015 \cite{Ioffe2015}
 \end{equation}
 
 where $\gamma$ and $\beta$ are trainable parameters. This way the output of the previous layer has a mean of zero and a variance of one which has advantages for the networks stability and training speed \note{needs cite}.
-Additionally the running average filters were added because the output oscillated too much on small wavelength differences. This way the fact that transmission spectra do not change too much on a per wavelength scale is directly contained in the network architecture. 
+Additionally the running average filters were added because the output oscillated too much on small wavelength differences.
+This way the fact, that transmission spectra do not change too much on a per wavelength scale, is directly contained in the network architecture. 
 \\
 
 \begin{figure}[H]
@@ -28,16 +26,20 @@ Additionally the running average filters were added because the output oscillate
     \label{fig:in:NN}
 \end{figure}
 
-\begin{figure}[H]
-    \floatbox[{
-    \capbeside
-    \thisfloatsetup{capbesideposition={right,top}}}]{figure}[\FBwidth]
-    {\caption{
-        Example spectrum to viziulaize the effect of a running averge layer at the end of the forward model. 
-    }
-    \label{fig:in:avg_plot}}
-    {\includegraphics[width=0.6\textwidth]{in_avg_plot}}
-\end{figure}
+
+
+\newpage
+\paragraph{Network Training}~\\
+The forward model is trained like the inverse model just the inputs and outputs are exchanged. That is, the training data $(X,\, Y)$ now consists of tuples 
+$(\mc D,\, I)$ instead of $(I,\, \mc D)$.
+This allows us to use the same underlying data of pre simulated stacks, we already have, to also train the forward model. 
+The mean absolute error (mae) per spectrum drops to 0.04 over 20 epochs as shown in figure \ref{fig:in:forward_training}. $I$ consists of 160 discretized wavelengths for two polarizations. This means the transmission at every wavelength is on average $4/320 = 1/30$ percent points off. However, the forward model is not perfect. As can be seen in figure \ref{fig:in:avg_plot} it generates small troughs and peaks where there are none in the original spectrum.
+\\
+
+\indent
+Now we can combine the inverse model $\mc D \rightarrow I$ and the forward model $I \rightarrow \mc D$ into a combined model $I \rightarrow \mc D \rightarrow I'$ and directly use the loss function $C_\s{mse}(I,\, I')$.
+However, even trying different regularization techniques, this model could not be trained successfully as seen in figure \ref{fig:ap:combined_training}.  
+
 
 \begin{figure}[H]
     \floatbox[{
@@ -51,7 +53,13 @@ Additionally the running average filters were added because the output oscillate
     {\includegraphics[width=0.6\textwidth]{in_forward_training}}
 \end{figure}
 
-\paragraph{Network Training}~\\
-The forward model is trained like the inverse model just the inputs and outputs are exchanged. That is, the training data $(X,\, Y)$ now consists of tuples 
-$(\mc D,\, I)$ instead of $(I,\, \mc D)$. This allows us to use the same underlying data of pre simulated stacks we already have to also train the forward model. 
-The mean absolute error (mae) per spectrum drops to 0.04 over 20 epochs as shown in figure \ref{fig:in:forward_training}. $I$ consists of 160 discretized wavelengths for two polarizations. This means the transmission at every wavelength is on average $4/320 = 1/30$ percent points off. However, the forward model is not perfect. As can be seen in figure \ref{fig:in:avg_plot} it generates small troughs and peaks where there are none in the original spectrum.
+\begin{figure}[H]
+    \floatbox[{
+    \capbeside
+    \thisfloatsetup{capbesideposition={right,top}}}]{figure}[\FBwidth]
+    {\caption{
+        Training of the combined model. Validation loss oscillates wildly.
+    }
+    \label{fig:ap:combined_training}}
+    {\includegraphics[width=0.6\textwidth]{ap_combo}}
+\end{figure}
