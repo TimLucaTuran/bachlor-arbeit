@@ -14,7 +14,7 @@
 \end{tabular}
 
 \paragraph{Network Architecture}
-This module is a 1D Convolutional Neural Network instead of the basic Multi Layer Perceptron. It was chosen to utilize the translational invariance of ConvNets. For example the concept "peak" should be learned independent of its position in the spectrum. As described in section \ref{sec:NN_bg} a ConvNet provides this functionality. Another constraint on the network architecture arises from the different kind of outputs.
+This module is a 1D Convolutional Neural Network instead of the basic Multi Layer Perceptron. It was chosen to utilize the translational invariance of ConvNets. For example the concept "peak" should be learned independent of its position in the spectrum. As described in section \ref{sec:NN_bg}, a ConvNet provides this functionality. Another constraint on the network architecture arises from the different kind of outputs.
 Most of the outputs are continuous but the choices about material $m$ and geometry $g$ are discrete/categorical.
 These need different activation functions $\sigma$ to reach the different value ranges. The continuous outputs are mostly bounded by physical constraints and $m, \, g \in [0, \, 1]$ as they are \textit{one hot encoded}, meaning $1 \rightarrow$ "The layer has this property" and
 $0 \rightarrow$ "The layer does not have this property".
@@ -26,14 +26,14 @@ $0 \rightarrow$ "The layer does not have this property".
 \end{equation}
 
 \noindent
-as all outputs are equally important and the cost function should be indifferent on whether the networks prediction is over or under target. For the categorical output the network learns quicker with the \textit{Categorical Cross-Entropy} error.
+as all outputs are equally important and the cost function should be indifferent on whether the networks prediction is over or under target. For the categorical output the network learns quicker with the \textit{Categorical Cross-Entropy} error
 
 \begin{equation}
-    C_\s{ce}(\vb y, \, \vb y') = - \sum_i y_i \log y'_i,
+    C_\s{ce}(\vb y, \, \vb y') = - \sum_i y_i \log y'_i.
 \end{equation}
 
 \noindent
-This error treats false positives ($y_i = 0, \, y_i' = 1$) and false negatives ($y_i = 1, \, y_i' = 0$) differently. A false positive does not increase the overall cost as $y_i = 0 \Rightarrow C_\s{ce} = 0$ but for a false negative $C_\s{ce} \rightarrow \infty$. This is wanted behavior because it does not matter if the network outputs some probability for a wrong class as long as it outputs a higher probability for the correct class. The final architecture is similar to the example given in figure \ref{fig:bg:NN_example} while meeting the above-mentioned constraints:
+This error treats false positives ($y_i = 0, \, y_i' = 1$) and false negatives ($y_i = 1, \, y_i' = 0$) differently. A false positive does not increase the overall cost as $y_i = 0 \Rightarrow C_\s{ce} = 0$ but for a false negative $C_\s{ce} \rightarrow \infty$. This is favorable behavior because it does not matter if the network outputs some probability for a wrong class as long as it outputs a higher probability for the correct class. The final architecture, seen in figure \ref{fig:al:NN_architecture}, is similar to the example given in figure \ref{fig:bg:NN_example} while meeting the above-mentioned constraints.
 
 \begin{figure}[H]
     \centering
@@ -45,12 +45,12 @@ This error treats false positives ($y_i = 0, \, y_i' = 1$) and false negatives (
 
 \newpage
 \paragraph{Network Training}~\\
-To train a Neural Network one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre-simulated single layers in the database which are randomly combined into stacks. Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
-That means $I = (I_x, \, I_y) \in X$ are the networks input and the random design parameters ${\mc D = (\mc S, \mc L_1, \mc L_2) \in Y}$ are the output. For the first test we used squares and square holes of Aluminum and Gold. During the training one epoch is defined as one loop over all training samples. After every epoch the network is validated on a data set $(X_\s v, \, Y_\s v)$ of samples it has not seen before. This is done to check wether the network actually learns something rather than just memorizing the input data.  The results of this first training on the square geometry can be seen in figure \ref{fig:al:square_results}.
+To train a Neural Network, one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre-simulated single layers in the database which are randomly combined into stacks. Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
+This means $I = (I_x, \, I_y) \in X$ are the networks input and the random design parameters ${\mc D = (\mc S, \mc L_1, \mc L_2) \in Y}$ are the output. For the first test we used squares and square holes of Aluminum and Gold. During the training one epoch is defined as one loop over all training samples. After every epoch the network is validated on a data set $(X_\s v, \, Y_\s v)$ of samples it has not seen before. This is done to check wether the network actually learns something rather than just memorizing the input data.  The results of this first training on the square geometry can be seen in figure \ref{fig:al:square_results}.
 \\
 
 \indent
-Training and validation results are very similar which indicates that there is no overfitting or memorization. The discrete accuracy quickly reaches a maximum of $\sim 76\%$ which is less than expected and also the speed at which this value is reached is suspicious. The network does not improve much after the fourth epoch and this does not change by tuning the network architecture. This is because the issue lies not within the architecture but in the training data. In section \ref{sec:SASA} we have shown that for the used two layer stacks the transmission spectrum is reciprocal, that is the same for both directions. This means the data generation can result in two different stacks which produce the same spectrum. Consider a stack where one layer is Aluminum and the other is Gold as seen in figure \ref{fig:al:same_spec} . As both of them produce the same spectrum one time the network is taught that the first layer is Gold and the second is Aluminum but another time it is taught the complete opposite. Actually if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only setup it can get right.
+Training and validation results are very similar which indicates that there is no overfitting or memorization. The discrete accuracy quickly reaches a maximum of $\sim 76\%$ which is less than expected and also the speed at which this value is reached is suspicious. The network does not improve much after the fourth epoch and this does not change by tuning the network architecture. This is because the issue lies not within the architecture but in the training data. In section \ref{sec:SASA} we have shown that for the used two layer stacks the transmission spectrum is reciprocal, that is the same for both directions. Therefor the data generation can result in two different stacks which produce the same spectrum. Consider a stack where one layer is Aluminum and the other is Gold as seen in figure \ref{fig:al:same_spec}. As both of them produce the same spectrum, one time the network is taught that the first layer is Gold and the second is Aluminum but another time it is taught the complete opposite. Actually, if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only setup it can get right.
 
 \begin{figure}[H]
     \centering
@@ -79,11 +79,12 @@ Training and validation results are very similar which indicates that there is n
 
 
 \newpage
-This is a well known problem when trying to solve an inverse problem. In this case the function $\mc D \rightarrow I$ is well defined as one stack can only produce one spectrum but for the inverse problem we are trying to solve $I \rightarrow \mc D$ and there might be multiple designs which produce the same spectrum. We can solve the issue described in figure \ref{fig:al:same_spec} simply by allowing only one of the orientations into the training data. By doing this the training  results change as seen in figure \ref{fig:al:squares_fix}.
+This is a well known problem when trying to solve an inverse problem.
+In this case the function $\mc D \rightarrow I$ is well defined as one stack can only produce one spectrum but for the inverse problem we are trying to solve $I \rightarrow \mc D$ and there might be multiple designs which produce the same spectrum. We can solve the issue simply by allowing only one of the orientations into the training data. By doing this the training  results change as seen in figure \ref{fig:al:squares_fix}.
 \\
 
 \indent
-The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}. However, the performance of the continuous branch could not be improved in this manner and we will discuss the reason for this in chapter \ref{sec:inverse}.
+The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}. However, the performance of the continuous branch could not be improved in this manner and we will discuss the reason for this at the end of section \ref{sec:opt}.
 \note{add info on final training}
 
 \begin{figure}[H]
