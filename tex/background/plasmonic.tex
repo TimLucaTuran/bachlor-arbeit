@@ -1,7 +1,5 @@
-As stated in the introduction metasurfaces are 2D materials with some sub-wavelength structure. Their properties are determined by the geometry of this structure which is usually a simple shape, like a rectangle or oval, on a periodic grid. The shape is called metaatom and in the case of plasmonic metasurfaces it is made of metal.
-
-\indent
-With the $S$-matrix calculus and SASA we can fully describe stacks of homogeneous isotropic materials but we still have no understanding of what happens when we add a metasurface to a stack. To build some intuition for how a specific metasurface will affect the transmission spectrum of a stack we will need a little more theory on optics in materials. As stated before, all optical properties of a material a captured by the $\vb D$ and $\vb H$ fields and in our context
+As stated in the introduction, metasurfaces are 2D materials with some sub-wavelength structure. Their properties are determined by the geometry of this structure which is usually a simple shape, like a rectangle or oval, on a periodic grid. The shape is called metaatom and in the case of plasmonic metasurfaces it is made of metal.
+With the $S$-matrix calculus and SASA we can fully describe stacks of homogeneous isotropic materials but we still have no understanding of what happens when we add a metasurface to a stack. To build some intuition for how a specific metasurface will affect the transmission spectrum of a stack, we will need a little more theory on optics in materials. As stated before, all optical properties of a material a captured by the $\vb D$ and $\vb H$ fields and in our context
 \begin{equation} \label{eq:bg:D}
     \vb D = 
     \epsilon_0 \, \vb E + \vb P =
@@ -9,7 +7,7 @@ With the $S$-matrix calculus and SASA we can fully describe stacks of homogeneou
          := \epsilon
     }\, \vb E
 \end{equation}
-so the $\vb D$ field is determined by the $\vb E$ field and dielectric function $\epsilon$. In the following sections we will discuss which materials have which kind of dielectric functions and how we can use these to gain some understanding for the optical mechanisms in a metasurface.
+so the $\vb D$ field is determined by the $\vb E$ field and dielectric function $\epsilon$. In the following sections we will discuss which materials have which kind of dielectric functions and how we can use these to gain some understanding of the optical mechanisms in a metasurface.
 
 \paragraph{Dielectric Function}~\\
 In the simplest model we can describe electrons in a material as an ensemble of harmonic oscillators
@@ -21,7 +19,7 @@ In the simplest model we can describe electrons in a material as an ensemble of 
 with the displacement $\vb x$, electron mass $m$, electron charge $e$, dampening factor $\gamma$ and resonance frequency $\omega_0$.
 In this model the macroscopic polarization $\vb P$ is directly caused by this displacement $\vb x$ through
 \begin{equation} \label{eq:bg:P}
-    \vb P = - \rho e \vb x
+    \vb P = - \rho e \vb x,
 \end{equation}
 
 where $\rho$ is the density of electrons.
@@ -42,7 +40,7 @@ and using equation \eqref{eq:bg:D} and \eqref{eq:bg:P} this results in the $\vb 
 \end{equation}
 
 where $f = \rho e^2 / \epsilon_0 m$ is the oscillator strength.
-In a real material there are always multiple resonance frequencies $\omega_m$ but in a good approximation these do not influence each other and the total dielectric function can be obtained simply by summing over all $m$ \cite{FOMO}
+In a real material there are always multiple resonance frequencies $\omega_m$ but in good approximation these do not influence each other and the total dielectric function can be obtained simply by summing over all $m$ \cite{FOMO}
 \begin{equation}
     \epsilon(\omega) := 
     \epsilon'(\omega) + i \epsilon''(\omega) = 
@@ -57,7 +55,7 @@ In a real material there are always multiple resonance frequencies $\omega_m$ bu
         Example plots for the real and imaginary part of the refractive index 
         $n = \eta + i\kappa$
         as calculated by the multiple resonance Lorentz model.
-        \cite{FOMO} modified
+        \cite{FOMO}
     }
     \label{fig:bg:lorentz}}
     {\includegraphics[width=0.5\textwidth]{bg_lorentz}}
@@ -80,7 +78,7 @@ In a real material there are always multiple resonance frequencies $\omega_m$ bu
     \caption{Imaginary and real part of the dielectric function 
     $\epsilon = \epsilon' + i \epsilon''$
     for dielectrics (a) and metals (b) in the visible spectrum.
-    \cite{FOMO} modified}
+    \cite{FOMO}}
     \label{fig:bg:dm}
     \end{figure}
 
@@ -97,8 +95,7 @@ Figure \ref{fig:bg:lorentz} is just a general example. To understand metasurface
 
 \indent
 Dielectrics in the visible spectrum are well described by two resonance frequencies. One in the IR and one in the UV range. That means in the visible spectrum we have a vanishing imaginary part $\epsilon''$ of the dielectric function and normal dispersion as seen in figure \ref{fig:bg:dielectric}. 
-Metals on the other hand are characterized by their high availability in free charges. That means there is no restoring force so 
-$\omega_0$ = 0 and
+Metals on the other hand are characterized by their high availability in free charges, thereby eliminating the restoring force ($\omega_0 = 0$) and reducing the dielectric function to 
 \begin{equation}
     \epsilon(\omega) = 1 - \frac{\omega_\s p^2}{\omega^2 + i \gamma \omega}\, ,
 \end{equation}
@@ -108,7 +105,7 @@ $\omega_\s p^2 = f = \rho e^2 / \epsilon_0 m$.
 This results in a large negative $\epsilon'$ and a positive $\epsilon''$ as seen in figure \ref{fig:bg:metal}. The negative $\epsilon'$ is responsible for the reflection of visible light at metallic surfaces.
 
 \paragraph{Surface Plasmon Polaritons}~\\
-Finally we can discuss the mechanism behind the optical properties of plasmonic metasurfaces. These work by allowing the excitation of a special electromagnetic wave at a metal dielectric interface called Surface Plasmon Polariton (SPP). This wave is confined to the interface and travels along it until its energy is lost via absorption or scattering. That means it allows some photons to be absorbed by coupling into the interface. At which wavelengths this conversion is possible depends on the metasurface geometry and can thus be tailored for a specific optical target.
+Finally, we can discuss the mechanism behind the optical properties of plasmonic metasurfaces. These work by allowing the excitation of a special electromagnetic wave at a metal dielectric interface called Surface Plasmon Polariton (SPP). This wave is confined to and travels along the interface until its energy is lost via absorption or scattering. That means it enables some photons to be absorbed by coupling into the interface. At which wavelengths this conversion occurs depends on the metasurface geometry and can thus be tailored for a specific optical target.
 
 \begin{figure}[H]
     \centering
@@ -127,7 +124,7 @@ Suppose the described wave exists as a TM mode, as can be seen in figure \ref{fi
 \end{aligned}
 \end{equation}
 
-that is, propagating along the $x$ axis and evanescently decaying along the $z$ axis. This wave does indeed satisfy Maxwell's equation and the continuity conditions discussed in section \ref{sec:s_mats} if and only if \cite{Maier2007}
+That is, propagating along the $x$ axis and evanescently decaying along the $z$ axis. This wave does indeed satisfy Maxwell's equation and the continuity conditions discussed in section \ref{sec:s_mats} if and only if \cite{Maier2007}
 
 \begin{equation} \label{eq:bg:con1}
     \frac{\epsilon_1}{k_{z1}} = - \frac{\epsilon_2}{k_{z2}} 
@@ -141,14 +138,16 @@ and
     n = 1,2.
 \end{equation}
 
-Equation \eqref{eq:bg:con1} explains why SPP's are only possible at metal dielectric interfaces because $\epsilon'_1$ and $\epsilon'_2$ need to have different signs and this is fulfilled precisely for metals and dielectrics as can be seen in figure \ref{fig:bg:dm}. If we solve equation \eqref{eq:bg:con1} and \eqref{eq:bg:con2} we can obtain the dispersion relation for SPP's
+Equation \eqref{eq:bg:con1} explains why SPP's are only possible at metal dielectric interfaces because $\epsilon'_1$ and $\epsilon'_2$ need to have different signs and this is fulfilled precisely for metals and dielectrics as can be seen in figure \ref{fig:bg:dm}. If we solve equation \eqref{eq:bg:con1} and \eqref{eq:bg:con2}, we can obtain the dispersion relation for SPP's
 
 \begin{equation}
     k_x = \frac{\omega}{c}
     \qty(\frac{\epsilon_1 \epsilon_2}{\epsilon_1 + \epsilon_2})^{1/2}.
 \end{equation}
 
-This dispersion relation is shown in figure \ref{fig:bg:dispersion}. For small wave vectors SPP's behave like light but then they start to have increasingly lower energy $E = \hbar \omega$ compared to a free photon at the same momentum $\vb p = \hbar \vb k$. However, for a conversion photon $\rightarrow$ SPP both energy and momentum have to be conserved. That means the excitation of SPP's is not possible at a simple smooth metallic surface rather the wave vector of an incident photon has to be matched to that of an SPP of the same energy by the surface geometry. 
+This dispersion relation is shown in figure \ref{fig:bg:dispersion}. For small wave vectors SPP's behave like light but then they start to have increasingly lower energy $E = \hbar \omega$ compared to a free photon at the same momentum $\vb p = \hbar \vb k$. However, for a conversion Photon $\rightarrow$ SPP both energy and momentum have to be conserved.
+Thus excitation of SPP's is not possible at a simple smooth metallic surface, but rather the wave vector of an incident photon has to be matched to that of an SPP of the same energy by the surface geometry.
+\\
 
 \indent
 To summarize, photons can couple into a plasmonic metasurface by exiting a special electromagnetic wave called Surface Plasmon Polariton confined to the interface. The exact wavelength at which this conversion is possible depends on the metaatom geometry and can thus be easily tuned to create different optical behaviors.
