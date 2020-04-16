@@ -1,5 +1,5 @@
 \paragraph{Network Architecture}~\\
-The network architecture we used for the inverse problem contained pooling layers to gradually reduce the many parameters of a spectrum $I$ to a few design parameters $\mc D$. Here we have to go the opposite way and upsample $\mc D$ to $I$. For this we will use upsampling layers which double the size of their input, e.g. $(1,3) \rightarrow (1,1,3,3)$. The convolution is then applied to this upsampled output to "fill in the details" \note{needs cite}. This combination of upsampling and convolution is called \textit{transposed convolution} in literature \note{needs cite}. The full Network architecture is shown in figure \ref{fig:in:NN} and contains two more new layers. Batch Normalization (BN) and a running average filter (Avg).
+The network architecture we used for the inverse problem contained pooling layers to gradually reduce the many parameters of a spectrum $I$ to a few design parameters $\mc D$. Here we have to go the opposite way and upsample $\mc D$ to $I$. For this we will use upsampling layers which double the size of their input, e.g. $(1,3) \rightarrow (1,1,3,3)$. The convolution is then applied to this upsampled output to "fill in the details" \cite{fill_in_details}. This combination of upsampling and convolution is called \textit{transposed convolution} in literature \cite{TransposedConv}. The full Network architecture is shown in figure \ref{fig:in:NN} and contains two more new layers. Batch Normalization (BN) and a running average filter (Avg).
 \\
 
 \indent
@@ -10,7 +10,7 @@ Batch Normalization was introduced by Ioffe and Szegedy in 2015 \cite{Ioffe2015}
     y_i = \gamma \bar x_i + \beta \,,
 \end{equation}
 
-where $\gamma$ and $\beta$ are trainable parameters. This way the output of the previous layer has a mean of zero and a variance of one which has advantages for the networks stability and training speed \note{needs cite}.
+where $\gamma$ and $\beta$ are trainable parameters. This way the output of the previous layer has a mean of zero and a variance of one which has advantages for the networks stability and training speed \cite{Ioffe2015}.
 (Batch Normalization was later also added to the inverse model.)
 Additionally, the running average filters were added because the output oscillated too much on small wavelength differences.
 This way the fact, that transmission spectra do not change too much on a per wavelength scale, is directly contained in the network architecture. 

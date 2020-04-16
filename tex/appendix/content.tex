@@ -7,21 +7,22 @@
 \input{\here/forward_model}
 \newpage
 
-\section{Example Fits}
-
+\section{Example Fits}\label{sec:apdx_B}
+Some example fits. All figures show the transmission over the wave length in $\mu$m from $0.4\, \mu \s m$ to $1.2\, \mu \s m$.
+All parameters are given in nm except for the angle in degree and the spacer hight in $\mu$m.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=.95\linewidth]{ap_peak.pdf}
-    \caption{}
-    \label{}
+    \includegraphics[width=\linewidth]{ap_peak2.pdf}
+    \caption{Gauß Peak}
+    \label{gauspeak}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{ap_dip.pdf}
-    \caption{}
-    \label{}
+    \includegraphics[width=.9\linewidth]{ap_dip2.pdf}
+    \caption{Gauß Dip}
+    \label{gausdip}
 \end{subfigure}
 \caption{}
 \label{}
@@ -32,16 +33,27 @@
 \centering
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=.9\linewidth]{ap_sine}
-    \caption{}
+    \includegraphics[width=\linewidth]{ap_sine2}
+    \caption{Sine}
     \label{}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{ap_one}
-    \caption{}
-    \label{}
+    \includegraphics[width=.95\linewidth]{ap_one2}
+    \caption{Failed fit on an all one transmission spectrum.}
+    \label{one}
 \end{subfigure}
 \caption{}
 \label{}
+\end{figure}
+
+\begin{figure}[H]
+    \floatbox[{
+    \capbeside
+    \thisfloatsetup{capbesideposition={right,top}}}]{figure}[\FBwidth]
+    {\caption{
+        Here, the two sets of layer parameters from figure \ref{gausdip} were directly simulated via FMM and then the transmission spectrum was calculated via SASA. The agreement of this transmission spectrum and figure \ref{gausdip} indecates that the interpoation of $S$-matrices is working correctly.
+    }
+    \label{fig:in:avg_plot}}
+    {\includegraphics[width=0.5\textwidth]{ap_simul}}
 \end{figure}

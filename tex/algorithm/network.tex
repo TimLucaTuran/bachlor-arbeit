@@ -66,7 +66,8 @@ Training and validation results are very similar which indicates that there is n
         \caption{}
     \end{subfigure}
     
-    \caption{Training only with squares. (a) shows the accuracy of the discrete branch. That is, what percentage of choices for material and geometry were correct. In (b) we can see the performance of the continuous branch evaluated directly through its cost function $C_\s{mse}$.}
+    \caption{Training only with squares. (a) shows the accuracy of the discrete branch. That is, what percentage of choices for material and geometry were correct. In (b) we can see the performance of the continuous branch evaluated using the mean absolute error (mae).
+    $C_\s{mae}(\vb y, \vb y') = \sum_i \qty|y_i - y'_i|$.}
     \label{fig:al:square_results}
     \end{figure}
 
@@ -84,8 +85,9 @@ In this case the function $\mc D \rightarrow I$ is well defined as one stack can
 \\
 
 \indent
-The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}. However, the performance of the continuous branch could not be improved in this manner and we will discuss the reason for this at the end of section \ref{sec:opt}.
-\note{add info on final training}
+The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}.
+Having resolved this issue, we can train the model on the more complex rectangle geometry reaching 94\% accuracy and 11 mae.
+
 
 \begin{figure}[H]
 \centering

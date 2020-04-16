@@ -241,4 +241,51 @@
   publisher = {American Chemical Society ({ACS})},
 }
 
+@InProceedings{Fan2019,
+  author    = {J. A. {Fan}},
+  title     = {Generating high performance, topologically-complex metasurfaces with neural networks},
+  booktitle = {2019 Conference on Lasers and Electro-Optics (CLEO)},
+  year      = {2019},
+  pages     = {1-2},
+}
+
+@Article{TransposedConv,
+  author      = {Vincent Dumoulin and Francesco Visin},
+  title       = {A guide to convolution arithmetic for deep learning},
+  abstract    = {We introduce a guide to help deep learning practitioners understand and manipulate convolutional neural network architectures. The guide clarifies the relationship between various properties (input shape, kernel shape, zero padding, strides and output shape) of convolutional, pooling and transposed convolutional layers, as well as the relationship between convolutional and transposed convolutional layers. Relationships are derived for various cases, and are illustrated in order to make them intuitive.},
+  date        = {2016-03-23},
+  eprint      = {http://arxiv.org/abs/1603.07285v2},
+  eprintclass = {stat.ML},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/1603.07285v2:PDF},
+  keywords    = {stat.ML, cs.LG, cs.NE},
+}
+
+@Article{RandomSearch,
+  author  = {James Bergstra and Yoshua Bengio},
+  title   = {Random Search for Hyper-Parameter Optimization},
+  journal = {Journal of Machine Learning Research},
+  year    = {2012},
+  volume  = {13},
+  number  = {10},
+  pages   = {281-305},
+  url     = {http://jmlr.org/papers/v13/bergstra12a.html},
+}
+
+@Electronic{fill_in_detailsq,
+  author       = {Jason Brownlee},
+  month        = jun,
+  year         = {2019},
+  title        = {How to use the UpSampling2D and Conv2DTranspose Layers in Keras},
+  howpublished = {https://machinelearningmastery.com/upsampling-and-transpose-convolution-layers-for-generative-adversarial-networks/},
+}
+
+@Misc{cat,
+  author       = {Arthur Douillard, Yifu Chen, Matthieu Cord},
+  title        = {Reeseaux convolutionnels pour l’image},
+  howpublished = {\url{https://arthurdouillard.com/files/rdfia_resources/tp6-7.pdf}},
+  month        = nov,
+  year         = {2},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
