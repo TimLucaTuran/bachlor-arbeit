@@ -21,7 +21,7 @@ This way the fact, that transmission spectra do not change too much on a per wav
     \includegraphics[width=\linewidth]{in_NN_architecture}
     \caption{Network architecture of the forward model. First the discrete and continuous inputs are combined and connected to a Dense layer with 
     $(20 \cdot 128)$
-    neurons. The number 20 will later become 160 discretized wavelength after the three upscale operations are applied. As discussed in section \ref{sec:NN_bg} convolutional layers operate on stacked feature maps. This is why the $20 \cdot 128$ flat neurons need to be reshaped into a $20 \times 128$ array. Next there are three transposed convolutional layers $CNU$. Each consisting on a basic convolution $C$, a Batch Normalization $N$ and an upscale layer $U$. The convolution is characterized by the parameters (\textit{number of kernels, kernel size}). The final convolution $C^4$ reduces the number stacked feature maps to 2. One each for the $x$ and $y$ polarization. Finally, two running average filters (Avg) are applied to smooth the output. All the internal activations $\sigma_\s{r}$ are ReLu's and the final activations $\sigma_{l}$ is a linear function.
+    neurons. The number 20 will later become 160 discretized wavelength after the three upscale operations are applied. As discussed in section \ref{sec:NN_bg} convolutional layers operate on stacked feature maps. This is why the $20 \cdot 128$ flat neurons need to be reshaped into a $20 \times 128$ array. Next there are three transposed convolutional layers $CNU$. Each consisting of a basic convolution $C$, a Batch Normalization $N$ and an upscale layer $U$. The convolution is characterized by the parameters (\textit{number of kernels, kernel size}). The final convolution $C^4$ reduces the number stacked feature maps to 2. One each for the $x$ and $y$ polarization. Finally, two running average filters (Avg) are applied to smooth the output. All the internal activations $\sigma_\s{r}$ are ReLu's and the final activations $\sigma_{l}$ is a linear function.
     Layers which contain trainable parameters are marked red.
     }
     \label{fig:in:NN}
@@ -47,8 +47,7 @@ However, even trying different regularization techniques, this model could not b
     \capbeside
     \thisfloatsetup{capbesideposition={right,top}}}]{figure}[\FBwidth]
     {\caption{
-        Training of the forward model. The Network performance is evaluated based on the mean absolute error (mae). If $I$ is the real spectrum and $I'$ is the networks output then 
-        $C_\s{mae} = \sum_i \qty|I_i - I'_i|$.
+        Training of the forward model. The Network performance is evaluated based on the mean absolute error \ref{eq:al:mae}.
     }
     \label{fig:in:forward_training}}
     {\includegraphics[width=0.6\textwidth]{in_forward_training}}

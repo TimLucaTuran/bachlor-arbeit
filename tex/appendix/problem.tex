@@ -1,8 +1,8 @@
 % !TeX root = ../bachlor-arbeit.tex
-As stated in section \ref{sec:outlook} it would be beneficial to train the inverse model $\mc D \rightarrow I$ in a tandem structure 
+It would be beneficial to train the inverse model $\mc D \rightarrow I$ in a tandem structure 
 $I \rightarrow \mc D \rightarrow I'$ with a pre trained forward model.
 This would circumvent the many-to-one problem and the network could even be trained on arbitrary functions as knowledge of the design parameters to a training spectrum are not necessary.
-This combined model can easily be implemented as all the necessary modules are already there and a possible implementation is shown in figure \ref{fig:al:combined}.
+This combined model can easily be implemented as all the necessary modules are already there. A possible implementation is shown in figure \ref{fig:al:combined}.
 However, this model can not be trained.
 To understand why we need to go back to the concept of {\hyperref[eq:bg:back_prop]{Backpropagation}}.
 During training the gradient of the cost function needs to propagate backwards through the network. To capture this mathematically we will identify the forward model in figure \ref{fig:al:combined} as the last layer $L$ in a combined network. Equation \eqref{eq:bg:back_prop} tells us we need to calculate
@@ -20,7 +20,7 @@ the output of the last layer derived by the input to the last layer, is not easi
 \\
 
 \indent
-The Network has to generate the right spectrum to an input Design. Once again we will use convolutional layers, as the output neurons of this Network are spatially related. Another indicative to try a convolutional architecture is that the NN's used to generate photorealistic Images, like Nvidea's StyleGan \cite{Karras2018}, also rely on convolutional layers and we can think of a transmission spectrum as a 1D image.
+The Network has to generate the right spectrum to an input Design. Once again we will use convolutional layers, as the output neurons of this Network are spatially related. Another indication to try a convolutional architecture is that the NN's used to generate photorealistic Images, like Nvidea's StyleGan \cite{Karras2018}, also rely on convolutional layers and we can think of a transmission spectrum as a 1D image.
 
 \begin{figure}[H]
     \floatbox[{

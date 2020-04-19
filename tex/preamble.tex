@@ -39,15 +39,19 @@
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \newcommand{\comment}[1]{}
 \renewcommand{\indent}{\hspace{0.8cm}}
-
+%equations on a grid
+\newenvironment{minipeqn}[1][]{\begin{minipage}[#1]{.45\textwidth}\begin{equation}}{\end{equation}\end{minipage}}
+%bold equation
 \renewcommand\theequation{\thesection.\arabic{equation}}
 \newenvironment{boldequation}{
 \renewcommand\theequation{\textbf{\thesection.\arabic{equation}}}\equation}
 {\endequation}
+%reset equation counter at each section
+\usepackage{chngcntr}
+\counterwithin*{equation}{section}
 
 \renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
-\newcommand{\newlparagraph}[1]{\paragraph{#1}\mbox{}\\}
-\newenvironment{minipeqn}[1][]{\begin{minipage}[#1]{.45\textwidth}\begin{equation}}{\end{equation}\end{minipage}}
+
 
 
 %typeset colon equal sign

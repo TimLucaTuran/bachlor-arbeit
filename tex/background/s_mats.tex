@@ -1,6 +1,6 @@
 % !TEX root = ../bachlor-arbeit.tex
-To implement the desired algorithm we need to be able to calculate the optical behavior of stacked metasurfaces. The mathematical framework we will use is called scatter matrix calculus and this section will give some insight into its physical origin and how to use it. We will start with Maxwell's equations in matter.
-\newlparagraph{Maxwell Equations}
+To implement the desired algorithm we need to be able to calculate the optical behavior of stacked metasurfaces. The mathematical framework we will use is called scattering matrix calculus and this section will give some insight into its physical origin and how to use it. We will start with Maxwell's equations in matter.
+\paragraph{Maxwell Equations}~\\
 
 \begin{tabular*}{\textwidth}{ll}
 \begin{minipeqn}
@@ -57,7 +57,7 @@ This set of equations describes the whole electromagnetic spectrum. However, in 
 \end{tabular*}
 
 
-\newlparagraph{Light in Vacuum}
+\paragraph{Light in Vacuum}~\\
 Now we can derive the wave equation by applying $\curl$ to \eqref{eq:bg:M1} which yields
 
 
@@ -111,7 +111,7 @@ The wave equation is also solved by a complex valued $n := \eta + i \kappa$ whic
     oscillation}
 \end{equation}
 
-\newlparagraph{Interfaces}
+\paragraph{Interfaces}~\\
 The metasurface stacks we want to understand are obviously not one homogeneous material. Rather, they contain many interfaces between different materials and we can again use the maxwell equations to predict how light will behave at such an interface.
 \\
 
@@ -224,7 +224,7 @@ and the Snells law of refraction
     n_1 \sin \varphi_1 = n_2 \sin \varphi_2.
 \end{equation}
 
-\newlparagraph{Fresnel Equations}
+\paragraph{Fresnel Equations}~\\
 To fully describe an interface we also need to know the transmitted and the reflected field amplitudes,  
 $t := E^t / E^i$ 
 and 
@@ -294,7 +294,7 @@ For perpendicular incident light at $\varphi = 90^\circ$ these should describe t
     t = \frac{2 n_1}{n_1 + n_2} \qq{and} r = \frac{n_1 - n_2}{n_1 + n_2}.
 \end{equation}
 
-\newlparagraph{Stacking}
+\paragraph{Stacking}~\\
 We can take this one step further by including interfaces which have incident light from both sides. Let $\vb E_\s{out}$ be the light coming out of the interface and $\vb E_\s{in}$ be the light going into the interface as seen in figure \ref{fig:bg:both}. Using the factors from the Fresnel equations we get
 
 \begin{equation}
@@ -407,15 +407,15 @@ Applied to the example of figure \ref{fig:bg:star_prod}, the star product gives
     \hat S = \hat S_{n_0, n} \star \hat S_{n, d} \star \hat S_{n, n_0}.
 \end{equation}
 
-\newlparagraph{Polarization}
-Up to this point the $S$-matrix is made of the four complex numbers $t^f$, $r^b$, $r^f$ and $t^b$. This means, when a $S$-matrix is applied to the input vector containing the total incoming light  
+\paragraph{Polarization}~\\
+Up to this point the $S$-matrix is made of the four complex numbers $t^f$, $r^b$, $r^f$ and $t^b$. This means when a $S$-matrix is applied to the input vector containing the total incoming light  
 $
 \begin{pmatrix}
     E^f_\s{in} \\
     E^b_\s{in}
 \end{pmatrix}
 $,
-$E^f_\s{in}$ and $E^b_\s{in}$ are also restricted to the complex plane and can only describe linear polarized light in one direction. The last generalization we want to make is to extend the scatter matrix calculus to all polarizations. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} a planar light wave propagating along the $z$ axis through a homogeneous isotropic material can be described as
+$E^f_\s{in}$ and $E^b_\s{in}$ are also restricted to the complex plane and can only describe linear polarized light in one direction. The last generalization we want to make is to extend the scattering matrix calculus to all polarizations. As shown in the paragraph \hyperref[par:light_in_materials]{Light in materials} a planar light wave propagating along the $z$ axis through a homogeneous isotropic material can be described as
 
 \begin{equation}
    \vb E =
@@ -445,7 +445,7 @@ The waves polarization is determined by the scaling factors of $\va{e_x}$ and $\
 \end{equation}
 
 \noindent
-Now all linear operations on the polarization are matrices $\hat{M} \in \mathds{C}^{2 \times 2}$. This means, all passive components have a corresponding matrix. Examples for components aligned with the $x$ axis are
+Now all linear operations on the polarization are matrices $\hat{M} \in \mathds{C}^{2 \times 2}$. This means all passive components have a corresponding matrix. Examples for components aligned with the $x$ axis are
 
 
 \begin{equation}

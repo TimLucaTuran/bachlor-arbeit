@@ -207,7 +207,8 @@ The input to the desired algorithm is a target spectrum to which the Network sho
 \vspace{1.5cm}
 
 \paragraph{Dropout Layer} ~\\
-In 2014 Srivastava et al.\cite{Srivastava2014} presented a method to prevent overfitting and speed up the training process of large Neural Networks. During training, for each step, they randomly drop a number of neurons in a layer along with all connections to and from these neurons. This prevents the neurons from co-adapting \cite{Srivastava2014} and because there are less weights and biases to tune for each step the training becomes overall faster. The process of dropping some neurons is shown in figure \ref{fig:bg:dropout}.
+In 2014 Srivastava et al.\cite{Srivastava2014} presented a method to prevent overfitting and speed up the training process of large Neural Networks. During training, for each step, they randomly drop a number of neurons in a layer along with all connections to and from these neurons. This prevents the neurons from co-adapting \cite{Srivastava2014} and because there are less weights and biases to tune for each step the training becomes overall faster.
+These layers are characterized by their \textit{drop rate} \label{hyp:dropout} that determines what fraction of neurons should be dropped. The process of dropping neurons is shown in figure \ref{fig:bg:dropout}.
 
 \begin{figure}[H]
 \centering

@@ -1,6 +1,6 @@
 % !TeX root = ../bachlor-arbeit.tex
 \appendix
-\section{The Tandem Model}\label{sec:apdx_A}
+\section{Tandem Model}\label{sec:apdx_A}
 
 \input{\here/problem}
 
@@ -9,18 +9,17 @@
 
 \section{Example Fits}\label{sec:apdx_B}
 Some example fits. All figures show the transmission over the wave length in $\mu$m from $0.4\, \mu \s m$ to $1.2\, \mu \s m$.
-All parameters are given in nm except for the angle in degree and the spacer hight in $\mu$m.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{ap_peak2.pdf}
+    \includegraphics[width=.95\linewidth]{ap_peak3.pdf}
     \caption{Gauß Peak}
     \label{gauspeak}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=.9\linewidth]{ap_dip2.pdf}
+    \includegraphics[width=.95\linewidth]{ap_dip2.pdf}
     \caption{Gauß Dip}
     \label{gausdip}
 \end{subfigure}
@@ -28,7 +27,7 @@ All parameters are given in nm except for the angle in degree and the spacer hig
 \label{}
 \end{figure}
 
-
+\comment{
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -39,12 +38,25 @@ All parameters are given in nm except for the angle in degree and the spacer hig
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=.95\linewidth]{ap_one2}
-    \caption{Failed fit on an all one transmission spectrum.}
+    \includegraphics[width=.95\linewidth]{ap_one3}
+    \caption{Failed fit on an all one transmission spectrum. 
+    spacer height should not be negative.}
     \label{one}
 \end{subfigure}
 \caption{}
 \label{}
+\end{figure}
+}
+\begin{figure}[H]
+    \floatbox[{
+    \capbeside
+    \thisfloatsetup{capbesideposition={right,top}}}]{figure}[\FBwidth]
+    {\caption{
+        Failed fit on an all one transmission spectrum. 
+        The Spacer height should not be negative.
+    }
+    \label{one}}
+    {\includegraphics[width=0.5\textwidth]{ap_one3}}
 \end{figure}
 
 \begin{figure}[H]

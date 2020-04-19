@@ -33,11 +33,11 @@ In this way one can penalize the simplex for stepping over the set boundaries by
     C_\s{mse}(I_\s{c}, \, I_\s{t})}_{\text{find target}}}
     +
     {\underbrace{%
-    \qty[\sum_i D\qty(p_i, \, p_i^l, \, p_i^u)]^3
+    \qty[1 + \sum_i D\qty(p_i, \, p_i^l, \, p_i^u)]^3
     }_{\text{stay within bounds}}}.
 \end{equation}
 
-The choice of exponent, 3 in this case, depends on how much the simplex should be penalized for stepping over a boundary.
+The choice of exponent, 3 in this case, depends on how much the simplex should be penalized for stepping over a boundary and the +1 was added so that even $\mc D < 1$ are increased by the exponentiation.
 All our conditions are requirements for physical approximations and these approximations do no break completely when a boundary is only slightly violated. This justifies this approach where the simplex might step over a boundary but is then "pushed back" in the right direction. In figure \ref{fig:al:x_trans} we can see the optimizer in operation.
 \\
 

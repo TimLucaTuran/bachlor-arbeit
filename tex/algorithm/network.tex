@@ -46,12 +46,15 @@ This error treats false positives ($y_i = 0, \, y_i' = 1$) and false negatives (
 \newpage
 \paragraph{Network Training}~\\
 To train a Neural Network, one needs a training set $(X, \, Y)$ of known input output pairs. In this case they are generated using the pre-simulated single layers in the database which are randomly combined into stacks. Then the stacks X- and Y-transmission spectra $(I_x, \, I_y)$ are calculated via SASA.
-This means $I = (I_x, \, I_y) \in X$ are the networks input and the random design parameters ${\mc D = (\mc S, \mc L_1, \mc L_2) \in Y}$ are the output. For the first test we used squares and square holes of Aluminum and Gold. During the training one epoch is defined as one loop over all training samples. After every epoch the network is validated on a data set $(X_\s v, \, Y_\s v)$ of samples it has not seen before. This is done to check wether the network actually learns something rather than just memorizing the input data.  The results of this first training on the square geometry can be seen in figure \ref{fig:al:square_results}.
-\\
+This means $I = (I_x, \, I_y) \in X$ are the networks input and the random design parameters ${\mc D = (\mc S, \mc L_1, \mc L_2) \in Y}$ are the output. For the first test we used squares and square holes of Aluminum and Gold. During the training one epoch is defined as one loop over all training samples. After every epoch the network is validated on a data set $(X_\s v, \, Y_\s v)$ of samples it has not seen before. This is done to check wether the network actually learns something rather than just memorizing the input data. It is common to rely on the cost function for training but use a separate function called \textit{metric} to evaluate the Network. This is done because there are occasions when the cost of a network drops but the performance does not increase. The metric should be a function where the output can be easily understood by the human evaluating the network. For discrete outputs we are going to use the metric \textit{accuracy}, that is what fraction of choices were correct and for the continuous outputs we will use the \textit{mean absolute error}
+
+\begin{equation} \label{eq:al:mae}
+    M_\s{mae}(\vb y, \vb y') = \sum_i \qty|y_i - y'_i|.
+\end{equation}
 
 \indent
+The results of this first training on the square geometry can be seen in figure \ref{fig:al:square_results}.
 Training and validation results are very similar which indicates that there is no overfitting or memorization. The discrete accuracy quickly reaches a maximum of $\sim 76\%$ which is less than expected and also the speed at which this value is reached is suspicious. The network does not improve much after the fourth epoch and this does not change by tuning the network architecture. This is because the issue lies not within the architecture but in the training data. In section \ref{sec:SASA} we have shown that for the used two layer stacks the transmission spectrum is reciprocal, that is the same for both directions. Therefor the data generation can result in two different stacks which produce the same spectrum. Consider a stack where one layer is Aluminum and the other is Gold as seen in figure \ref{fig:al:same_spec}. As both of them produce the same spectrum, one time the network is taught that the first layer is Gold and the second is Aluminum but another time it is taught the complete opposite. Actually, if the network is trained this way it only ever predicts stacks with layers of equal materials because this is the only setup it can get right.
-
 \begin{figure}[H]
     \centering
     \captionsetup[subfigure]{position=b}
@@ -66,10 +69,17 @@ Training and validation results are very similar which indicates that there is n
         \caption{}
     \end{subfigure}
     
-    \caption{Training only with squares. (a) shows the accuracy of the discrete branch. That is, what percentage of choices for material and geometry were correct. In (b) we can see the performance of the continuous branch evaluated using the mean absolute error (mae).
-    $C_\s{mae}(\vb y, \vb y') = \sum_i \qty|y_i - y'_i|$.}
+    \caption{Training only with squares. (a) shows the accuracy of the discrete branch. That is, what percentage of choices for material and geometry were correct. In (b) we can see the performance of the continuous branch evaluated using the mean absolute error \ref{eq:al:mae}.}
     \label{fig:al:square_results}
     \end{figure}
+
+
+
+\newpage
+This is a well known problem when trying to solve an inverse problem.
+In this case the function $\mc D \rightarrow I$ is well defined as one stack can only produce one spectrum but for the inverse problem we are trying to solve $I \rightarrow \mc D$ and there might be multiple designs which produce the same spectrum. We can solve the issue simply by allowing only one of the orientations into the training data. By doing this the training  results change as seen in figure \ref{fig:al:squares_fix}.
+The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}.
+Having resolved this issue, we can train the model on the more complex rectangle geometry reaching 94\% accuracy and 11 mae.
 
 \begin{figure}[H]
     \floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top}}}]{figure}[\FBwidth]
@@ -77,16 +87,6 @@ Training and validation results are very similar which indicates that there is n
     \label{fig:al:same_spec}}
     {\includegraphics[width=.36\textwidth]{al_flipped_stack}}
 \end{figure}
-
-
-\newpage
-This is a well known problem when trying to solve an inverse problem.
-In this case the function $\mc D \rightarrow I$ is well defined as one stack can only produce one spectrum but for the inverse problem we are trying to solve $I \rightarrow \mc D$ and there might be multiple designs which produce the same spectrum. We can solve the issue simply by allowing only one of the orientations into the training data. By doing this the training  results change as seen in figure \ref{fig:al:squares_fix}.
-\\
-
-\indent
-The discrete accuracy is much better at $\sim 98 \%$ and the training curve looks more natural in the sense that improvements diminish over time but do not hit a sudden barrier as they did in figure \ref{fig:al:square_results}.
-Having resolved this issue, we can train the model on the more complex rectangle geometry reaching 94\% accuracy and 11 mae.
 
 
 \begin{figure}[H]
